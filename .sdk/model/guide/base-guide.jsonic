@@ -1,0 +1,21 @@
+# Guide
+
+guide: {
+  metrics: count: entity: 2
+  metrics: count: path: 2
+  metrics: count: method: 2
+
+  entity: get_package: {
+    path: "/{package}": {
+      rename: param: "package": *"id"
+      op: list: method: *GET
+    }
+  }
+
+  entity: search: {
+    path: "/-/v1/search": {
+      op: list: method: *GET
+    }
+  }
+
+}

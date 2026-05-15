@@ -1,0 +1,26 @@
+{
+  "existing": {
+    "get_package": {
+      "GET_PACKAGE00": {
+        "email": "s14",
+        "name": "s15"
+      },
+      "GET_PACKAGE01": {
+        "email": "s28",
+        "name": "s29"
+      },
+      "GET_PACKAGE02": {
+        "email": "s3c",
+        "name": "s3d"
+      }
+    }
+  },
+  "new": {
+    "get_package": {
+      "get_package_ref01": {
+        "email": "s50",
+        "name": "s51"
+      }
+    }
+  }
+}

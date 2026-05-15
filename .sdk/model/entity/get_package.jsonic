@@ -1,0 +1,64 @@
+# Entity: get_package
+
+main: kit: entity: get_package: {
+
+  alias: field: {}
+
+  fields: [
+    {
+      name: "email"
+      req: false
+      type: "`$STRING`"
+    }
+    {
+      name: "name"
+      req: false
+      type: "`$STRING`"
+    }
+  ]
+
+  name: "get_package"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          args: {
+            params: [
+              {
+                example: "express"
+                kind: "param"
+                name: "id"
+                orig: "package"
+                reqd: true
+                type: "`$STRING`"
+              }
+            ]
+          }
+          method: "GET"
+          orig: "/{package}"
+          parts: [
+            "{id}"
+          ]
+          rename: {
+            param: {
+              package: "id"
+            }
+          }
+          select: {
+            exist: [
+              "id"
+            ]
+          }
+          transform: {
+            req: "`reqdata`"
+            res: "`body`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

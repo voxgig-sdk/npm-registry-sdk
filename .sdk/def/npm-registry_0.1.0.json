@@ -1,0 +1,559 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "NPM Registry API",
+    "description": "API for accessing package metadata from the NPM registry. Allows retrieval of package information, versions, and search functionality with detailed response formats.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "NPM Support",
+      "url": "https://www.npmjs.com/support"
+    },
+    "license": {
+      "name": "ISC",
+      "url": "https://opensource.org/licenses/ISC"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://registry.npmjs.org",
+      "description": "NPM Registry Production Server"
+    }
+  ],
+  "paths": {
+    "/{package}": {
+      "get": {
+        "summary": "Get package metadata",
+        "description": "Retrieves complete metadata for a package including all versions, maintainers, and distribution information",
+        "operationId": "getPackage",
+        "tags": [
+          "Packages"
+        ],
+        "parameters": [
+          {
+            "name": "package",
+            "in": "path",
+            "required": true,
+            "description": "The name of the package",
+            "schema": {
+              "type": "string"
+            },
+            "example": "express"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Package metadata retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PackageMetadata"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Package not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/-/v1/search": {
+      "get": {
+        "summary": "Search packages",
+        "description": "Search for packages in the NPM registry with various filters and options",
+        "operationId": "searchPackages",
+        "tags": [
+          "Search"
+        ],
+        "parameters": [
+          {
+            "name": "text",
+            "in": "query",
+            "required": true,
+            "description": "Search query text",
+            "schema": {
+              "type": "string"
+            },
+            "example": "react"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "required": false,
+            "description": "Number of results to return",
+            "schema": {
+              "type": "integer",
+              "default": 20,
+              "minimum": 1,
+              "maximum": 250
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "required": false,
+            "description": "Offset for pagination",
+            "schema": {
+              "type": "integer",
+              "default": 0,
+              "minimum": 0
+            }
+          },
+          {
+            "name": "quality",
+            "in": "query",
+            "required": false,
+            "description": "Weight for quality score (0.0 to 1.0)",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.65
+            }
+          },
+          {
+            "name": "popularity",
+            "in": "query",
+            "required": false,
+            "description": "Weight for popularity score (0.0 to 1.0)",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.98
+            }
+          },
+          {
+            "name": "maintenance",
+            "in": "query",
+            "required": false,
+            "description": "Weight for maintenance score (0.0 to 1.0)",
+            "schema": {
+              "type": "number",
+              "format": "float",
+              "minimum": 0,
+              "maximum": 1,
+              "default": 0.5
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Search results retrieved successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SearchResults"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Invalid search parameters",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Error"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "PackageMetadata": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "Package identifier"
+          },
+          "_rev": {
+            "type": "string",
+            "description": "Revision identifier"
+          },
+          "name": {
+            "type": "string",
+            "description": "Package name"
+          },
+          "description": {
+            "type": "string",
+            "description": "Package description"
+          },
+          "dist-tags": {
+            "type": "object",
+            "description": "Distribution tags mapping to versions",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "versions": {
+            "type": "object",
+            "description": "All versions of the package",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Version"
+            }
+          },
+          "maintainers": {
+            "type": "array",
+            "description": "Package maintainers",
+            "items": {
+              "$ref": "#/components/schemas/Maintainer"
+            }
+          },
+          "time": {
+            "type": "object",
+            "description": "Timestamps for each version",
+            "additionalProperties": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          "author": {
+            "$ref": "#/components/schemas/Person"
+          },
+          "repository": {
+            "$ref": "#/components/schemas/Repository"
+          },
+          "readme": {
+            "type": "string",
+            "description": "Package README content"
+          },
+          "readmeFilename": {
+            "type": "string",
+            "description": "Name of the README file"
+          },
+          "homepage": {
+            "type": "string",
+            "description": "Package homepage URL"
+          },
+          "keywords": {
+            "type": "array",
+            "description": "Package keywords",
+            "items": {
+              "type": "string"
+            }
+          },
+          "license": {
+            "type": "string",
+            "description": "Package license"
+          }
+        }
+      },
+      "Version": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Package name"
+          },
+          "version": {
+            "type": "string",
+            "description": "Version number"
+          },
+          "description": {
+            "type": "string",
+            "description": "Version description"
+          },
+          "main": {
+            "type": "string",
+            "description": "Main entry point"
+          },
+          "scripts": {
+            "type": "object",
+            "description": "NPM scripts",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "dependencies": {
+            "type": "object",
+            "description": "Package dependencies",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "devDependencies": {
+            "type": "object",
+            "description": "Development dependencies",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "peerDependencies": {
+            "type": "object",
+            "description": "Peer dependencies",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "dist": {
+            "$ref": "#/components/schemas/Distribution"
+          },
+          "author": {
+            "$ref": "#/components/schemas/Person"
+          },
+          "license": {
+            "type": "string",
+            "description": "Package license"
+          },
+          "_id": {
+            "type": "string",
+            "description": "Version identifier"
+          },
+          "_npmVersion": {
+            "type": "string",
+            "description": "NPM version used to publish"
+          },
+          "_nodeVersion": {
+            "type": "string",
+            "description": "Node version used to publish"
+          }
+        }
+      },
+      "Distribution": {
+        "type": "object",
+        "properties": {
+          "shasum": {
+            "type": "string",
+            "description": "SHA-1 checksum"
+          },
+          "tarball": {
+            "type": "string",
+            "description": "URL to tarball",
+            "format": "uri"
+          },
+          "integrity": {
+            "type": "string",
+            "description": "Subresource integrity hash"
+          },
+          "fileCount": {
+            "type": "integer",
+            "description": "Number of files in package"
+          },
+          "unpackedSize": {
+            "type": "integer",
+            "description": "Unpacked size in bytes"
+          }
+        }
+      },
+      "Maintainer": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Maintainer username"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Maintainer email"
+          }
+        }
+      },
+      "Person": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Person name"
+          },
+          "email": {
+            "type": "string",
+            "format": "email",
+            "description": "Person email"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Person URL"
+          }
+        }
+      },
+      "Repository": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "description": "Repository type",
+            "example": "git"
+          },
+          "url": {
+            "type": "string",
+            "format": "uri",
+            "description": "Repository URL"
+          }
+        }
+      },
+      "SearchResults": {
+        "type": "object",
+        "properties": {
+          "objects": {
+            "type": "array",
+            "description": "Array of search result objects",
+            "items": {
+              "$ref": "#/components/schemas/SearchResultObject"
+            }
+          },
+          "total": {
+            "type": "integer",
+            "description": "Total number of results"
+          },
+          "time": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Search execution timestamp"
+          }
+        }
+      },
+      "SearchResultObject": {
+        "type": "object",
+        "properties": {
+          "package": {
+            "$ref": "#/components/schemas/SearchPackage"
+          },
+          "score": {
+            "$ref": "#/components/schemas/Score"
+          },
+          "searchScore": {
+            "type": "number",
+            "format": "float",
+            "description": "Overall search score"
+          }
+        }
+      },
+      "SearchPackage": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "description": "Package name"
+          },
+          "version": {
+            "type": "string",
+            "description": "Latest version"
+          },
+          "description": {
+            "type": "string",
+            "description": "Package description"
+          },
+          "keywords": {
+            "type": "array",
+            "description": "Package keywords",
+            "items": {
+              "type": "string"
+            }
+          },
+          "date": {
+            "type": "string",
+            "format": "date-time",
+            "description": "Last publish date"
+          },
+          "links": {
+            "type": "object",
+            "properties": {
+              "npm": {
+                "type": "string",
+                "format": "uri",
+                "description": "NPM package page URL"
+              },
+              "homepage": {
+                "type": "string",
+                "format": "uri",
+                "description": "Package homepage URL"
+              },
+              "repository": {
+                "type": "string",
+                "format": "uri",
+                "description": "Repository URL"
+              },
+              "bugs": {
+                "type": "string",
+                "format": "uri",
+                "description": "Bug tracker URL"
+              }
+            }
+          },
+          "author": {
+            "$ref": "#/components/schemas/Person"
+          },
+          "publisher": {
+            "$ref": "#/components/schemas/Person"
+          },
+          "maintainers": {
+            "type": "array",
+            "description": "Package maintainers",
+            "items": {
+              "$ref": "#/components/schemas/Maintainer"
+            }
+          }
+        }
+      },
+      "Score": {
+        "type": "object",
+        "properties": {
+          "final": {
+            "type": "number",
+            "format": "float",
+            "description": "Final weighted score"
+          },
+          "detail": {
+            "type": "object",
+            "properties": {
+              "quality": {
+                "type": "number",
+                "format": "float",
+                "description": "Quality score"
+              },
+              "popularity": {
+                "type": "number",
+                "format": "float",
+                "description": "Popularity score"
+              },
+              "maintenance": {
+                "type": "number",
+                "format": "float",
+                "description": "Maintenance score"
+              }
+            }
+          }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "type": "string",
+            "description": "Error type"
+          },
+          "reason": {
+            "type": "string",
+            "description": "Error reason"
+          }
+        }
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Packages",
+      "description": "Operations related to package metadata retrieval"
+    },
+    {
+      "name": "Search",
+      "description": "Operations for searching packages in the registry"
+    }
+  ]
+}

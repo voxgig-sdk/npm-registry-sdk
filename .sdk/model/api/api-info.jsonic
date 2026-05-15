@@ -1,0 +1,28 @@
+# API Information
+
+
+main: {
+  kit: {
+    info: {
+      contact: {
+        name: "NPM Support"
+        url: "https://www.npmjs.com/support"
+      }
+      description: "API for accessing package metadata from the NPM registry. Allows retrieval of package information, versions, and search functionality with detailed response formats."
+      license: {
+        name: "ISC"
+        url: "https://opensource.org/licenses/ISC"
+      }
+      servers: [
+        {
+          description: "NPM Registry Production Server"
+          url: "https://registry.npmjs.org"
+        }
+      ]
+      title: "NPM Registry API"
+      version: "1.0.0"
+    }
+  }
+}
+
+}

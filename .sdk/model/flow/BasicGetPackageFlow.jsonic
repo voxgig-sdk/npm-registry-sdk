@@ -1,0 +1,26 @@
+# BasicGetPackageFlow
+
+main: kit: flow: BasicGetPackageFlow:
+{
+  entity: "get_package",
+  kind: "basic",
+  name: "BasicGetPackageFlow",
+  step: [
+    {
+      match: {
+        package: "package01"
+      }
+
+      op: "list",
+      valid: [
+        {
+          apply: "ItemExists",
+          def: {
+            ref: "get_package_ref01"
+          }
+        }
+      ]
+    }
+  ],
+  "key$": "BasicGetPackageFlow"
+}
