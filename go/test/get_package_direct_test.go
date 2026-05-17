@@ -6,8 +6,8 @@ import (
 	"strings"
 	"testing"
 
-	sdk "github.com/voxgig-sdk/npm-registry-sdk"
-	"github.com/voxgig-sdk/npm-registry-sdk/core"
+	sdk "github.com/voxgig-sdk/npm-registry-sdk/go"
+	"github.com/voxgig-sdk/npm-registry-sdk/go/core"
 )
 
 func TestGetPackageDirect(t *testing.T) {

@@ -1,10 +1,10 @@
 package voxgignpmregistrysdk
 
 import (
-	"github.com/voxgig-sdk/npm-registry-sdk/core"
-	"github.com/voxgig-sdk/npm-registry-sdk/entity"
-	"github.com/voxgig-sdk/npm-registry-sdk/feature"
-	_ "github.com/voxgig-sdk/npm-registry-sdk/utility"
+	"github.com/voxgig-sdk/npm-registry-sdk/go/core"
+	"github.com/voxgig-sdk/npm-registry-sdk/go/entity"
+	"github.com/voxgig-sdk/npm-registry-sdk/go/feature"
+	_ "github.com/voxgig-sdk/npm-registry-sdk/go/utility"
 )
 
 // Type aliases preserve external API.

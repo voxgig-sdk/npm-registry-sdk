@@ -29,7 +29,7 @@ class Config {
 
 
   options = {
-    base: 'https://registry.npmjs.org',
+    base: '$$main.kit.info.servers.0.url$$',
 
     'AUTHBLOCK'headers: 'HEADERS',
 
