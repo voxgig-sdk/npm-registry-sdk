@@ -61,14 +61,12 @@ def _search_direct_setup(mockres):
     env = runner.env_override({
         "NPMREGISTRY_TEST_SEARCH_ENTID": {},
         "NPMREGISTRY_TEST_LIVE": "FALSE",
-        "NPMREGISTRY_APIKEY": "NONE",
     })
 
     live = env.get("NPMREGISTRY_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {
-            "apikey": env.get("NPMREGISTRY_APIKEY"),
         }
         client = NpmRegistrySDK(merged_opts)
         return {

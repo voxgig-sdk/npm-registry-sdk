@@ -21,7 +21,18 @@
           }
         ],
         "title": "NPM Registry API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "tagline": "Read package metadata, versions, and search results from the public npm registry",
+        "homepage": "https://registry.npmjs.org",
+        "docs_url": "https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md",
+        "license_short": "ISC (registry client/spec); package metadata reflects each package's own licence.",
+        "license_md": "- Registry client tooling and spec are distributed under the ISC licence.\n- Individual package documents returned by the registry include each package's own declared `license` field.\n- No authentication is required for read-only access to public package metadata.\n- CORS is enabled, so the endpoints can be called directly from browsers.",
+        "about_md": "The [npm Registry](https://registry.npmjs.org) is the public package registry that backs the `npm` and other Node.js package managers. It is operated by [npm, Inc.](https://www.npmjs.com) (a subsidiary of GitHub/Microsoft) and serves package metadata and tarballs for millions of JavaScript packages.\n\nWhat you get from the API:\n\n- `GET /{package}` returns the full \"packument\" for a package: name, description, `dist-tags`, every published version, timestamps, author, repository, README, and attachments.\n- `GET /{package}/{version}` returns a single version document with dependencies, scripts, declared `license`, maintainer info, and the `dist.tarball` URL.\n- `GET /-/v1/search?text=...` performs full-text search with `size` (max 250), `from`, and weighted `quality`/`popularity`/`maintenance` modifiers, plus qualifiers like `author:`, `maintainer:`, `scope:`, and `keywords:`.\n- `GET /` returns registry-level metadata (document count, disk size, update sequence).\n\nReads are unauthenticated and CORS-enabled. Publishing and other write operations require an npm account and token, but are outside the scope of this SDK. The registry is a CouchDB-style document store, so package documents can be large; prefer the version-specific endpoint when you only need one release.",
+        "entity_desc": {
+          "get_package": "Package metadata documents (\"packuments\") fetched from `GET /{package}` and individual versions from `GET /{package}/{version}`.",
+          "search": "Full-text package search backed by `GET /-/v1/search`, with `text`, `size`, `from`, and quality/popularity/maintenance scoring parameters."
+        },
+        "auth": false
       },
       "config": {
         "auth": {
@@ -29,7 +40,15 @@
         },
         "headers": {
           "content-type": "application/json"
-        }
+        },
+        "docs_order": [
+          "ts",
+          "py",
+          "php",
+          "go",
+          "rb",
+          "lua"
+        ]
       },
       "entity": {
         "get_package": {

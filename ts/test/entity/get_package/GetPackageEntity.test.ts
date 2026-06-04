@@ -114,7 +114,6 @@ function basicSetup(extra?: any) {
     'NPM_REGISTRY_TEST_GET_PACKAGE_ENTID': idmap,
     'NPM_REGISTRY_TEST_LIVE': 'FALSE',
     'NPM_REGISTRY_TEST_EXPLAIN': 'FALSE',
-    'NPM_REGISTRY_APIKEY': 'NONE',
   })
 
   idmap = env['NPM_REGISTRY_TEST_GET_PACKAGE_ENTID']
@@ -124,7 +123,6 @@ function basicSetup(extra?: any) {
   if (live) {
     client = new NpmRegistrySDK(merge([
       {
-        apikey: env.NPM_REGISTRY_APIKEY,
       },
       extra
     ]))
