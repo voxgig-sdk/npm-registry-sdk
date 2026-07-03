@@ -63,12 +63,14 @@ function search_direct_setup(mockres)
   local env = runner.env_override({
     ["NPMREGISTRY_TEST_SEARCH_ENTID"] = {},
     ["NPMREGISTRY_TEST_LIVE"] = "FALSE",
+    ["NPMREGISTRY_APIKEY"] = "NONE",
   })
 
   local live = env["NPMREGISTRY_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {
+      apikey = env["NPMREGISTRY_APIKEY"],
     }
     local client = sdk.new(merged_opts)
     return {

@@ -93,12 +93,14 @@ func searchDirectSetup(mockres any) *searchDirectSetupResult {
 	env := envOverride(map[string]any{
 		"NPMREGISTRY_TEST_SEARCH_ENTID": map[string]any{},
 		"NPMREGISTRY_TEST_LIVE":    "FALSE",
+		"NPMREGISTRY_APIKEY":       "NONE",
 	})
 
 	live := env["NPMREGISTRY_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["NPMREGISTRY_APIKEY"],
 		}
 		client := sdk.NewNpmRegistrySDK(mergedOpts)
 

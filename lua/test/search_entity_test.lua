@@ -92,6 +92,7 @@ function search_basic_setup(extra)
     ["NPMREGISTRY_TEST_SEARCH_ENTID"] = idmap,
     ["NPMREGISTRY_TEST_LIVE"] = "FALSE",
     ["NPMREGISTRY_TEST_EXPLAIN"] = "FALSE",
+    ["NPMREGISTRY_APIKEY"] = "NONE",
   })
 
   local idmap_resolved = helpers.to_map(
@@ -103,6 +104,7 @@ function search_basic_setup(extra)
   if env["NPMREGISTRY_TEST_LIVE"] == "TRUE" then
     local merged_opts = vs.merge({
       {
+        apikey = env["NPMREGISTRY_APIKEY"],
       },
       extra or {},
     })

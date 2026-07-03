@@ -118,12 +118,14 @@ func get_packageDirectSetup(mockres any) *get_packageDirectSetupResult {
 	env := envOverride(map[string]any{
 		"NPMREGISTRY_TEST_GET_PACKAGE_ENTID": map[string]any{},
 		"NPMREGISTRY_TEST_LIVE":    "FALSE",
+		"NPMREGISTRY_APIKEY":       "NONE",
 	})
 
 	live := env["NPMREGISTRY_TEST_LIVE"] == "TRUE"
 
 	if live {
 		mergedOpts := map[string]any{
+			"apikey": env["NPMREGISTRY_APIKEY"],
 		}
 		client := sdk.NewNpmRegistrySDK(mergedOpts)
 

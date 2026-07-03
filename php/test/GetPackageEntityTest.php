@@ -88,6 +88,7 @@ function get_package_basic_setup($extra)
         "NPMREGISTRY_TEST_GET_PACKAGE_ENTID" => $idmap,
         "NPMREGISTRY_TEST_LIVE" => "FALSE",
         "NPMREGISTRY_TEST_EXPLAIN" => "FALSE",
+        "NPMREGISTRY_APIKEY" => "NONE",
     ]);
 
     $idmap_resolved = Helpers::to_map(
@@ -99,6 +100,7 @@ function get_package_basic_setup($extra)
     if ($env["NPMREGISTRY_TEST_LIVE"] === "TRUE") {
         $merged_opts = Vs::merge([
             [
+                "apikey" => $env["NPMREGISTRY_APIKEY"],
             ],
             $extra ?? [],
         ]);

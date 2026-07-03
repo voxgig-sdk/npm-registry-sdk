@@ -1,21 +1,8 @@
 # NpmRegistry SDK
 
-Read package metadata, versions, and search results from the public npm registry
+NPM Registry API client, generated from the OpenAPI spec.
 
 > TypeScript, Python, PHP, Golang, Ruby, Lua SDKs, a CLI, an interactive REPL, and an MCP server for AI agents — all generated from one OpenAPI spec by [@voxgig/sdkgen](https://github.com/voxgig/sdkgen).
-
-## About NPM Registry API
-
-The [npm Registry](https://registry.npmjs.org) is the public package registry that backs the `npm` and other Node.js package managers. It is operated by [npm, Inc.](https://www.npmjs.com) (a subsidiary of GitHub/Microsoft) and serves package metadata and tarballs for millions of JavaScript packages.
-
-What you get from the API:
-
-- `GET /{package}` returns the full "packument" for a package: name, description, `dist-tags`, every published version, timestamps, author, repository, README, and attachments.
-- `GET /{package}/{version}` returns a single version document with dependencies, scripts, declared `license`, maintainer info, and the `dist.tarball` URL.
-- `GET /-/v1/search?text=...` performs full-text search with `size` (max 250), `from`, and weighted `quality`/`popularity`/`maintenance` modifiers, plus qualifiers like `author:`, `maintainer:`, `scope:`, and `keywords:`.
-- `GET /` returns registry-level metadata (document count, disk size, update sequence).
-
-Reads are unauthenticated and CORS-enabled. Publishing and other write operations require an npm account and token, but are outside the scope of this SDK. The registry is a CouchDB-style document store, so package documents can be large; prefer the version-specific endpoint when you only need one release.
 
 ## Try it
 
@@ -49,29 +36,31 @@ gem install npm-registry-sdk
 luarocks install npm-registry-sdk
 ```
 
-## 30-second quickstart
+## Quickstart
 
 ### TypeScript
 
 ```ts
 import { NpmRegistrySDK } from 'npm-registry'
 
-const client = new NpmRegistrySDK({})
+const client = new NpmRegistrySDK({
+  apikey: process.env.NPM-REGISTRY_APIKEY,
+})
 
 // List all getpackages
 const getpackages = await client.GetPackage().list()
+console.log(getpackages.data)
 ```
 
-See the [TypeScript README](ts/README.md) for the
-full guide, or scroll down for the same example in other languages.
+See the [TypeScript README](ts/README.md) for the full guide.
 
-## What's in the box
+## Surfaces
 
-| Surface | Use it for | Path |
-| --- | --- | --- |
-| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | App integration | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
-| **CLI** | Scripts, CI, ops, one-off API calls | `go-cli/` |
-| **MCP server** | AI agents (Claude, Cursor, Cline) | `go-mcp/` |
+| Surface | Path |
+| --- | --- |
+| **SDK** (TypeScript, Python, PHP, Golang, Ruby, Lua) | `ts/` `py/` `php/` `go/` `rb/` `lua/` |
+| **CLI** | `go-cli/` |
+| **MCP server** | `go-mcp/` |
 
 ## Use it from an AI agent (MCP)
 
@@ -101,8 +90,8 @@ The API exposes 2 entities:
 
 | Entity | Description | API path |
 | --- | --- | --- |
-| **GetPackage** | Package metadata documents ("packuments") fetched from `GET /{package}` and individual versions from `GET /{package}/{version}`. | `/{package}` |
-| **Search** | Full-text package search backed by `GET /-/v1/search`, with `text`, `size`, `from`, and quality/popularity/maintenance scoring parameters. | `/-/v1/search` |
+| **GetPackage** |  | `/{package}` |
+| **Search** |  | `/-/v1/search` |
 
 Each entity supports the following operations where available: **load**,
 **list**, **create**, **update**, and **remove**.
@@ -112,12 +101,16 @@ Each entity supports the following operations where available: **load**,
 ### Python
 
 ```python
+import os
 from npmregistry_sdk import NpmRegistrySDK
 
-client = NpmRegistrySDK({})
+client = NpmRegistrySDK({
+    "apikey": os.environ.get("NPM-REGISTRY_APIKEY"),
+})
 
 # List all getpackages
-getpackages, err = client.GetPackage(None).list(None, None)
+getpackages, err = client.GetPackage().list()
+print(getpackages)
 ```
 
 ### PHP
@@ -126,10 +119,13 @@ getpackages, err = client.GetPackage(None).list(None, None)
 <?php
 require_once 'npmregistry_sdk.php';
 
-$client = new NpmRegistrySDK([]);
+$client = new NpmRegistrySDK([
+    "apikey" => getenv("NPM-REGISTRY_APIKEY"),
+]);
 
 // List all getpackages
-[$getpackages, $err] = $client->GetPackage(null)->list(null, null);
+[$getpackages, $err] = $client->GetPackage()->list();
+print_r($getpackages);
 ```
 
 ### Golang
@@ -137,10 +133,13 @@ $client = new NpmRegistrySDK([]);
 ```go
 import sdk "github.com/voxgig-sdk/npm-registry-sdk/go"
 
-client := sdk.NewNpmRegistrySDK(map[string]any{})
+client := sdk.NewNpmRegistrySDK(map[string]any{
+    "apikey": os.Getenv("NPM-REGISTRY_APIKEY"),
+})
 
 // List all getpackages
 getpackages, err := client.GetPackage(nil).List(nil, nil)
+fmt.Println(getpackages)
 ```
 
 ### Ruby
@@ -148,10 +147,13 @@ getpackages, err := client.GetPackage(nil).List(nil, nil)
 ```ruby
 require_relative "NpmRegistry_sdk"
 
-client = NpmRegistrySDK.new({})
+client = NpmRegistrySDK.new({
+  "apikey" => ENV["NPM-REGISTRY_APIKEY"],
+})
 
 # List all getpackages
-getpackages, err = client.GetPackage(nil).list(nil, nil)
+getpackages, err = client.GetPackage().list
+puts getpackages
 ```
 
 ### Lua
@@ -159,10 +161,13 @@ getpackages, err = client.GetPackage(nil).list(nil, nil)
 ```lua
 local sdk = require("npm-registry_sdk")
 
-local client = sdk.new({})
+local client = sdk.new({
+  apikey = os.getenv("NPM-REGISTRY_APIKEY"),
+})
 
 -- List all getpackages
-local getpackages, err = client:GetPackage(nil):list(nil, nil)
+local getpackages, err = client:GetPackage():list()
+print(getpackages)
 ```
 
 ## Unit testing in offline mode
@@ -181,25 +186,21 @@ const result = await client.GetPackage().load({ id: 'test01' })
 ### Python
 
 ```python
-client = NpmRegistrySDK.test(None, None)
-result, err = client.GetPackage(None).load(
-    {"id": "test01"}, None
-)
+client = NpmRegistrySDK.test()
+result, err = client.GetPackage().load({"id": "test01"})
 ```
 
 ### PHP
 
 ```php
-$client = NpmRegistrySDK::test(null, null);
-[$result, $err] = $client->GetPackage(null)->load(
-    ["id" => "test01"], null
-);
+$client = NpmRegistrySDK::test();
+[$result, $err] = $client->GetPackage()->load(["id" => "test01"]);
 ```
 
 ### Golang
 
 ```go
-client := sdk.TestSDK(nil, nil)
+client := sdk.Test()
 result, err := client.GetPackage(nil).Load(
     map[string]any{"id": "test01"}, nil,
 )
@@ -208,19 +209,15 @@ result, err := client.GetPackage(nil).Load(
 ### Ruby
 
 ```ruby
-client = NpmRegistrySDK.test(nil, nil)
-result, err = client.GetPackage(nil).load(
-  { "id" => "test01" }, nil
-)
+client = NpmRegistrySDK.test
+result, err = client.GetPackage().load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
-local client = sdk.test(nil, nil)
-local result, err = client:GetPackage(nil):load(
-  { id = "test01" }, nil
-)
+local client = sdk.test()
+local result, err = client:GetPackage():load({ id = "test01" })
 ```
 
 ## How it works
@@ -324,16 +321,6 @@ local result, err = client:direct({
 - [Golang](go/README.md)
 - [Ruby](rb/README.md)
 - [Lua](lua/README.md)
-
-## Using the NPM Registry API
-
-- Upstream: [https://registry.npmjs.org](https://registry.npmjs.org)
-- API docs: [https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md](https://github.com/npm/registry/blob/main/docs/REGISTRY-API.md)
-
-- Registry client tooling and spec are distributed under the ISC licence.
-- Individual package documents returned by the registry include each package's own declared `license` field.
-- No authentication is required for read-only access to public package metadata.
-- CORS is enabled, so the endpoints can be called directly from browsers.
 
 ---
 

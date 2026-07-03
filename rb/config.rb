@@ -15,6 +15,9 @@ module NpmRegistryConfig
       },
       "options" => {
         "base" => "https://registry.npmjs.org",
+        "auth" => {
+          "prefix" => "Bearer",
+        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -27,36 +30,38 @@ module NpmRegistryConfig
         "get_package" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "email",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "name",
               "req" => false,
               "type" => "`$STRING`",
-              "active" => true,
               "index$" => 1,
             },
           ],
           "name" => "get_package",
           "op" => {
             "list" => {
+              "input" => "data",
               "name" => "list",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "params" => [
                       {
+                        "active" => true,
                         "example" => "express",
                         "kind" => "param",
                         "name" => "id",
                         "orig" => "package",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -79,11 +84,9 @@ module NpmRegistryConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "list",
             },
           },
@@ -94,88 +97,90 @@ module NpmRegistryConfig
         "search" => {
           "fields" => [
             {
+              "active" => true,
               "name" => "package",
               "req" => false,
               "type" => "`$OBJECT`",
-              "active" => true,
               "index$" => 0,
             },
             {
+              "active" => true,
               "name" => "score",
               "req" => false,
               "type" => "`$OBJECT`",
-              "active" => true,
               "index$" => 1,
             },
             {
+              "active" => true,
               "name" => "search_score",
               "req" => false,
               "type" => "`$NUMBER`",
-              "active" => true,
               "index$" => 2,
             },
           ],
           "name" => "search",
           "op" => {
             "list" => {
+              "input" => "data",
               "name" => "list",
               "points" => [
                 {
+                  "active" => true,
                   "args" => {
                     "query" => [
                       {
+                        "active" => true,
                         "example" => 0,
                         "kind" => "query",
                         "name" => "from",
                         "orig" => "from",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                       {
+                        "active" => true,
                         "example" => 0.5,
                         "kind" => "query",
                         "name" => "maintenance",
                         "orig" => "maintenance",
                         "reqd" => false,
                         "type" => "`$NUMBER`",
-                        "active" => true,
                       },
                       {
+                        "active" => true,
                         "example" => 0.98,
                         "kind" => "query",
                         "name" => "popularity",
                         "orig" => "popularity",
                         "reqd" => false,
                         "type" => "`$NUMBER`",
-                        "active" => true,
                       },
                       {
+                        "active" => true,
                         "example" => 0.65,
                         "kind" => "query",
                         "name" => "quality",
                         "orig" => "quality",
                         "reqd" => false,
                         "type" => "`$NUMBER`",
-                        "active" => true,
                       },
                       {
+                        "active" => true,
                         "example" => 20,
                         "kind" => "query",
                         "name" => "size",
                         "orig" => "size",
                         "reqd" => false,
                         "type" => "`$INTEGER`",
-                        "active" => true,
                       },
                       {
+                        "active" => true,
                         "example" => "react",
                         "kind" => "query",
                         "name" => "text",
                         "orig" => "text",
                         "reqd" => true,
                         "type" => "`$STRING`",
-                        "active" => true,
                       },
                     ],
                   },
@@ -200,11 +205,9 @@ module NpmRegistryConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
-                  "active" => true,
                   "index$" => 0,
                 },
               ],
-              "input" => "data",
               "key$" => "list",
             },
           },

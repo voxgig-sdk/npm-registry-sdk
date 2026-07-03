@@ -15,6 +15,9 @@ def make_config():
         },
         "options": {
             "base": "https://registry.npmjs.org",
+            "auth": {
+                "prefix": "Bearer",
+            },
             "headers": {
         "content-type": "application/json",
       },
@@ -27,36 +30,38 @@ def make_config():
       "get_package": {
         "fields": [
           {
+            "active": True,
             "name": "email",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "name",
             "req": False,
             "type": "`$STRING`",
-            "active": True,
             "index$": 1,
           },
         ],
         "name": "get_package",
         "op": {
           "list": {
+            "input": "data",
             "name": "list",
             "points": [
               {
+                "active": True,
                 "args": {
                   "params": [
                     {
+                      "active": True,
                       "example": "express",
                       "kind": "param",
                       "name": "id",
                       "orig": "package",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -79,11 +84,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "list",
           },
         },
@@ -94,88 +97,90 @@ def make_config():
       "search": {
         "fields": [
           {
+            "active": True,
             "name": "package",
             "req": False,
             "type": "`$OBJECT`",
-            "active": True,
             "index$": 0,
           },
           {
+            "active": True,
             "name": "score",
             "req": False,
             "type": "`$OBJECT`",
-            "active": True,
             "index$": 1,
           },
           {
+            "active": True,
             "name": "search_score",
             "req": False,
             "type": "`$NUMBER`",
-            "active": True,
             "index$": 2,
           },
         ],
         "name": "search",
         "op": {
           "list": {
+            "input": "data",
             "name": "list",
             "points": [
               {
+                "active": True,
                 "args": {
                   "query": [
                     {
+                      "active": True,
                       "example": 0,
                       "kind": "query",
                       "name": "from",
                       "orig": "from",
                       "reqd": False,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 0.5,
                       "kind": "query",
                       "name": "maintenance",
                       "orig": "maintenance",
                       "reqd": False,
                       "type": "`$NUMBER`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 0.98,
                       "kind": "query",
                       "name": "popularity",
                       "orig": "popularity",
                       "reqd": False,
                       "type": "`$NUMBER`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 0.65,
                       "kind": "query",
                       "name": "quality",
                       "orig": "quality",
                       "reqd": False,
                       "type": "`$NUMBER`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": 20,
                       "kind": "query",
                       "name": "size",
                       "orig": "size",
                       "reqd": False,
                       "type": "`$INTEGER`",
-                      "active": True,
                     },
                     {
+                      "active": True,
                       "example": "react",
                       "kind": "query",
                       "name": "text",
                       "orig": "text",
                       "reqd": True,
                       "type": "`$STRING`",
-                      "active": True,
                     },
                   ],
                 },
@@ -200,11 +205,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
-                "active": True,
                 "index$": 0,
               },
             ],
-            "input": "data",
             "key$": "list",
           },
         },

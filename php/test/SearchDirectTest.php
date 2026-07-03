@@ -68,12 +68,14 @@ function search_direct_setup($mockres)
     $env = Runner::env_override([
         "NPMREGISTRY_TEST_SEARCH_ENTID" => [],
         "NPMREGISTRY_TEST_LIVE" => "FALSE",
+        "NPMREGISTRY_APIKEY" => "NONE",
     ]);
 
     $live = $env["NPMREGISTRY_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [
+            "apikey" => $env["NPMREGISTRY_APIKEY"],
         ];
         $client = new NpmRegistrySDK($merged_opts);
         return [

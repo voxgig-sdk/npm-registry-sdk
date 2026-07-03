@@ -119,6 +119,7 @@ func searchBasicSetup(extra map[string]any) *entityTestSetup {
 		"NPMREGISTRY_TEST_SEARCH_ENTID": idmap,
 		"NPMREGISTRY_TEST_LIVE":      "FALSE",
 		"NPMREGISTRY_TEST_EXPLAIN":   "FALSE",
+		"NPMREGISTRY_APIKEY":         "NONE",
 	})
 
 	idmapResolved := core.ToMapAny(env["NPMREGISTRY_TEST_SEARCH_ENTID"])
@@ -129,6 +130,7 @@ func searchBasicSetup(extra map[string]any) *entityTestSetup {
 	if env["NPMREGISTRY_TEST_LIVE"] == "TRUE" {
 		mergedOpts := vs.Merge([]any{
 			map[string]any{
+				"apikey": env["NPMREGISTRY_APIKEY"],
 			},
 			extra,
 		})
