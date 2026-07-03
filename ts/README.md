@@ -10,7 +10,7 @@ The TypeScript SDK for the NpmRegistry API — a type-safe, entity-oriented clie
 
 ## Install
 ```bash
-npm install npm-registry
+npm install @voxgig-sdk/npm-registry
 ```
 ## Tutorial: your first API call
 

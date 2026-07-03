@@ -10,13 +10,13 @@ The Ruby SDK for the NpmRegistry API — an entity-oriented client using idiomat
 
 ## Install
 ```bash
-gem install npm-registry-sdk
+gem install voxgig-sdk-npm-registry
 ```
 
 Or add to your `Gemfile`:
 
 ```ruby
-gem "npm-registry-sdk"
+gem "voxgig-sdk-npm-registry"
 ```
 
 Then run:

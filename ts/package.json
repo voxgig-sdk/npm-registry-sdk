@@ -1,7 +1,23 @@
 {
   "name": "@voxgig-sdk/npm-registry",
   "version": "0.0.1",
-  "description": "DESCRIPTION",
+  "description": "Unofficial generated TypeScript SDK for the NPM Registry public API. Not affiliated with or endorsed by the upstream API provider.",
+  "keywords": [
+    "voxgig",
+    "sdk",
+    "generated-sdk",
+    "openapi",
+    "api-client",
+    "npm-registry"
+  ],
+  "homepage": "https://github.com/voxgig-sdk/npm-registry-sdk#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/voxgig-sdk/npm-registry-sdk.git"
+  },
+  "bugs": {
+    "url": "https://github.com/voxgig-sdk/npm-registry-sdk/issues"
+  },
   "main": "dist/NpmRegistrySDK.js",
   "type": "commonjs",
   "types": "dist/NpmRegistrySDK.d.ts",
@@ -14,7 +30,10 @@
     "clean": "rm -rf node_modules yarn.lock package-lock.json",
     "reset": "npm run clean && npm i && npm run build && npm test"
   },
-  "author": "NpmRegistry",
+  "author": {
+    "name": "Voxgig",
+    "url": "https://voxgig.com"
+  },
   "license": "MIT",
   "dependencies": {},
   "peerDependencies": {},

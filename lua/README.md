@@ -10,7 +10,7 @@ The Lua SDK for the NpmRegistry API — an entity-oriented client using Lua conv
 
 ## Install
 ```bash
-luarocks install npm-registry-sdk
+luarocks install voxgig-sdk-npm-registry
 ```
 
 If the module is not yet published, add the source directory to

@@ -10,7 +10,7 @@ The Python SDK for the NpmRegistry API — an entity-oriented client following P
 
 ## Install
 ```bash
-pip install npm-registry-sdk
+pip install voxgig-sdk-npm-registry
 ```
 
 Or install from source:

@@ -10,7 +10,7 @@ The PHP SDK for the NpmRegistry API — an entity-oriented client using PHP conv
 
 ## Install
 ```bash
-composer require voxgig/npm-registry-sdk
+composer require voxgig-sdk/npm-registry
 ```
 
 
