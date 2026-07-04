@@ -15,9 +15,6 @@ def make_config():
         },
         "options": {
             "base": "https://registry.npmjs.org",
-            "auth": {
-                "prefix": "Bearer",
-            },
             "headers": {
         "content-type": "application/json",
       },
@@ -62,6 +59,7 @@ def make_config():
                       "orig": "package",
                       "reqd": True,
                       "type": "`$STRING`",
+                      "index$": 0,
                     },
                   ],
                 },

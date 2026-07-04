@@ -52,8 +52,7 @@ class TestGetPackageEntity:
             "package": setup["idmap"]["package01"],
         }
 
-        get_package_ref01_list_result, err = get_package_ref01_ent.list(get_package_ref01_match, None)
-        assert err is None
+        get_package_ref01_list_result = get_package_ref01_ent.list(get_package_ref01_match, None)
         assert isinstance(get_package_ref01_list_result, list)
 
 
@@ -94,7 +93,6 @@ def _get_package_basic_setup(extra):
         "NPMREGISTRY_TEST_GET_PACKAGE_ENTID": idmap,
         "NPMREGISTRY_TEST_LIVE": "FALSE",
         "NPMREGISTRY_TEST_EXPLAIN": "FALSE",
-        "NPMREGISTRY_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -105,7 +103,6 @@ def _get_package_basic_setup(extra):
     if env.get("NPMREGISTRY_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("NPMREGISTRY_APIKEY"),
             },
             extra or {},
         ])

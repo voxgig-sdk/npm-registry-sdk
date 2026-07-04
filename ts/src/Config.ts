@@ -38,10 +38,6 @@ class Config {
   options = {
     base: 'https://registry.npmjs.org',
 
-    auth: {
-      prefix: 'Bearer',
-    },
-
     headers: {
       "content-type": "application/json"
     },
@@ -93,7 +89,8 @@ class Config {
                     "name": "id",
                     "orig": "package",
                     "reqd": true,
-                    "type": "`$STRING`"
+                    "type": "`$STRING`",
+                    "index$": 0
                   }
                 ]
               },

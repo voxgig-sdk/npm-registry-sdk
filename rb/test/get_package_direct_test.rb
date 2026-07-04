@@ -33,7 +33,7 @@ class GetPackageDirectTest < Minitest::Test
       params["id"] = "direct01"
     end
 
-    result, err = client.direct({
+    result = client.direct({
       "path" => "{id}",
       "method" => "GET",
       "params" => params,
@@ -42,8 +42,8 @@ class GetPackageDirectTest < Minitest::Test
       # Live mode is lenient: synthetic IDs frequently 4xx and the list-
       # response shape varies wildly across public APIs. Skip rather than
       # fail when the call doesn't return a usable list.
-      if !err.nil?
-        skip("list call failed (likely synthetic IDs against live API): #{err}")
+      if !result["err"].nil?
+        skip("list call failed (likely synthetic IDs against live API): #{result["err"]}")
         return
       end
       unless result["ok"]
@@ -56,7 +56,7 @@ class GetPackageDirectTest < Minitest::Test
         return
       end
     else
-      assert_nil err
+      assert_nil result["err"]
       assert result["ok"]
       assert_equal 200, Helpers.to_int(result["status"])
       assert result["data"].is_a?(Array)
@@ -76,14 +76,12 @@ def get_package_direct_setup(mockres)
   env = Runner.env_override({
     "NPMREGISTRY_TEST_GET_PACKAGE_ENTID" => {},
     "NPMREGISTRY_TEST_LIVE" => "FALSE",
-    "NPMREGISTRY_APIKEY" => "NONE",
   })
 
   live = env["NPMREGISTRY_TEST_LIVE"] == "TRUE"
 
   if live
     merged_opts = {
-      "apikey" => env["NPMREGISTRY_APIKEY"],
     }
     client = NpmRegistrySDK.new(merged_opts)
     return {

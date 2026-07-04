@@ -4,6 +4,7 @@
 main: {
   kit: {
     info: {
+      auth: false
       contact: {
         name: "NPM Support"
         url: "https://www.npmjs.com/support"

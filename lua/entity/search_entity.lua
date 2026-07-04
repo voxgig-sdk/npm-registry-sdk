@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch SearchListMatch
+---@param ctrl? table
+---@return Search[]
+---@return string? err
 function SearchEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

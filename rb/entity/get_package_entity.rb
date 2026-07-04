@@ -45,6 +45,7 @@ class GetPackageEntity
     end
   end
 
+  # @return [GetPackage, Hash] the current GetPackage data
   def data_get
     @_utility.feature_hook.call(@_entctx, "GetData")
     VoxgigStruct.clone(@_data)
@@ -57,6 +58,7 @@ class GetPackageEntity
     end
   end
 
+  # @return [Hash] the current match filter (any subset of GetPackage fields)
   def match_get
     @_utility.feature_hook.call(@_entctx, "GetMatch")
     VoxgigStruct.clone(@_match)
@@ -65,6 +67,11 @@ class GetPackageEntity
   
 
   
+  # List GetPackage items matching the given filter.
+  #
+  # @param reqmatch [GetPackageListMatch, Hash, nil] match filter (any subset of GetPackage fields)
+  # @param ctrl [Object, nil] optional per-call control
+  # @return [Array<GetPackage>, Array] the matching GetPackage items; raises NpmRegistryError on failure
   def list(reqmatch, ctrl = nil)
     utility = @_utility
     ctx = utility.make_context.call({

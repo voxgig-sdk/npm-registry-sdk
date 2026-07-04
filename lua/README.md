@@ -9,12 +9,9 @@ The Lua SDK for the NpmRegistry API — an entity-oriented client using Lua conv
 
 
 ## Install
-```bash
-luarocks install voxgig-sdk-npm-registry
-```
-
-If the module is not yet published, add the source directory to
-your `LUA_PATH`:
+This package is not yet published to LuaRocks. Install it from the
+GitHub release tag (`lua/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/npm-registry-sdk/releases)),
+or add the source directory to your `LUA_PATH`:
 
 ```bash
 export LUA_PATH="path/to/lua/?.lua;path/to/lua/?/init.lua;;"
@@ -31,15 +28,13 @@ loading a specific record.
 ```lua
 local sdk = require("npm-registry_sdk")
 
-local client = sdk.new({
-  apikey = os.getenv("NPM-REGISTRY_APIKEY"),
-})
+local client = sdk.new()
 ```
 
 ### 2. List getpackages
 
 ```lua
-local result, err = client:GetPackage():list()
+local result, err = client:getpackage():list()
 if err then error(err) end
 
 if type(result) == "table" then
@@ -93,7 +88,7 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:NpmRegistry():load({ id = "test01" })
+local result, err = client:getpackage():load({ id = "test01" })
 -- result contains mock response data
 ```
 
@@ -126,8 +121,7 @@ local client = sdk.new({
 Create a `.env.local` file at the project root:
 
 ```
-NPM-REGISTRY_TEST_LIVE=TRUE
-NPM-REGISTRY_APIKEY=<your-key>
+NPM_REGISTRY_TEST_LIVE=TRUE
 ```
 
 Then run:
@@ -150,7 +144,6 @@ Creates a new SDK client.
 
 | Option | Type | Description |
 | --- | --- | --- |
-| `apikey` | `string` | API key for authentication. |
 | `base` | `string` | Base URL of the API server. |
 | `prefix` | `string` | URL path prefix prepended to all requests. |
 | `suffix` | `string` | URL path suffix appended to all requests. |
@@ -241,7 +234,7 @@ API path: `/-/v1/search`
 
 ### GetPackage
 
-Create an instance: `const get_package = client.GetPackage()`
+Create an instance: `const get_package = client.get_package`
 
 #### Operations
 
@@ -259,13 +252,13 @@ Create an instance: `const get_package = client.GetPackage()`
 #### Example: List
 
 ```ts
-const get_packages = await client.GetPackage().list()
+const get_packages = await client.get_package.list()
 ```
 
 
 ### Search
 
-Create an instance: `const search = client.Search()`
+Create an instance: `const search = client.search`
 
 #### Operations
 
@@ -284,7 +277,7 @@ Create an instance: `const search = client.Search()`
 #### Example: List
 
 ```ts
-const searchs = await client.Search().list()
+const searchs = await client.search.list()
 ```
 
 
@@ -359,11 +352,11 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local moon = client:Moon(nil)
-moon:load({ planet_id = "earth", id = "luna" }, nil)
+local getpackage = client:getpackage()
+getpackage:load({ id = "example_id" })
 
--- moon:data_get() now returns the loaded moon data
--- moon:match_get() returns the last match criteria
+-- getpackage:data_get() now returns the loaded getpackage data
+-- getpackage:match_get() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

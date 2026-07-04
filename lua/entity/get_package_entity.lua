@@ -81,6 +81,10 @@ end
 
 
 
+---@param reqmatch GetPackageListMatch
+---@param ctrl? table
+---@return GetPackage[]
+---@return string? err
 function GetPackageEntity:list(reqmatch, ctrl)
   local utility = self._utility
   local ctx = utility.make_context({

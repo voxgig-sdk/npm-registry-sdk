@@ -50,8 +50,7 @@ class TestSearchEntity:
         search_ref01_ent = client.Search(None)
         search_ref01_match = {}
 
-        search_ref01_list_result, err = search_ref01_ent.list(search_ref01_match, None)
-        assert err is None
+        search_ref01_list_result = search_ref01_ent.list(search_ref01_match, None)
         assert isinstance(search_ref01_list_result, list)
 
 
@@ -92,7 +91,6 @@ def _search_basic_setup(extra):
         "NPMREGISTRY_TEST_SEARCH_ENTID": idmap,
         "NPMREGISTRY_TEST_LIVE": "FALSE",
         "NPMREGISTRY_TEST_EXPLAIN": "FALSE",
-        "NPMREGISTRY_APIKEY": "NONE",
     })
 
     idmap_resolved = helpers.to_map(
@@ -103,7 +101,6 @@ def _search_basic_setup(extra):
     if env.get("NPMREGISTRY_TEST_LIVE") == "TRUE":
         merged_opts = vs.merge([
             {
-                "apikey": env.get("NPMREGISTRY_APIKEY"),
             },
             extra or {},
         ])

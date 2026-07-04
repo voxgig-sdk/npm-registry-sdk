@@ -15,9 +15,6 @@ module NpmRegistryConfig
       },
       "options" => {
         "base" => "https://registry.npmjs.org",
-        "auth" => {
-          "prefix" => "Bearer",
-        },
         "headers" => {
           "content-type" => "application/json",
         },
@@ -62,6 +59,7 @@ module NpmRegistryConfig
                         "orig" => "package",
                         "reqd" => true,
                         "type" => "`$STRING`",
+                        "index$" => 0,
                       },
                     ],
                   },

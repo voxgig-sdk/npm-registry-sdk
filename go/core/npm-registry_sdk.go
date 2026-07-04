@@ -245,11 +245,17 @@ func (sdk *NpmRegistrySDK) Direct(fetchargs map[string]any) (map[string]any, err
 }
 
 
+// GetPackage returns a GetPackage entity bound to this client.
+// Idiomatic usage: client.GetPackage(nil).List(nil, nil) or
+// client.GetPackage(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NpmRegistrySDK) GetPackage(data map[string]any) NpmRegistryEntity {
 	return NewGetPackageEntityFunc(sdk, data)
 }
 
 
+// Search returns a Search entity bound to this client.
+// Idiomatic usage: client.Search(nil).List(nil, nil) or
+// client.Search(nil).Load(map[string]any{"id": ...}, nil).
 func (sdk *NpmRegistrySDK) Search(data map[string]any) NpmRegistryEntity {
 	return NewSearchEntityFunc(sdk, data)
 }

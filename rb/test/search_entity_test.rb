@@ -43,8 +43,7 @@ class SearchEntityTest < Minitest::Test
     search_ref01_ent = client.Search(nil)
     search_ref01_match = {}
 
-    search_ref01_list_result, err = search_ref01_ent.list(search_ref01_match, nil)
-    assert_nil err
+    search_ref01_list_result = search_ref01_ent.list(search_ref01_match, nil)
     assert search_ref01_list_result.is_a?(Array)
 
   end
@@ -83,7 +82,6 @@ def search_basic_setup(extra)
     "NPMREGISTRY_TEST_SEARCH_ENTID" => idmap,
     "NPMREGISTRY_TEST_LIVE" => "FALSE",
     "NPMREGISTRY_TEST_EXPLAIN" => "FALSE",
-    "NPMREGISTRY_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -95,7 +93,6 @@ def search_basic_setup(extra)
   if env["NPMREGISTRY_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["NPMREGISTRY_APIKEY"],
       },
       extra || {},
     ])

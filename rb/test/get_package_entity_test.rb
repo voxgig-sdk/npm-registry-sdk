@@ -45,8 +45,7 @@ class GetPackageEntityTest < Minitest::Test
       "package" => setup[:idmap]["package01"],
     }
 
-    get_package_ref01_list_result, err = get_package_ref01_ent.list(get_package_ref01_match, nil)
-    assert_nil err
+    get_package_ref01_list_result = get_package_ref01_ent.list(get_package_ref01_match, nil)
     assert get_package_ref01_list_result.is_a?(Array)
 
   end
@@ -85,7 +84,6 @@ def get_package_basic_setup(extra)
     "NPMREGISTRY_TEST_GET_PACKAGE_ENTID" => idmap,
     "NPMREGISTRY_TEST_LIVE" => "FALSE",
     "NPMREGISTRY_TEST_EXPLAIN" => "FALSE",
-    "NPMREGISTRY_APIKEY" => "NONE",
   })
 
   idmap_resolved = Helpers.to_map(
@@ -97,7 +95,6 @@ def get_package_basic_setup(extra)
   if env["NPMREGISTRY_TEST_LIVE"] == "TRUE"
     merged_opts = Vs.merge([
       {
-        "apikey" => env["NPMREGISTRY_APIKEY"],
       },
       extra || {},
     ])

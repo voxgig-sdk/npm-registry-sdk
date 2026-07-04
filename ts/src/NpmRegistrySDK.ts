@@ -3,6 +3,8 @@
 import { GetPackageEntity } from './entity/GetPackageEntity'
 import { SearchEntity } from './entity/SearchEntity'
 
+export type * from './NpmRegistryTypes'
+
 
 import { inspect } from 'node:util'
 
@@ -203,12 +205,28 @@ class NpmRegistrySDK {
 
 
 
+  _get_package?: GetPackageEntity
+
+  // Idiomatic facade: `client.get_package.list()` / `client.get_package.load({ id })`.
+  get get_package(): GetPackageEntity {
+    return (this._get_package ??= new GetPackageEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.get_package` instead. */
   GetPackage(data?: any) {
     const self = this
     return new GetPackageEntity(self,data)
   }
 
 
+  _search?: SearchEntity
+
+  // Idiomatic facade: `client.search.list()` / `client.search.load({ id })`.
+  get search(): SearchEntity {
+    return (this._search ??= new SearchEntity(this, undefined))
+  }
+
+  /** @deprecated Use `client.search` instead. */
   Search(data?: any) {
     const self = this
     return new SearchEntity(self,data)
