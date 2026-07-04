@@ -90,7 +90,7 @@ same parameters as `direct()`. Raises on error.
 ## GetPackageEntity
 
 ```ruby
-get_package = client.get_package
+get_package = client.GetPackage
 ```
 
 ### Fields
@@ -107,7 +107,7 @@ get_package = client.get_package
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.get_package.list(nil)
+results = client.GetPackage.list(nil)
 ```
 
 ### Common Methods
@@ -143,7 +143,7 @@ Return the entity name.
 ## SearchEntity
 
 ```ruby
-search = client.search
+search = client.Search
 ```
 
 ### Fields
@@ -161,7 +161,7 @@ search = client.search
 List entities matching the given criteria. Returns an array. Raises on error.
 
 ```ruby
-results = client.search.list(nil)
+results = client.Search.list(nil)
 ```
 
 ### Common Methods

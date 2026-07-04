@@ -233,10 +233,10 @@ class NpmRegistrySDK
 
     private $_get_package = null;
 
-    // Idiomatic facade: $client->get_package()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias GetPackage() (PHP method
-    // names are case-insensitive).
-    public function get_package($data = null)
+    // Canonical facade: $client->GetPackage()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->get_package()
+    // resolves here too.
+    public function GetPackage($data = null)
     {
         require_once __DIR__ . '/entity/get_package_entity.php';
         if ($data === null) {
@@ -251,10 +251,10 @@ class NpmRegistrySDK
 
     private $_search = null;
 
-    // Idiomatic facade: $client->search()->list() / ->load(["id" => ...]).
-    // Also serves the deprecated PascalCase alias Search() (PHP method
-    // names are case-insensitive).
-    public function search($data = null)
+    // Canonical facade: $client->Search()->list() / ->load(["id" => ...]).
+    // PHP method names are case-insensitive, so lowercase $client->search()
+    // resolves here too.
+    public function Search($data = null)
     {
         require_once __DIR__ . '/entity/search_entity.php';
         if ($data === null) {

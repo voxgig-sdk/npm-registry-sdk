@@ -26,9 +26,11 @@ import { NpmRegistrySDK } from '@voxgig-sdk/npm-registry'
 
 const client = new NpmRegistrySDK()
 
-// List all getpackages
-const getpackages = await client.getpackage.list()
-console.log(getpackages.data)
+// List all getpackages (returns GetPackage[])
+const getpackages = await client.GetPackage().list()
+for (const getpackage of getpackages) {
+  console.log(getpackage)
+}
 ```
 
 See the [TypeScript README](ts/README.md) for the full guide.
@@ -84,9 +86,10 @@ from npmregistry_sdk import NpmRegistrySDK
 
 client = NpmRegistrySDK()
 
-# List all getpackages
-getpackages = client.getpackage.list()
-print(getpackages)
+# List all getpackages (returns a list, raises on error)
+getpackages = client.GetPackage().list({})
+for getpackage in getpackages:
+    print(getpackage)
 ```
 
 ### PHP
@@ -97,8 +100,8 @@ require_once 'npmregistry_sdk.php';
 
 $client = new NpmRegistrySDK();
 
-// List all getpackages (throws on error)
-$getpackages = $client->getpackage()->list();
+// List all getpackages (returns an array; throws on error)
+$getpackages = $client->GetPackage()->list();
 print_r($getpackages);
 ```
 
@@ -121,8 +124,8 @@ require_relative "NpmRegistry_sdk"
 
 client = NpmRegistrySDK.new
 
-# List all getpackages
-getpackages = client.getpackage.list
+# List all getpackages (returns an Array; raises on error)
+getpackages = client.GetPackage.list
 puts getpackages
 ```
 
@@ -134,7 +137,7 @@ local sdk = require("npm-registry_sdk")
 local client = sdk.new()
 
 -- List all getpackages
-local getpackages, err = client:getpackage():list()
+local getpackages, err = client:GetPackage():list()
 print(getpackages)
 ```
 
@@ -147,22 +150,27 @@ in-memory mock, so unit tests run offline.
 
 ```ts
 const client = NpmRegistrySDK.test()
-const result = await client.getpackage.load({ id: 'test01' })
-// result.ok === true, result.data contains mock data
+const getpackage = await client.GetPackage().load({ id: 'test01' })
+// getpackage is a bare GetPackage populated with mock data
+console.log(getpackage)
 ```
 
 ### Python
 
 ```python
 client = NpmRegistrySDK.test()
-result = client.getpackage.load({"id": "test01"})
+getpackage = client.GetPackage().load({"id": "test01"})
+print(getpackage)
 ```
 
 ### PHP
 
 ```php
-$client = NpmRegistrySDK::test();
-$result = $client->getpackage()->load(["id" => "test01"]);
+// Seed fixture data so offline calls resolve without a live server.
+$client = NpmRegistrySDK::test([
+    "entity" => ["getpackage" => ["test01" => ["id" => "test01"]]],
+]);
+$getpackage = $client->GetPackage()->load(["id" => "test01"]);
 ```
 
 ### Golang
@@ -177,15 +185,18 @@ result, err := client.GetPackage(nil).Load(
 ### Ruby
 
 ```ruby
-client = NpmRegistrySDK.test
-result = client.getpackage.load({ "id" => "test01" })
+# Seed fixture data so offline calls resolve without a live server.
+client = NpmRegistrySDK.test({
+  "entity" => { "getpackage" => { "test01" => { "id" => "test01" } } },
+})
+getpackage = client.GetPackage.load({ "id" => "test01" })
 ```
 
 ### Lua
 
 ```lua
 local client = sdk.test()
-local result, err = client:getpackage():load({ id = "test01" })
+local result, err = client:GetPackage():load({ id = "test01" })
 ```
 
 ## How it works
@@ -233,6 +244,9 @@ const result = await client.direct({
   method: 'GET',
   params: { id: 'example' },
 })
+if (result instanceof Error) {
+  throw result
+}
 console.log(result.data)
 ```
 

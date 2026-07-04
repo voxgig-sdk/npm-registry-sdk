@@ -87,7 +87,7 @@ same parameters as `direct()`.
 ## GetPackageEntity
 
 ```lua
-local get_package = client:get_package(nil)
+local get_package = client:GetPackage(nil)
 ```
 
 ### Fields
@@ -104,7 +104,7 @@ local get_package = client:get_package(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:get_package():list()
+local results, err = client:GetPackage():list()
 ```
 
 ### Common Methods
@@ -140,7 +140,7 @@ Return the entity name.
 ## SearchEntity
 
 ```lua
-local search = client:search(nil)
+local search = client:Search(nil)
 ```
 
 ### Fields
@@ -158,7 +158,7 @@ local search = client:search(nil)
 List entities matching the given criteria. Returns an array.
 
 ```lua
-local results, err = client:search():list()
+local results, err = client:Search():list()
 ```
 
 ### Common Methods

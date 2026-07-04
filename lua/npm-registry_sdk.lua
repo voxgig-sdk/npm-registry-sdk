@@ -244,8 +244,9 @@ end
 
 
 
--- Idiomatic facade: client:get_package():list() / client:get_package():load({ id = ... })
-function NpmRegistrySDK:get_package(data)
+-- Idiomatic facade: client:GetPackage():list() / client:GetPackage():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NpmRegistrySDK:GetPackage(data)
   local EntityMod = require("entity.get_package_entity")
   if data == nil then
     if self._get_package == nil then
@@ -256,15 +257,10 @@ function NpmRegistrySDK:get_package(data)
   return EntityMod.new(self, data)
 end
 
--- Deprecated: use client:get_package() instead.
-function NpmRegistrySDK:GetPackage(data)
-  local EntityMod = require("entity.get_package_entity")
-  return EntityMod.new(self, data)
-end
 
-
--- Idiomatic facade: client:search():list() / client:search():load({ id = ... })
-function NpmRegistrySDK:search(data)
+-- Idiomatic facade: client:Search():list() / client:Search():load({ id = ... })
+-- Entity access is capitalised (PascalCase) for parity with the other SDKs.
+function NpmRegistrySDK:Search(data)
   local EntityMod = require("entity.search_entity")
   if data == nil then
     if self._search == nil then
@@ -272,12 +268,6 @@ function NpmRegistrySDK:search(data)
     end
     return self._search
   end
-  return EntityMod.new(self, data)
-end
-
--- Deprecated: use client:search() instead.
-function NpmRegistrySDK:Search(data)
-  local EntityMod = require("entity.search_entity")
   return EntityMod.new(self, data)
 end
 

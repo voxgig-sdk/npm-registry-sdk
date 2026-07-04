@@ -29,18 +29,16 @@ require_once 'npmregistry_sdk.php';
 $client = new NpmRegistrySDK();
 ```
 
-### 2. List getpackages
+### 2. List getpackage records
 
 ```php
 try {
-    $result = $client->getpackage()->list();
-    if (is_array($result)) {
-        foreach ($result as $item) {
-            $d = $item->data_get();
-            echo $d["id"] . " " . $d["name"] . "\n";
-        }
+    // list() returns an array of GetPackage records — iterate directly.
+    $getpackages = $client->GetPackage()->list();
+    foreach ($getpackages as $item) {
+        echo $item["id"] . " " . $item["name"] . "\n";
     }
-} catch (\Exception $err) {
+} catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
 }
 ```
@@ -86,13 +84,17 @@ print_r($fetchdef["headers"]);
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```php
-$client = NpmRegistrySDK::test();
+$client = NpmRegistrySDK::test([
+    "entity" => ["getpackage" => ["test01" => ["id" => "test01"]]],
+]);
 
-$result = $client->getpackage()->load(["id" => "test01"]);
-// $result contains mock response data
+// load() returns the bare mock record (throws on error).
+$getpackage = $client->GetPackage()->load(["id" => "test01"]);
+print_r($getpackage);
 ```
 
 ### Use a custom fetch function
@@ -242,7 +244,7 @@ API path: `/-/v1/search`
 
 ### GetPackage
 
-Create an instance: `const get_package = client.get_package`
+Create an instance: `$get_package = $client->GetPackage();`
 
 #### Operations
 
@@ -259,14 +261,15 @@ Create an instance: `const get_package = client.get_package`
 
 #### Example: List
 
-```ts
-const get_packages = await client.get_package.list()
+```php
+// list() returns an array of GetPackage records (throws on error).
+$get_packages = $client->GetPackage()->list();
 ```
 
 
 ### Search
 
-Create an instance: `const search = client.search`
+Create an instance: `$search = $client->Search();`
 
 #### Operations
 
@@ -284,8 +287,9 @@ Create an instance: `const search = client.search`
 
 #### Example: List
 
-```ts
-const searchs = await client.search.list()
+```php
+// list() returns an array of Search records (throws on error).
+$searchs = $client->Search()->list();
 ```
 
 
@@ -360,7 +364,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```php
-$getpackage = $client->getpackage();
+$getpackage = $client->GetPackage();
 $getpackage->load(["id" => "example_id"]);
 
 // $getpackage->dataGet() now returns the loaded getpackage data

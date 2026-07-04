@@ -220,41 +220,21 @@ class NpmRegistrySDK:
         }
 
 
-    @property
-    def get_package(self):
-        """Idiomatic facade: client.get_package.list() / client.get_package.load({"id": ...})."""
-        from entity.get_package_entity import GetPackageEntity
-        cached = getattr(self, "_get_package", None)
-        if cached is None:
-            cached = GetPackageEntity(self, None)
-            self._get_package = cached
-        return cached
-
-    def GetPackage(self, data=None):
-        # Deprecated: use client.get_package instead.
+    def GetPackage(self, data=None) -> "GetPackageEntity":
+        """Entity factory: client.GetPackage().list({}) / client.GetPackage().load({"id": ...})."""
         from entity.get_package_entity import GetPackageEntity
         return GetPackageEntity(self, data)
 
 
-    @property
-    def search(self):
-        """Idiomatic facade: client.search.list() / client.search.load({"id": ...})."""
-        from entity.search_entity import SearchEntity
-        cached = getattr(self, "_search", None)
-        if cached is None:
-            cached = SearchEntity(self, None)
-            self._search = cached
-        return cached
-
-    def Search(self, data=None):
-        # Deprecated: use client.search instead.
+    def Search(self, data=None) -> "SearchEntity":
+        """Entity factory: client.Search().list({}) / client.Search().load({"id": ...})."""
         from entity.search_entity import SearchEntity
         return SearchEntity(self, data)
 
 
 
     @classmethod
-    def test(cls, testopts=None, sdkopts=None):
+    def test(cls, testopts=None, sdkopts=None) -> "NpmRegistrySDK":
         if sdkopts is None:
             sdkopts = {}
         sdkopts = vs.clone(sdkopts)
@@ -274,3 +254,10 @@ class NpmRegistrySDK:
         sdk.mode = "test"
 
         return sdk
+
+
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from entity.get_package_entity import GetPackageEntity
+    from entity.search_entity import SearchEntity

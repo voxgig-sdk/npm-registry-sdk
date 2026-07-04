@@ -31,14 +31,16 @@ from npmregistry_sdk import NpmRegistrySDK
 client = NpmRegistrySDK()
 ```
 
-### 2. List getpackages
+### 2. List getpackage records
+
+`list()` returns a `list` of records (each a `dict`) and raises on
+error — iterate it directly.
 
 ```python
 try:
-    result = client.getpackage.list()
-    for item in result:
-        d = item.data_get()
-        print(d["id"], d["name"])
+    getpackages = client.GetPackage().list({})
+    for getpackage in getpackages:
+        print(getpackage)
 except Exception as err:
     print(f"list failed: {err}")
 ```
@@ -86,8 +88,9 @@ Create a mock client for unit testing — no server required:
 ```python
 client = NpmRegistrySDK.test()
 
-result = client.getpackage.load({"id": "test01"})
-# result contains mock response data
+# Entity ops return the bare record and raise on error.
+getpackage = client.GetPackage().load({"id": "test01"})
+# getpackage contains the mock response record
 ```
 
 ### Use a custom fetch function
@@ -234,7 +237,7 @@ API path: `/-/v1/search`
 
 ### GetPackage
 
-Create an instance: `const get_package = client.get_package`
+Create an instance: `get_package = client.GetPackage()`
 
 #### Operations
 
@@ -251,14 +254,14 @@ Create an instance: `const get_package = client.get_package`
 
 #### Example: List
 
-```ts
-const get_packages = await client.get_package.list()
+```python
+get_packages = client.GetPackage().list({})
 ```
 
 
 ### Search
 
-Create an instance: `const search = client.search`
+Create an instance: `search = client.Search()`
 
 #### Operations
 
@@ -276,8 +279,8 @@ Create an instance: `const search = client.search`
 
 #### Example: List
 
-```ts
-const searchs = await client.search.list()
+```python
+searchs = client.Search().list({})
 ```
 
 
@@ -351,7 +354,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```python
-getpackage = client.getpackage
+getpackage = client.GetPackage()
 getpackage.load({"id": "example_id"})
 
 # getpackage.data_get() now returns the loaded getpackage data

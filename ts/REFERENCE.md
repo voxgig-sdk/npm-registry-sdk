@@ -121,7 +121,7 @@ Alias for `NpmRegistrySDK.test()`.
 ## GetPackageEntity
 
 ```ts
-const get_package = client.get_package
+const get_package = client.GetPackage()
 ```
 
 ### Fields
@@ -138,7 +138,7 @@ const get_package = client.get_package
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.get_package.list()
+const results = await client.GetPackage().list()
 ```
 
 ### Common Methods
@@ -172,7 +172,7 @@ Return a copy of the entity options.
 ## SearchEntity
 
 ```ts
-const search = client.search
+const search = client.Search()
 ```
 
 ### Fields
@@ -190,7 +190,7 @@ const search = client.search
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.search.list()
+const results = await client.Search().list()
 ```
 
 ### Common Methods

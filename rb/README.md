@@ -28,16 +28,14 @@ require_relative "NpmRegistry_sdk"
 client = NpmRegistrySDK.new
 ```
 
-### 2. List getpackages
+### 2. List getpackage records
 
 ```ruby
 begin
-  result = client.getpackage.list
-  if result.is_a?(Array)
-    result.each do |item|
-      d = item.data_get
-      puts "#{d["id"]} #{d["name"]}"
-    end
+  # list returns an Array of GetPackage records — iterate directly.
+  getpackages = client.GetPackage.list
+  getpackages.each do |item|
+    puts "#{item["id"]} #{item["name"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -85,13 +83,17 @@ end
 
 ### Use test mode
 
-Create a mock client for unit testing — no server required:
+Create a mock client for unit testing — no server required. Seed fixture
+data via the `entity` option so offline calls resolve without a live server:
 
 ```ruby
-client = NpmRegistrySDK.test
+client = NpmRegistrySDK.test({
+  "entity" => { "getpackage" => { "test01" => { "id" => "test01" } } },
+})
 
-result = client.getpackage.load({ "id" => "test01" })
-# result contains mock response data
+# load returns the bare mock record (raises on error).
+getpackage = client.GetPackage.load({ "id" => "test01" })
+puts getpackage
 ```
 
 ### Use a custom fetch function
@@ -237,7 +239,7 @@ API path: `/-/v1/search`
 
 ### GetPackage
 
-Create an instance: `const get_package = client.get_package`
+Create an instance: `get_package = client.GetPackage`
 
 #### Operations
 
@@ -254,14 +256,15 @@ Create an instance: `const get_package = client.get_package`
 
 #### Example: List
 
-```ts
-const get_packages = await client.get_package.list()
+```ruby
+# list returns an Array of GetPackage records (raises on error).
+get_packages = client.GetPackage.list
 ```
 
 
 ### Search
 
-Create an instance: `const search = client.search`
+Create an instance: `search = client.Search`
 
 #### Operations
 
@@ -279,8 +282,9 @@ Create an instance: `const search = client.search`
 
 #### Example: List
 
-```ts
-const searchs = await client.search.list()
+```ruby
+# list returns an Array of Search records (raises on error).
+searchs = client.Search.list
 ```
 
 
@@ -355,7 +359,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```ruby
-getpackage = client.getpackage
+getpackage = client.GetPackage
 getpackage.load({ "id" => "example_id" })
 
 # getpackage.data_get now returns the loaded getpackage data

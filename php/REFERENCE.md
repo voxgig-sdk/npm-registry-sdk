@@ -89,7 +89,7 @@ Prepare a fetch definition without sending the request. Returns the
 ## GetPackageEntity
 
 ```php
-$get_package = $client->get_package();
+$get_package = $client->GetPackage();
 ```
 
 ### Fields
@@ -106,7 +106,7 @@ $get_package = $client->get_package();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->get_package()->list([]);
+$results = $client->GetPackage()->list([]);
 ```
 
 ### Common Methods
@@ -142,7 +142,7 @@ Return the entity name.
 ## SearchEntity
 
 ```php
-$search = $client->search();
+$search = $client->Search();
 ```
 
 ### Fields
@@ -160,7 +160,7 @@ $search = $client->search();
 List entities matching the given criteria. Returns an array. Throws on error.
 
 ```php
-$results = $client->search()->list([]);
+$results = $client->Search()->list([]);
 ```
 
 ### Common Methods

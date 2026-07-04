@@ -31,17 +31,17 @@ local sdk = require("npm-registry_sdk")
 local client = sdk.new()
 ```
 
-### 2. List getpackages
+### 2. List getpackage records
+
+Entity operations return `(value, err)`. For `list`, `value` is the
+array of records itself — iterate it directly (there is no wrapper).
 
 ```lua
-local result, err = client:getpackage():list()
+local getpackages, err = client:GetPackage():list()
 if err then error(err) end
 
-if type(result) == "table" then
-  for _, item in ipairs(result) do
-    local d = item:data_get()
-    print(d["id"], d["name"])
-  end
+for _, item in ipairs(getpackages) do
+  print(item["id"], item["name"])
 end
 ```
 
@@ -88,8 +88,8 @@ Create a mock client for unit testing — no server required:
 ```lua
 local client = sdk.test()
 
-local result, err = client:getpackage():load({ id = "test01" })
--- result contains mock response data
+local result, err = client:GetPackage():load({ id = "test01" })
+-- result is the loaded data; err is set on failure
 ```
 
 ### Use a custom fetch function
@@ -190,17 +190,22 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return `(any, err)`. The first value is a
-`table` with these keys:
+Entity operations return `(value, err)`. The `value` is the operation's
+data **directly** — there is no wrapper:
 
-| Key | Type | Description |
-| --- | --- | --- |
-| `ok` | `boolean` | `true` if the HTTP status is 2xx. |
-| `status` | `number` | HTTP status code. |
-| `headers` | `table` | Response headers. |
-| `data` | `any` | Parsed JSON response body. |
+| Operation | `value` |
+| --- | --- |
+| `load` / `create` / `update` / `remove` | the entity record (a `table`) |
+| `list` | an array (`table`) of entity records |
 
-On error, `ok` is `false` and `err` contains the error value.
+Check `err` first (it is non-`nil` on failure), then use `value`:
+
+    local get_package, err = client:GetPackage():load({ id = "example_id" })
+    if err then error(err) end
+    -- get_package is the loaded record
+
+Only `direct()` returns a response envelope — a `table` with `ok`,
+`status`, `headers`, and `data` keys.
 
 ### Entities
 
@@ -234,7 +239,7 @@ API path: `/-/v1/search`
 
 ### GetPackage
 
-Create an instance: `const get_package = client.get_package`
+Create an instance: `local get_package = client:GetPackage(nil)`
 
 #### Operations
 
@@ -251,14 +256,14 @@ Create an instance: `const get_package = client.get_package`
 
 #### Example: List
 
-```ts
-const get_packages = await client.get_package.list()
+```lua
+local get_packages, err = client:GetPackage():list()
 ```
 
 
 ### Search
 
-Create an instance: `const search = client.search`
+Create an instance: `local search = client:Search(nil)`
 
 #### Operations
 
@@ -276,8 +281,8 @@ Create an instance: `const search = client.search`
 
 #### Example: List
 
-```ts
-const searchs = await client.search.list()
+```lua
+local searchs, err = client:Search():list()
 ```
 
 
@@ -352,7 +357,7 @@ Entity instances are stateful. After a successful `load`, the entity
 stores the returned data and match criteria internally.
 
 ```lua
-local getpackage = client:getpackage()
+local getpackage = client:GetPackage()
 getpackage:load({ id = "example_id" })
 
 -- getpackage:data_get() now returns the loaded getpackage data

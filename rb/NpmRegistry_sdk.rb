@@ -208,26 +208,14 @@ class NpmRegistrySDK
   end
 
 
-  # Idiomatic facade: client.get_package.list / client.get_package.load({ "id" => ... })
-  def get_package
-    require_relative 'entity/get_package_entity'
-    @get_package ||= GetPackageEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.get_package instead.
+  # Canonical facade: client.GetPackage.list / client.GetPackage.load({ "id" => ... })
   def GetPackage(data = nil)
     require_relative 'entity/get_package_entity'
     GetPackageEntity.new(self, data)
   end
 
 
-  # Idiomatic facade: client.search.list / client.search.load({ "id" => ... })
-  def search
-    require_relative 'entity/search_entity'
-    @search ||= SearchEntity.new(self, nil)
-  end
-
-  # Deprecated: use client.search instead.
+  # Canonical facade: client.Search.list / client.Search.load({ "id" => ... })
   def Search(data = nil)
     require_relative 'entity/search_entity'
     SearchEntity.new(self, data)

@@ -84,7 +84,7 @@ Prepare a fetch definition without sending. Returns the `fetchdef` and raises on
 ## GetPackageEntity
 
 ```python
-get_package = client.get_package
+get_package = client.GetPackage()
 ```
 
 ### Fields
@@ -101,7 +101,9 @@ get_package = client.get_package
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.get_package.list({})
+results = client.GetPackage().list({})
+for get_package in results:
+    print(get_package)
 ```
 
 ### Common Methods
@@ -136,7 +138,7 @@ Return the entity name.
 ## SearchEntity
 
 ```python
-search = client.search
+search = client.Search()
 ```
 
 ### Fields
@@ -154,7 +156,9 @@ search = client.search
 List entities matching the given criteria. Returns a list and raises on error.
 
 ```python
-results = client.search.list({})
+results = client.Search().list({})
+for search in results:
+    print(search)
 ```
 
 ### Common Methods
