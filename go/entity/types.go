@@ -26,8 +26,7 @@ type Search struct {
 	SearchScore *float64 `json:"search_score,omitempty"`
 }
 
-// SearchListMatch mirrors the search fields as an all-optional match
-// filter (Go analog of Partial<Search>).
+// SearchListMatch is the typed request payload for Search.ListTyped.
 type SearchListMatch struct {
 	Package *map[string]any `json:"package,omitempty"`
 	Score *map[string]any `json:"score,omitempty"`

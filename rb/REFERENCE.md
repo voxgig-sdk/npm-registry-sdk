@@ -8,7 +8,7 @@ Complete API reference for the NpmRegistry Ruby SDK.
 ### Constructor
 
 ```ruby
-require_relative 'npm-registry_sdk'
+require_relative 'NpmRegistry_sdk'
 
 client = NpmRegistrySDK.new(options)
 ```
@@ -97,17 +97,17 @@ get_package = client.GetPackage
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `email` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `email` | `String` | No |  |
+| `name` | `String` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.GetPackage.list(nil)
+results = client.GetPackage.list
 ```
 
 ### Common Methods
@@ -150,18 +150,18 @@ search = client.Search
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `package` | ``$OBJECT`` | No |  |
-| `score` | ``$OBJECT`` | No |  |
-| `search_score` | ``$NUMBER`` | No |  |
+| `package` | `Hash` | No |  |
+| `score` | `Hash` | No |  |
+| `search_score` | `Float` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl = nil) -> Array`
+#### `list(reqmatch = nil, ctrl = nil) -> Array`
 
-List entities matching the given criteria. Returns an array. Raises on error.
+List entities matching the given criteria (call with no argument to list all). Returns an array. Raises on error.
 
 ```ruby
-results = client.Search.list(nil)
+results = client.Search.list
 ```
 
 ### Common Methods

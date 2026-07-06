@@ -128,8 +128,8 @@ const get_package = client.GetPackage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `email` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `email` | `string` | No |  |
+| `name` | `string` | No |  |
 
 ### Operations
 
@@ -179,9 +179,9 @@ const search = client.Search()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `package` | ``$OBJECT`` | No |  |
-| `score` | ``$OBJECT`` | No |  |
-| `search_score` | ``$NUMBER`` | No |  |
+| `package` | `Record<string, any>` | No |  |
+| `score` | `Record<string, any>` | No |  |
+| `search_score` | `number` | No |  |
 
 ### Operations
 

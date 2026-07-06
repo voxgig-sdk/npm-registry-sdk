@@ -19,6 +19,9 @@
 ---@field search_score? number
 
 ---@class SearchListMatch
+---@field package? table
+---@field score? table
+---@field search_score? number
 
 local M = {}
 

@@ -8,7 +8,7 @@ Complete API reference for the NpmRegistry Python SDK.
 ### Constructor
 
 ```python
-from npm-registry_sdk import NpmRegistrySDK
+from npmregistry_sdk import NpmRegistrySDK
 
 client = NpmRegistrySDK(options)
 ```
@@ -91,17 +91,17 @@ get_package = client.GetPackage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `email` | ``$STRING`` | No |  |
-| `name` | ``$STRING`` | No |  |
+| `email` | `str` | No |  |
+| `name` | `str` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.GetPackage().list({})
+results = client.GetPackage().list()
 for get_package in results:
     print(get_package)
 ```
@@ -145,18 +145,18 @@ search = client.Search()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `package` | ``$OBJECT`` | No |  |
-| `score` | ``$OBJECT`` | No |  |
-| `search_score` | ``$NUMBER`` | No |  |
+| `package` | `dict` | No |  |
+| `score` | `dict` | No |  |
+| `search_score` | `float` | No |  |
 
 ### Operations
 
-#### `list(reqmatch, ctrl=None) -> list`
+#### `list(reqmatch=None, ctrl=None) -> list`
 
-List entities matching the given criteria. Returns a list and raises on error.
+List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.Search().list({})
+results = client.Search().list()
 for search in results:
     print(search)
 ```

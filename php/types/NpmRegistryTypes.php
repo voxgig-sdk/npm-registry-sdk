@@ -33,7 +33,7 @@ class Search
     public ?float $search_score = null;
 }
 
-/** Match filter for Search#list (any subset of Search fields). */
+/** Request payload for Search#list. */
 class SearchListMatch
 {
     public ?array $package = null;
