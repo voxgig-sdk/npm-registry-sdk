@@ -50,12 +50,12 @@ import (
 func main() {
     client := sdk.New()
 
-    // List getpackage records — the value is the array of records itself.
-    getpackages, err := client.GetPackage(nil).List(nil, nil)
+    // List getPackage records — the value is the array of records itself.
+    getPackages, err := client.GetPackage(nil).List(nil, nil)
     if err != nil {
         panic(err)
     }
-    for _, item := range getpackages.([]any) {
+    for _, item := range getPackages.([]any) {
         fmt.Println(item)
     }
 }
@@ -137,13 +137,13 @@ Create a mock client for unit testing — no server required:
 ```go
 client := sdk.Test()
 
-getpackage, err := client.GetPackage(nil).List(
+getPackage, err := client.GetPackage(nil).List(
     nil, nil,
 )
 if err != nil {
     panic(err)
 }
-fmt.Println(getpackage) // the returned mock data
+fmt.Println(getPackage) // the returned mock data
 ```
 
 ### Use a custom fetch function
@@ -248,9 +248,9 @@ Check `err` first, then use the value directly (or the typed
 `...Typed` variants, which return the entity's model struct and a typed
 slice):
 
-    getpackage, err := client.GetPackage(nil).List(map[string]any{/* fields */}, nil)
+    getPackage, err := client.GetPackage(nil).List(map[string]any{/* fields */}, nil)
     if err != nil { /* handle */ }
-    // getpackage is the returned record
+    // getPackage is the returned record
 
 Only `Direct()` returns a response envelope — a `map[string]any` with
 `"ok"`, `"status"`, `"headers"`, and `"data"` keys.
@@ -287,7 +287,7 @@ API path: `/-/v1/search`
 
 ### GetPackage
 
-Create an instance: `get_package := client.GetPackage(nil)`
+Create an instance: `getPackage := client.GetPackage(nil)`
 
 #### Operations
 
@@ -305,11 +305,11 @@ Create an instance: `get_package := client.GetPackage(nil)`
 #### Example: List
 
 ```go
-get_packages, err := client.GetPackage(nil).List(nil, nil)
+getPackages, err := client.GetPackage(nil).List(nil, nil)
 if err != nil {
     panic(err)
 }
-fmt.Println(get_packages) // the array of records
+fmt.Println(getPackages) // the array of records
 ```
 
 

@@ -20,9 +20,9 @@ main: {
           url: "https://registry.npmjs.org"
         }
       ]
+      summary: "API for accessing package metadata from the NPM registry."
       title: "NPM Registry API"
       version: "1.0.0"
+      website: "https://registry.npmjs.org"
     }
   }
-}
-

@@ -6,9 +6,6 @@
     },
     "kit": {
       "config": {
-        "auth": {
-          "prefix": "Bearer"
-        },
         "docs_order": [
           "ts",
           "py",
@@ -370,14 +367,17 @@
           "name": "ISC",
           "url": "https://opensource.org/licenses/ISC"
         },
+        "meta_source": "https://www.freepublicapis.com",
         "servers": [
           {
             "description": "NPM Registry Production Server",
             "url": "https://registry.npmjs.org"
           }
         ],
+        "summary": "API for accessing package metadata from the NPM registry.",
         "title": "NPM Registry API",
-        "version": "1.0.0"
+        "version": "1.0.0",
+        "website": "https://registry.npmjs.org"
       },
       "option": {},
       "target": {
@@ -430,6 +430,9 @@
           },
           "name": "go-cli",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
@@ -480,6 +483,9 @@
           },
           "name": "go-mcp",
           "phase": {
+            "agentguide": {
+              "active": false
+            },
             "entity": {
               "active": false
             },
