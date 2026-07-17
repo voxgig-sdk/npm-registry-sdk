@@ -1,4 +1,4 @@
--- ProjectName SDK exists test
+-- NpmRegistry SDK exists test
 
 local sdk = require("npm-registry_sdk")
 
