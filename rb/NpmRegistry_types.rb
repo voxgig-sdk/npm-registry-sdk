@@ -38,12 +38,12 @@ GetPackageListMatch = Struct.new(
 # @!attribute [rw] score
 #   @return [Hash, nil]
 #
-# @!attribute [rw] search_score
+# @!attribute [rw] searchScore
 #   @return [Float, nil]
 Search = Struct.new(
   :package,
   :score,
-  :search_score,
+  :searchScore,
   keyword_init: true
 )
 
@@ -55,12 +55,12 @@ Search = Struct.new(
 # @!attribute [rw] score
 #   @return [Hash, nil]
 #
-# @!attribute [rw] search_score
+# @!attribute [rw] searchScore
 #   @return [Float, nil]
 SearchListMatch = Struct.new(
   :package,
   :score,
-  :search_score,
+  :searchScore,
   keyword_init: true
 )
 

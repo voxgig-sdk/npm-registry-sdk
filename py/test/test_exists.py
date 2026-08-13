@@ -1,4 +1,4 @@
-# ProjectName SDK exists test
+# NpmRegistry SDK exists test
 
 import pytest
 from npmregistry_sdk import NpmRegistrySDK

@@ -16,11 +16,11 @@
 import pytest
 
 from npmregistry_sdk import NpmRegistrySDK
-from core.error import NpmRegistryError
-from core.result import NpmRegistryResult
-from core.response import NpmRegistryResponse
-from core.spec import NpmRegistrySpec
-from feature.base_feature import NpmRegistryBaseFeature
+from npmregistry_sdk.core.error import NpmRegistryError
+from npmregistry_sdk.core.result import NpmRegistryResult
+from npmregistry_sdk.core.response import NpmRegistryResponse
+from npmregistry_sdk.core.spec import NpmRegistrySpec
+from npmregistry_sdk.feature.base_feature import NpmRegistryBaseFeature
 
 
 def _client():

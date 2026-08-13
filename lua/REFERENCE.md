@@ -149,7 +149,7 @@ local search = client:Search(nil)
 | --- | --- | --- | --- |
 | `package` | `table` | No |  |
 | `score` | `table` | No |  |
-| `search_score` | `number` | No |  |
+| `searchScore` | `number` | No |  |
 
 ### Operations
 

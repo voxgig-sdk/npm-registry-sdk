@@ -37,7 +37,7 @@ class GetPackageEntity extends NpmRegistryEntityBase<GetPackage> {
 
 
 
-  async list(this: any, reqmatch?: GetPackageListMatch, ctrl?: Control): Promise<GetPackage[]> {
+  async list(this: any, reqmatch?: GetPackageListMatch, ctrl?: Control): Promise<GetPackageEntity[]> {
 
     const utility = this._utility
 

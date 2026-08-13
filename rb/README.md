@@ -119,7 +119,8 @@ Create a mock client for unit testing — no server required:
 ```ruby
 client = NpmRegistrySDK.test
 
-# Entity ops return the bare mock record (raises on error).
+# Entity ops return the ENTITY (raises on error);
+# call data_get for the mock record.
 getpackage = client.GetPackage.list()
 puts getpackage
 ```
@@ -250,7 +251,7 @@ API path: `/{package}`
 | --- | --- |
 | `package` |  |
 | `score` |  |
-| `search_score` |  |
+| `searchScore` |  |
 
 Operations: List.
 
@@ -302,7 +303,7 @@ Create an instance: `search = client.Search`
 | --- | --- | --- |
 | `package` | `Hash` |  |
 | `score` | `Hash` |  |
-| `search_score` | `Float` |  |
+| `searchScore` | `Float` |  |
 
 #### Example: List
 

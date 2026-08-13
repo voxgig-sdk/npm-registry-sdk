@@ -24,6 +24,7 @@ require_relative 'prepare_method'
 require_relative 'prepare_params'
 require_relative 'prepare_path'
 require_relative 'prepare_query'
+require_relative 'graphql'
 require_relative 'result_basic'
 require_relative 'result_body'
 require_relative 'result_headers'
@@ -55,6 +56,8 @@ NpmRegistryUtility.registrar = ->(u) {
   u.prepare_params = NpmRegistryUtilities::PrepareParams
   u.prepare_path = NpmRegistryUtilities::PreparePath
   u.prepare_query = NpmRegistryUtilities::PrepareQuery
+  u.graphql_body = NpmRegistryUtilities::GraphqlBody
+  u.graphql_errors = NpmRegistryUtilities::GraphqlErrors
   u.result_basic = NpmRegistryUtilities::ResultBasic
   u.result_body = NpmRegistryUtilities::ResultBody
   u.result_headers = NpmRegistryUtilities::ResultHeaders

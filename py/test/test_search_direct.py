@@ -3,9 +3,9 @@
 import json
 import pytest
 
-from utility.voxgig_struct import voxgig_struct as vs
+from npmregistry_sdk.utility.voxgig_struct import voxgig_struct as vs
 from npmregistry_sdk import NpmRegistrySDK
-from core import helpers
+from npmregistry_sdk.core import helpers
 from test import runner
 
 
@@ -58,11 +58,11 @@ def _search_direct_setup(mockres):
     calls = []
 
     env = runner.env_override({
-        "NPMREGISTRY_TEST_SEARCH_ENTID": {},
-        "NPMREGISTRY_TEST_LIVE": "FALSE",
+        "NPM_REGISTRY_TEST_SEARCH_ENTID": {},
+        "NPM_REGISTRY_TEST_LIVE": "FALSE",
     })
 
-    live = env.get("NPMREGISTRY_TEST_LIVE") == "TRUE"
+    live = env.get("NPM_REGISTRY_TEST_LIVE") == "TRUE"
 
     if live:
         merged_opts = {

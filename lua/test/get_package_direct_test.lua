@@ -75,11 +75,11 @@ function get_package_direct_setup(mockres)
   local calls = {}
 
   local env = runner.env_override({
-    ["NPMREGISTRY_TEST_GET_PACKAGE_ENTID"] = {},
-    ["NPMREGISTRY_TEST_LIVE"] = "FALSE",
+    ["NPM_REGISTRY_TEST_GET_PACKAGE_ENTID"] = {},
+    ["NPM_REGISTRY_TEST_LIVE"] = "FALSE",
   })
 
-  local live = env["NPMREGISTRY_TEST_LIVE"] == "TRUE"
+  local live = env["NPM_REGISTRY_TEST_LIVE"] == "TRUE"
 
   if live then
     local merged_opts = {

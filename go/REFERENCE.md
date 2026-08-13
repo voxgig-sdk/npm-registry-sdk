@@ -156,7 +156,7 @@ fmt.Println(search.GetName()) // "search"
 | --- | --- | --- | --- |
 | `package` | `map[string]any` | No |  |
 | `score` | `map[string]any` | No |  |
-| `search_score` | `float64` | No |  |
+| `searchScore` | `float64` | No |  |
 
 ### Operations
 

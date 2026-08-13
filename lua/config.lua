@@ -62,6 +62,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/{package}",
                 ["parts"] = {
@@ -109,7 +110,7 @@ local function make_config()
           },
           {
             ["active"] = true,
-            ["name"] = "search_score",
+            ["name"] = "searchScore",
             ["req"] = false,
             ["type"] = "`$NUMBER`",
             ["index$"] = 2,
@@ -181,6 +182,7 @@ local function make_config()
                     },
                   },
                 },
+                ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/-/v1/search",
                 ["parts"] = {
@@ -200,7 +202,7 @@ local function make_config()
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
-                  ["res"] = "`body`",
+                  ["res"] = "`body.objects`",
                 },
                 ["index$"] = 0,
               },

@@ -43,7 +43,7 @@ error — iterate it directly.
 
 ```python
 try:
-    getpackages = client.GetPackage().list()
+    getpackages = client.GetPackage().list({"id": "example"})
     for getpackage in getpackages:
         print(getpackage)
 except Exception as err:
@@ -124,7 +124,8 @@ Create a mock client for unit testing — no server required:
 ```python
 client = NpmRegistrySDK.test()
 
-# Entity ops return the bare record and raise on error.
+# Entity ops return the ENTITY and raises on error;
+# call data_get() for the record.
 getpackage = client.GetPackage().list()
 # getpackage contains the mock response record
 ```
@@ -221,7 +222,7 @@ All entities share the same interface.
 
 ### Result shape
 
-Entity operations return the bare result data (a `dict` for single-entity
+Entity operations return the ENTITY (call data_get() for the record) (a `dict` for single-entity
 ops, a `list` for `list`) and raise on error. Wrap calls in
 `try`/`except` to handle failures.
 
@@ -256,7 +257,7 @@ API path: `/{package}`
 | --- | --- |
 | `package` |  |
 | `score` |  |
-| `search_score` |  |
+| `searchScore` |  |
 
 Operations: List.
 
@@ -287,7 +288,7 @@ Create an instance: `get_package = client.GetPackage()`
 #### Example: List
 
 ```python
-get_packages = client.GetPackage().list()
+get_packages = client.GetPackage().list({"id": "example"})
 ```
 
 
@@ -307,7 +308,7 @@ Create an instance: `search = client.Search()`
 | --- | --- | --- |
 | `package` | `dict` |  |
 | `score` | `dict` |  |
-| `search_score` | `float` |  |
+| `searchScore` | `float` |  |
 
 #### Example: List
 

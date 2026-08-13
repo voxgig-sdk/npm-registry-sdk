@@ -23,8 +23,8 @@ module NpmRegistryTestRunner
   end
 
   def self.env_override(m)
-    live = getenv("NPMREGISTRY_TEST_LIVE")
-    override = getenv("NPMREGISTRY_TEST_OVERRIDE")
+    live = getenv("NPM_REGISTRY_TEST_LIVE")
+    override = getenv("NPM_REGISTRY_TEST_OVERRIDE")
 
     if live == "TRUE" || override == "TRUE"
       m.each_key do |key|
@@ -44,8 +44,8 @@ module NpmRegistryTestRunner
       end
     end
 
-    explain = getenv("NPMREGISTRY_TEST_EXPLAIN")
-    m["NPMREGISTRY_TEST_EXPLAIN"] = explain if explain && !explain.empty?
+    explain = getenv("NPM_REGISTRY_TEST_EXPLAIN")
+    m["NPM_REGISTRY_TEST_EXPLAIN"] = explain if explain && !explain.empty?
 
     m
   end

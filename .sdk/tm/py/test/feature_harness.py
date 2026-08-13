@@ -14,12 +14,12 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from config import make_config
-from features import _make_feature
-from core.control import NpmRegistryControl
-from core.error import NpmRegistryError
-from core.result import NpmRegistryResult
-from core.spec import NpmRegistrySpec
+from projectname_sdk.config import make_config
+from projectname_sdk.features import _make_feature
+from projectname_sdk.core.control import NpmRegistryControl
+from projectname_sdk.core.error import NpmRegistryError
+from projectname_sdk.core.result import NpmRegistryResult
+from projectname_sdk.core.spec import NpmRegistrySpec
 
 
 # True when this SDK was generated with the named feature.

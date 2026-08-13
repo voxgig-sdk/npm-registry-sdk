@@ -26,8 +26,8 @@ import {
 describe('GetPackageEntity', async () => {
 
   // Per-test live pacing. Delay is read from sdk-test-control.json's
-  // `test.live.delayMs`; only sleeps when NPMREGISTRY_TEST_LIVE=TRUE.
-  afterEach(liveDelay('NPMREGISTRY_TEST_LIVE'))
+  // `test.live.delayMs`; only sleeps when NPM_REGISTRY_TEST_LIVE=TRUE.
+  afterEach(liveDelay('NPM_REGISTRY_TEST_LIVE'))
 
   test('instance', async () => {
     const testsdk = NpmRegistrySDK.test()
@@ -64,7 +64,7 @@ describe('GetPackageEntity', async () => {
     const get_package_ref01_match: any = {}
     get_package_ref01_match['package'] = setup.idmap['package01']
 
-    const get_package_ref01_list = await get_package_ref01_ent.list(get_package_ref01_match)
+    const get_package_ref01_list = (await get_package_ref01_ent.list(get_package_ref01_match)).map((e: any) => e.data())
 
 
   })

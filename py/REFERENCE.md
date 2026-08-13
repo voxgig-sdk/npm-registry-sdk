@@ -101,7 +101,7 @@ get_package = client.GetPackage()
 List entities matching the given criteria. The match is optional — call `list()` with no argument to list all records. Returns a list and raises on error.
 
 ```python
-results = client.GetPackage().list()
+results = client.GetPackage().list({"id": "example"})
 for get_package in results:
     print(get_package)
 ```
@@ -147,7 +147,7 @@ search = client.Search()
 | --- | --- | --- | --- |
 | `package` | `dict` | No |  |
 | `score` | `dict` | No |  |
-| `search_score` | `float` | No |  |
+| `searchScore` | `float` | No |  |
 
 ### Operations
 

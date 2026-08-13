@@ -37,7 +37,7 @@ class SearchEntity extends NpmRegistryEntityBase<Search> {
 
 
 
-  async list(this: any, reqmatch?: SearchListMatch, ctrl?: Control): Promise<Search[]> {
+  async list(this: any, reqmatch?: SearchListMatch, ctrl?: Control): Promise<SearchEntity[]> {
 
     const utility = this._utility
 

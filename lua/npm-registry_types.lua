@@ -16,12 +16,12 @@
 ---@class Search
 ---@field package? table
 ---@field score? table
----@field search_score? number
+---@field searchScore? number
 
 ---@class SearchListMatch
 ---@field package? table
 ---@field score? table
----@field search_score? number
+---@field searchScore? number
 
 local M = {}
 

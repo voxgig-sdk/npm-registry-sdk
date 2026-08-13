@@ -30,7 +30,7 @@ class Search
 {
     public ?array $package = null;
     public ?array $score = null;
-    public ?float $search_score = null;
+    public ?float $searchScore = null;
 }
 
 /** Request payload for Search#list. */
@@ -38,6 +38,6 @@ class SearchListMatch
 {
     public ?array $package = null;
     public ?array $score = null;
-    public ?float $search_score = null;
+    public ?float $searchScore = null;
 }
 

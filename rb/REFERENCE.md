@@ -152,7 +152,7 @@ search = client.Search
 | --- | --- | --- | --- |
 | `package` | `Hash` | No |  |
 | `score` | `Hash` | No |  |
-| `search_score` | `Float` | No |  |
+| `searchScore` | `Float` | No |  |
 
 ### Operations
 

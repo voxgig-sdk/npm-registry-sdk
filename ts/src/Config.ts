@@ -21,7 +21,7 @@ class Config {
 
 
   main = {
-    name: 'ProjectName',
+    name: 'NpmRegistry',
   }
 
 
@@ -94,6 +94,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/{package}",
               "parts": [
@@ -141,7 +142,7 @@ class Config {
         },
         {
           "active": true,
-          "name": "search_score",
+          "name": "searchScore",
           "req": false,
           "type": "`$NUMBER`",
           "index$": 2
@@ -213,6 +214,7 @@ class Config {
                   }
                 ]
               },
+              "kind": "http",
               "method": "GET",
               "orig": "/-/v1/search",
               "parts": [
@@ -232,7 +234,7 @@ class Config {
               },
               "transform": {
                 "req": "`reqdata`",
-                "res": "`body`"
+                "res": "`body.objects`"
               },
               "index$": 0
             }

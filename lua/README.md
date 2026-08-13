@@ -219,9 +219,9 @@ data **directly** — there is no wrapper:
 
 Check `err` first (it is non-`nil` on failure), then use `value`:
 
-    local get_package, err = client:GetPackage():load()
+    local get_package, err = client:GetPackage():list()
     if err then error(err) end
-    -- get_package is the loaded record
+    -- get_package is the record list
 
 Only `direct()` returns a response envelope — a `table` with `ok`,
 `status`, `headers`, and `data` keys.
@@ -245,7 +245,7 @@ API path: `/{package}`
 | --- | --- |
 | `package` |  |
 | `score` |  |
-| `search_score` |  |
+| `searchScore` |  |
 
 Operations: List.
 
@@ -296,7 +296,7 @@ Create an instance: `local search = client:Search(nil)`
 | --- | --- | --- |
 | `package` | `table` |  |
 | `score` | `table` |  |
-| `search_score` | `number` |  |
+| `searchScore` | `number` |  |
 
 #### Example: List
 

@@ -15,6 +15,7 @@ guide: {
   entity: search: {
     path: "/-/v1/search": {
       op: list: method: *GET
+      op: list: transform: res: *("`body.objects`")|top
     }
   }
 

@@ -66,11 +66,11 @@ function search_direct_setup($mockres)
     $calls = new \ArrayObject();
 
     $env = Runner::env_override([
-        "NPMREGISTRY_TEST_SEARCH_ENTID" => [],
-        "NPMREGISTRY_TEST_LIVE" => "FALSE",
+        "NPM_REGISTRY_TEST_SEARCH_ENTID" => [],
+        "NPM_REGISTRY_TEST_LIVE" => "FALSE",
     ]);
 
-    $live = $env["NPMREGISTRY_TEST_LIVE"] === "TRUE";
+    $live = $env["NPM_REGISTRY_TEST_LIVE"] === "TRUE";
 
     if ($live) {
         $merged_opts = [

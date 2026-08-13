@@ -151,7 +151,7 @@ $search = $client->Search();
 | --- | --- | --- | --- |
 | `package` | `array` | No |  |
 | `score` | `array` | No |  |
-| `search_score` | `float` | No |  |
+| `searchScore` | `float` | No |  |
 
 ### Operations
 

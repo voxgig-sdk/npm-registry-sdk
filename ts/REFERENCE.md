@@ -138,7 +138,7 @@ const get_package = client.GetPackage()
 List entities matching the given criteria. Returns an array.
 
 ```ts
-const results = await client.GetPackage().list()
+const results = await client.GetPackage().list({ id: "example" })
 ```
 
 ### Common Methods
@@ -181,7 +181,7 @@ const search = client.Search()
 | --- | --- | --- | --- |
 | `package` | `Record<string, any>` | No |  |
 | `score` | `Record<string, any>` | No |  |
-| `search_score` | `number` | No |  |
+| `searchScore` | `number` | No |  |
 
 ### Operations
 

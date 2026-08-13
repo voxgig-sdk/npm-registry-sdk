@@ -274,7 +274,7 @@ API path: `/{package}`
 | --- | --- |
 | `"package"` |  |
 | `"score"` |  |
-| `"search_score"` |  |
+| `"searchScore"` |  |
 
 Operations: List.
 
@@ -329,7 +329,7 @@ Create an instance: `search := client.Search(nil)`
 | --- | --- | --- |
 | `package` | `map[string]any` |  |
 | `score` | `map[string]any` |  |
-| `search_score` | `float64` |  |
+| `searchScore` | `float64` |  |
 
 #### Example: List
 

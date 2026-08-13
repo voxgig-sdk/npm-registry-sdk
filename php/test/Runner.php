@@ -43,8 +43,8 @@ class NpmRegistryTestRunner
 
     public static function env_override(array $m): array
     {
-        $live = self::getenv('NPMREGISTRY_TEST_LIVE');
-        $override = self::getenv('NPMREGISTRY_TEST_OVERRIDE');
+        $live = self::getenv('NPM_REGISTRY_TEST_LIVE');
+        $override = self::getenv('NPM_REGISTRY_TEST_OVERRIDE');
 
         if ($live === 'TRUE' || $override === 'TRUE') {
             foreach (array_keys($m) as $key) {
@@ -63,9 +63,9 @@ class NpmRegistryTestRunner
             }
         }
 
-        $explain = self::getenv('NPMREGISTRY_TEST_EXPLAIN');
+        $explain = self::getenv('NPM_REGISTRY_TEST_EXPLAIN');
         if ($explain !== null && $explain !== '') {
-            $m['NPMREGISTRY_TEST_EXPLAIN'] = $explain;
+            $m['NPM_REGISTRY_TEST_EXPLAIN'] = $explain;
         }
 
         return $m;

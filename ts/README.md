@@ -35,10 +35,12 @@ const client = new NpmRegistrySDK()
 
 ### 2. List getpackage records
 
-`list()` resolves to an array of GetPackage objects — iterate it directly:
+`list()` resolves to an array of GetPackage ENTITIES — every operation
+resolves to entities, not raw records. Iterate them directly, and call
+`.data()` on one for the record it holds:
 
 ```ts
-const getpackages = await client.GetPackage().list()
+const getpackages = await client.GetPackage().list({ id: "example" })
 
 for (const getpackage of getpackages) {
   console.log(getpackage)
@@ -120,7 +122,8 @@ Create a mock client for unit testing — no server required:
 const client = NpmRegistrySDK.test()
 
 const getpackage = await client.GetPackage().list()
-// getpackage is a bare entity populated with mock response data
+// getpackage is the entity, populated with mock response data
+// — call getpackage.data() for the record itself
 console.log(getpackage)
 ```
 
@@ -298,7 +301,7 @@ API path: `/{package}`
 | --- | --- |
 | `package` |  |
 | `score` |  |
-| `search_score` |  |
+| `searchScore` |  |
 
 Operations: list.
 
@@ -329,7 +332,7 @@ Create an instance: `const get_package = client.GetPackage()`
 #### Example: List
 
 ```ts
-const get_packages = await client.GetPackage().list()
+const get_packages = await client.GetPackage().list({ id: "example" })
 ```
 
 
@@ -349,7 +352,7 @@ Create an instance: `const search = client.Search()`
 | --- | --- | --- |
 | `package` | `Record<string, any>` |  |
 | `score` | `Record<string, any>` |  |
-| `search_score` | `number` |  |
+| `searchScore` | `number` |  |
 
 #### Example: List
 

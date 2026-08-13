@@ -23,7 +23,7 @@ support (`list`):
 
 ```ts
 const client = new NpmRegistrySDK()
-const items = await client.GetPackage().list()
+const items = await client.GetPackage().list({ id: "example" })
 ```
 
 Thinking in entities keeps the mental model small — for people and AI agents alike —
@@ -38,9 +38,18 @@ network, and no credentials:
 ### TypeScript
 
 ```ts
-const client = NpmRegistrySDK.test()
+// The offline mock starts EMPTY — seed it with the records the test needs.
+// Shape: { entity: { <entity-name>: { <id>: <record> } } }
+const client = NpmRegistrySDK.test({
+  entity: {
+    get_package: {
+      test01: { id: 'test01' },
+    },
+  },
+})
 const getpackages = await client.GetPackage().list()
-// getpackages is an array of bare GetPackage records populated with mock data
+// getpackages is an array of GetPackage entities, populated with mock data
+// — call getpackages[0].data() for the record itself
 console.log(getpackages)
 ```
 
@@ -110,8 +119,8 @@ import { NpmRegistrySDK } from '@voxgig-sdk/npm-registry'
 
 const client = new NpmRegistrySDK()
 
-// List all getpackages (returns GetPackage[])
-const getpackages = await client.GetPackage().list()
+// List all getpackages (returns GetPackageEntity[] — .data() for the record)
+const getpackages = await client.GetPackage().list({ id: "example" })
 for (const getpackage of getpackages) {
   console.log(getpackage)
 }
@@ -171,7 +180,7 @@ from npmregistry_sdk import NpmRegistrySDK
 client = NpmRegistrySDK()
 
 # List all getpackages (returns a list, raises on error)
-getpackages = client.GetPackage().list()
+getpackages = client.GetPackage().list({"id": "example"})
 for getpackage in getpackages:
     print(getpackage)
 ```
@@ -344,6 +353,9 @@ Pass custom features via the `extend` option at construction time.
 
 This SDK is generated from the upstream OpenAPI specification. It is an
 unofficial client and is not affiliated with the API provider.
+
+The OpenAPI spec(s) this SDK was generated from are kept in the
+[`.sdk/def/`](.sdk/def/) folder.
 
 - Upstream API: [https://www.npmjs.com/support](https://www.npmjs.com/support)
 

@@ -17,12 +17,12 @@ export interface GetPackageListMatch {
 export interface Search {
   package?: Record<string, any>
   score?: Record<string, any>
-  search_score?: number
+  searchScore?: number
 }
 
 export interface SearchListMatch {
   package?: Record<string, any>
   score?: Record<string, any>
-  search_score?: number
+  searchScore?: number
 }
 

@@ -16,7 +16,7 @@ main: kit: entity: search: {
       type: "`$OBJECT`"
     }
     {
-      name: "search_score"
+      name: "searchScore"
       req: false
       type: "`$NUMBER`"
     }
@@ -99,7 +99,7 @@ main: kit: entity: search: {
           }
           transform: {
             req: "`reqdata`"
-            res: "`body`"
+            res: "`body.objects`"
           }
         }
       ]

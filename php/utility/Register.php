@@ -23,6 +23,7 @@ require_once __DIR__ . '/MakeUrl.php';
 require_once __DIR__ . '/Param.php';
 require_once __DIR__ . '/PrepareAuth.php';
 require_once __DIR__ . '/PrepareBody.php';
+require_once __DIR__ . '/Graphql.php';
 require_once __DIR__ . '/PrepareHeaders.php';
 require_once __DIR__ . '/PrepareMethod.php';
 require_once __DIR__ . '/PrepareParams.php';
@@ -59,6 +60,8 @@ NpmRegistryUtility::setRegistrar(function (NpmRegistryUtility $u): void {
     $u->prepare_params = [NpmRegistryPrepareParams::class, 'call'];
     $u->prepare_path = [NpmRegistryPreparePath::class, 'call'];
     $u->prepare_query = [NpmRegistryPrepareQuery::class, 'call'];
+    $u->graphql_body = [NpmRegistryGraphql::class, 'body'];
+    $u->graphql_errors = [NpmRegistryGraphql::class, 'errors'];
     $u->result_basic = [NpmRegistryResultBasic::class, 'call'];
     $u->result_body = [NpmRegistryResultBody::class, 'call'];
     $u->result_headers = [NpmRegistryResultHeaders::class, 'call'];

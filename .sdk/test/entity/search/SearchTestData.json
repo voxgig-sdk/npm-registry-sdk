@@ -4,17 +4,17 @@
       "SEARCH00": {
         "package": {},
         "score": {},
-        "search_score": 32
+        "searchScore": 32
       },
       "SEARCH01": {
         "package": {},
         "score": {},
-        "search_score": 62
+        "searchScore": 62
       },
       "SEARCH02": {
         "package": {},
         "score": {},
-        "search_score": 92
+        "searchScore": 92
       }
     }
   },
@@ -23,7 +23,7 @@
       "search_ref01": {
         "package": {},
         "score": {},
-        "search_score": 122
+        "searchScore": 122
       }
     }
   }
