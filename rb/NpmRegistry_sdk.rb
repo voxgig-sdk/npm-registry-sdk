@@ -28,7 +28,7 @@ class NpmRegistrySDK
     utility = NpmRegistryUtility.new
     @_utility = utility
 
-    config = NpmRegistryConfig.make_config
+    config = NpmRegistryConfig.shared_config
 
     @_rootctx = utility.make_context.call({
       "client" => self,

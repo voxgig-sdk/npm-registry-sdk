@@ -40,7 +40,7 @@ class NpmRegistrySDK
         $utility = new NpmRegistryUtility();
         $this->_utility = $utility;
 
-        $config = NpmRegistryConfig::make_config();
+        $config = NpmRegistryConfig::shared_config();
 
         $this->_rootctx = ($utility->make_context)([
             "client" => $this,

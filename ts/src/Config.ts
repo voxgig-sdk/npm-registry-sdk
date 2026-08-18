@@ -36,7 +36,7 @@ class Config {
 
 
   options = {
-    base: 'https://registry.npmjs.org',
+    base: "https://registry.npmjs.org",
 
     headers: {
       "content-type": "application/json"
@@ -58,18 +58,12 @@ class Config {
     "get_package": {
       "fields": [
         {
-          "active": true,
           "name": "email",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 0
+          "type": "`$STRING`"
         },
         {
-          "active": true,
           "name": "name",
-          "req": false,
-          "type": "`$STRING`",
-          "index$": 1
+          "type": "`$STRING`"
         }
       ],
       "name": "get_package",
@@ -79,18 +73,15 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "params": [
                   {
-                    "active": true,
                     "example": "express",
                     "kind": "param",
                     "name": "id",
                     "orig": "package",
                     "reqd": true,
-                    "type": "`$STRING`",
-                    "index$": 0
+                    "type": "`$STRING`"
                   }
                 ]
               },
@@ -113,11 +104,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {
@@ -127,25 +116,16 @@ class Config {
     "search": {
       "fields": [
         {
-          "active": true,
           "name": "package",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 0
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "score",
-          "req": false,
-          "type": "`$OBJECT`",
-          "index$": 1
+          "type": "`$OBJECT`"
         },
         {
-          "active": true,
           "name": "searchScore",
-          "req": false,
-          "type": "`$NUMBER`",
-          "index$": 2
+          "type": "`$NUMBER`"
         }
       ],
       "name": "search",
@@ -155,56 +135,44 @@ class Config {
           "name": "list",
           "points": [
             {
-              "active": true,
               "args": {
                 "query": [
                   {
-                    "active": true,
                     "example": 0,
                     "kind": "query",
                     "name": "from",
                     "orig": "from",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "example": 0.5,
                     "kind": "query",
                     "name": "maintenance",
                     "orig": "maintenance",
-                    "reqd": false,
                     "type": "`$NUMBER`"
                   },
                   {
-                    "active": true,
                     "example": 0.98,
                     "kind": "query",
                     "name": "popularity",
                     "orig": "popularity",
-                    "reqd": false,
                     "type": "`$NUMBER`"
                   },
                   {
-                    "active": true,
                     "example": 0.65,
                     "kind": "query",
                     "name": "quality",
                     "orig": "quality",
-                    "reqd": false,
                     "type": "`$NUMBER`"
                   },
                   {
-                    "active": true,
                     "example": 20,
                     "kind": "query",
                     "name": "size",
                     "orig": "size",
-                    "reqd": false,
                     "type": "`$INTEGER`"
                   },
                   {
-                    "active": true,
                     "example": "react",
                     "kind": "query",
                     "name": "text",
@@ -235,11 +203,9 @@ class Config {
               "transform": {
                 "req": "`reqdata`",
                 "res": "`body.objects`"
-              },
-              "index$": 0
+              }
             }
-          ],
-          "key$": "list"
+          ]
         }
       },
       "relations": {

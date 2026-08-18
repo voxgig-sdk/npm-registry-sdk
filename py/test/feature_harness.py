@@ -14,7 +14,7 @@ from __future__ import annotations
 
 from urllib.parse import quote
 
-from npmregistry_sdk.config import make_config
+from npmregistry_sdk.config import shared_config
 from npmregistry_sdk.features import _make_feature
 from npmregistry_sdk.core.control import NpmRegistryControl
 from npmregistry_sdk.core.error import NpmRegistryError
@@ -24,7 +24,7 @@ from npmregistry_sdk.core.spec import NpmRegistrySpec
 
 # True when this SDK was generated with the named feature.
 def has_feature(name):
-    feature = make_config().get("feature")
+    feature = shared_config().get("feature")
     return isinstance(feature, dict) and feature.get(name) is not None
 
 

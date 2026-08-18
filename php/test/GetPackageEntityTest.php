@@ -40,7 +40,7 @@ class GetPackageEntityTest extends TestCase
         $this->assertCount(3, $seen);
 
         // Inbound: streaming active -> yields each item from the feature.
-        $cfg = NpmRegistryConfig::make_config();
+        $cfg = NpmRegistryConfig::shared_config();
         if (isset($cfg["feature"]) && is_array($cfg["feature"]) && isset($cfg["feature"]["streaming"])) {
             $sdk = NpmRegistrySDK::test($seed, ["feature" => ["streaming" => ["active" => true]]]);
             $got = [];

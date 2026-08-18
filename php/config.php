@@ -5,6 +5,29 @@ declare(strict_types=1);
 
 class NpmRegistryConfig
 {
+    /** @var array<string,mixed>|null */
+    private static ?array $shared_config = null;
+
+    /**
+     * Return the process-wide config, built once on first use. The SDK reads
+     * the config on every request and never writes to it, so one instance is
+     * shared by every client rather than rebuilt per client.
+     *
+     * PHP arrays are copy-on-write, so callers that do mutate the result get
+     * their own copy and cannot disturb the shared one.
+     */
+    public static function shared_config(): array
+    {
+        if (self::$shared_config === null) {
+            self::$shared_config = self::make_config();
+        }
+        return self::$shared_config;
+    }
+
+    /**
+     * Build a fresh, fully materialised config array. Every call rebuilds the
+     * whole structure, so prefer shared_config unless you need a private copy.
+     */
     public static function make_config(): array
     {
         return [
@@ -32,18 +55,12 @@ class NpmRegistryConfig
         'get_package' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'email',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'name',
-              'req' => false,
               'type' => '`$STRING`',
-              'index$' => 1,
             ],
           ],
           'name' => 'get_package',
@@ -53,18 +70,15 @@ class NpmRegistryConfig
               'name' => 'list',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'params' => [
                       [
-                        'active' => true,
                         'example' => 'express',
                         'kind' => 'param',
                         'name' => 'id',
                         'orig' => 'package',
                         'reqd' => true,
                         'type' => '`$STRING`',
-                        'index$' => 0,
                       ],
                     ],
                   ],
@@ -88,10 +102,8 @@ class NpmRegistryConfig
                     'req' => '`reqdata`',
                     'res' => '`body`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'list',
             ],
           ],
           'relations' => [
@@ -101,25 +113,16 @@ class NpmRegistryConfig
         'search' => [
           'fields' => [
             [
-              'active' => true,
               'name' => 'package',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 0,
             ],
             [
-              'active' => true,
               'name' => 'score',
-              'req' => false,
               'type' => '`$OBJECT`',
-              'index$' => 1,
             ],
             [
-              'active' => true,
               'name' => 'searchScore',
-              'req' => false,
               'type' => '`$NUMBER`',
-              'index$' => 2,
             ],
           ],
           'name' => 'search',
@@ -129,56 +132,44 @@ class NpmRegistryConfig
               'name' => 'list',
               'points' => [
                 [
-                  'active' => true,
                   'args' => [
                     'query' => [
                       [
-                        'active' => true,
                         'example' => 0,
                         'kind' => 'query',
                         'name' => 'from',
                         'orig' => 'from',
-                        'reqd' => false,
                         'type' => '`$INTEGER`',
                       ],
                       [
-                        'active' => true,
                         'example' => 0.5,
                         'kind' => 'query',
                         'name' => 'maintenance',
                         'orig' => 'maintenance',
-                        'reqd' => false,
                         'type' => '`$NUMBER`',
                       ],
                       [
-                        'active' => true,
                         'example' => 0.98,
                         'kind' => 'query',
                         'name' => 'popularity',
                         'orig' => 'popularity',
-                        'reqd' => false,
                         'type' => '`$NUMBER`',
                       ],
                       [
-                        'active' => true,
                         'example' => 0.65,
                         'kind' => 'query',
                         'name' => 'quality',
                         'orig' => 'quality',
-                        'reqd' => false,
                         'type' => '`$NUMBER`',
                       ],
                       [
-                        'active' => true,
                         'example' => 20,
                         'kind' => 'query',
                         'name' => 'size',
                         'orig' => 'size',
-                        'reqd' => false,
                         'type' => '`$INTEGER`',
                       ],
                       [
-                        'active' => true,
                         'example' => 'react',
                         'kind' => 'query',
                         'name' => 'text',
@@ -210,10 +201,8 @@ class NpmRegistryConfig
                     'req' => '`reqdata`',
                     'res' => '`body.objects`',
                   ],
-                  'index$' => 0,
                 ],
               ],
-              'key$' => 'list',
             ],
           ],
           'relations' => [

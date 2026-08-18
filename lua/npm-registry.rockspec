@@ -23,6 +23,7 @@ build = {
   modules = {
     ["npm-registry_sdk"] = "npm-registry_sdk.lua",
     ["config"] = "config.lua",
+    ["config_shared"] = "config_shared.lua",
     ["features"] = "features.lua",
   }
 }
