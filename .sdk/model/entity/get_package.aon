@@ -8,11 +8,13 @@ main: kit: entity: get_package: {
     {
       name: "email"
       req: false
+      short: "Maintainer email"
       type: "`$STRING`"
     }
     {
       name: "name"
       req: false
+      short: "Maintainer username"
       type: "`$STRING`"
     }
   ]

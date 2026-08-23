@@ -33,6 +33,9 @@ class NpmRegistryConfig
         return [
             "main" => [
                 "name" => "NpmRegistry",
+                "slug" => "npm-registry",
+                "version" => "0.0.1",
+                "target" => "php",
             ],
             "feature" => [
                 "test" => [
@@ -56,10 +59,12 @@ class NpmRegistryConfig
           'fields' => [
             [
               'name' => 'email',
+              'short' => 'Maintainer email',
               'type' => '`$STRING`',
             ],
             [
               'name' => 'name',
+              'short' => 'Maintainer username',
               'type' => '`$STRING`',
             ],
           ],
@@ -122,6 +127,7 @@ class NpmRegistryConfig
             ],
             [
               'name' => 'searchScore',
+              'short' => 'Overall search score',
               'type' => '`$NUMBER`',
             ],
           ],

@@ -18,6 +18,7 @@ main: kit: entity: search: {
     {
       name: "searchScore"
       req: false
+      short: "Overall search score"
       type: "`$NUMBER`"
     }
   ]

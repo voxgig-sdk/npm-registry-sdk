@@ -36,12 +36,14 @@
               "active": true,
               "name": "email",
               "req": false,
+              "short": "Maintainer email",
               "type": "`$STRING`"
             },
             {
               "active": true,
               "name": "name",
               "req": false,
+              "short": "Maintainer username",
               "type": "`$STRING`"
             }
           ],
@@ -116,6 +118,7 @@
               "active": true,
               "name": "searchScore",
               "req": false,
+              "short": "Overall search score",
               "type": "`$NUMBER`"
             }
           ],

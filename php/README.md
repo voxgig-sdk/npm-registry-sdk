@@ -248,8 +248,8 @@ On error, `ok` is `false` and `$err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `email` |  |
-| `name` |  |
+| `email` | Maintainer email |
+| `name` | Maintainer username |
 
 Operations: List.
 
@@ -261,7 +261,7 @@ API path: `/{package}`
 | --- | --- |
 | `package` |  |
 | `score` |  |
-| `searchScore` |  |
+| `searchScore` | Overall search score |
 
 Operations: List.
 
@@ -286,8 +286,8 @@ Create an instance: `$get_package = $client->GetPackage();`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `email` | `string` |  |
-| `name` | `string` |  |
+| `email` | `string` | Maintainer email |
+| `name` | `string` | Maintainer username |
 
 #### Example: List
 
@@ -313,7 +313,7 @@ Create an instance: `$search = $client->Search();`
 | --- | --- | --- |
 | `package` | `array` |  |
 | `score` | `array` |  |
-| `searchScore` | `float` |  |
+| `searchScore` | `float` | Overall search score |
 
 #### Example: List
 

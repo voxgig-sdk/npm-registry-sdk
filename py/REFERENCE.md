@@ -91,8 +91,8 @@ get_package = client.GetPackage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `email` | `str` | No |  |
-| `name` | `str` | No |  |
+| `email` | `str` | No | Maintainer email |
+| `name` | `str` | No | Maintainer username |
 
 ### Operations
 
@@ -147,7 +147,7 @@ search = client.Search()
 | --- | --- | --- | --- |
 | `package` | `dict` | No |  |
 | `score` | `dict` | No |  |
-| `searchScore` | `float` | No |  |
+| `searchScore` | `float` | No | Overall search score |
 
 ### Operations
 

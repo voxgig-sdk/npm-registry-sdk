@@ -19,6 +19,9 @@ module NpmRegistryConfig
     {
       "main" => {
         "name" => "NpmRegistry",
+        "slug" => "npm-registry",
+        "version" => "0.0.1",
+        "target" => "rb",
       },
       "feature" => {
         "test" => {
@@ -42,10 +45,12 @@ module NpmRegistryConfig
           "fields" => [
             {
               "name" => "email",
+              "short" => "Maintainer email",
               "type" => "`$STRING`",
             },
             {
               "name" => "name",
+              "short" => "Maintainer username",
               "type" => "`$STRING`",
             },
           ],
@@ -108,6 +113,7 @@ module NpmRegistryConfig
             },
             {
               "name" => "searchScore",
+              "short" => "Overall search score",
               "type" => "`$NUMBER`",
             },
           ],

@@ -28,6 +28,9 @@ def make_config():
     return {
         "main": {
             "name": "NpmRegistry",
+            "slug": "npm-registry",
+            "version": "0.0.1",
+            "target": "py",
         },
         "feature": {
             "test": {
@@ -51,10 +54,12 @@ def make_config():
         "fields": [
           {
             "name": "email",
+            "short": "Maintainer email",
             "type": "`$STRING`",
           },
           {
             "name": "name",
+            "short": "Maintainer username",
             "type": "`$STRING`",
           },
         ],
@@ -117,6 +122,7 @@ def make_config():
           },
           {
             "name": "searchScore",
+            "short": "Overall search score",
             "type": "`$NUMBER`",
           },
         ],

@@ -102,8 +102,8 @@ fmt.Println(getPackage.GetName()) // "get_package"
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `email` | `string` | No |  |
-| `name` | `string` | No |  |
+| `email` | `string` | No | Maintainer email |
+| `name` | `string` | No | Maintainer username |
 
 ### Operations
 
@@ -156,7 +156,7 @@ fmt.Println(search.GetName()) // "search"
 | --- | --- | --- | --- |
 | `package` | `map[string]any` | No |  |
 | `score` | `map[string]any` | No |  |
-| `searchScore` | `float64` | No |  |
+| `searchScore` | `float64` | No | Overall search score |
 
 ### Operations
 

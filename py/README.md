@@ -244,8 +244,8 @@ On error, `ok` is `False` and `err` contains the error value.
 
 | Field | Description |
 | --- | --- |
-| `email` |  |
-| `name` |  |
+| `email` | Maintainer email |
+| `name` | Maintainer username |
 
 Operations: List.
 
@@ -257,7 +257,7 @@ API path: `/{package}`
 | --- | --- |
 | `package` |  |
 | `score` |  |
-| `searchScore` |  |
+| `searchScore` | Overall search score |
 
 Operations: List.
 
@@ -282,8 +282,8 @@ Create an instance: `get_package = client.GetPackage()`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `email` | `str` |  |
-| `name` | `str` |  |
+| `email` | `str` | Maintainer email |
+| `name` | `str` | Maintainer username |
 
 #### Example: List
 
@@ -308,7 +308,7 @@ Create an instance: `search = client.Search()`
 | --- | --- | --- |
 | `package` | `dict` |  |
 | `score` | `dict` |  |
-| `searchScore` | `float` |  |
+| `searchScore` | `float` | Overall search score |
 
 #### Example: List
 

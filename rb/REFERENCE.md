@@ -97,8 +97,8 @@ get_package = client.GetPackage
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `email` | `String` | No |  |
-| `name` | `String` | No |  |
+| `email` | `String` | No | Maintainer email |
+| `name` | `String` | No | Maintainer username |
 
 ### Operations
 
@@ -152,7 +152,7 @@ search = client.Search
 | --- | --- | --- | --- |
 | `package` | `Hash` | No |  |
 | `score` | `Hash` | No |  |
-| `searchScore` | `Float` | No |  |
+| `searchScore` | `Float` | No | Overall search score |
 
 ### Operations
 

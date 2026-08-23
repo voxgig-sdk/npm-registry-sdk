@@ -232,8 +232,8 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 
 | Field | Description |
 | --- | --- |
-| `email` |  |
-| `name` |  |
+| `email` | Maintainer email |
+| `name` | Maintainer username |
 
 Operations: List.
 
@@ -245,7 +245,7 @@ API path: `/{package}`
 | --- | --- |
 | `package` |  |
 | `score` |  |
-| `searchScore` |  |
+| `searchScore` | Overall search score |
 
 Operations: List.
 
@@ -270,8 +270,8 @@ Create an instance: `local get_package = client:GetPackage(nil)`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `email` | `string` |  |
-| `name` | `string` |  |
+| `email` | `string` | Maintainer email |
+| `name` | `string` | Maintainer username |
 
 #### Example: List
 
@@ -296,7 +296,7 @@ Create an instance: `local search = client:Search(nil)`
 | --- | --- | --- |
 | `package` | `table` |  |
 | `score` | `table` |  |
-| `searchScore` | `number` |  |
+| `searchScore` | `number` | Overall search score |
 
 #### Example: List
 

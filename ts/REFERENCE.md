@@ -128,8 +128,8 @@ const get_package = client.GetPackage()
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `email` | `string` | No |  |
-| `name` | `string` | No |  |
+| `email` | `string` | No | Maintainer email |
+| `name` | `string` | No | Maintainer username |
 
 ### Operations
 
@@ -181,7 +181,7 @@ const search = client.Search()
 | --- | --- | --- | --- |
 | `package` | `Record<string, any>` | No |  |
 | `score` | `Record<string, any>` | No |  |
-| `searchScore` | `number` | No |  |
+| `searchScore` | `number` | No | Overall search score |
 
 ### Operations
 

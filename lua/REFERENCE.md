@@ -94,8 +94,8 @@ local get_package = client:GetPackage(nil)
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `email` | `string` | No |  |
-| `name` | `string` | No |  |
+| `email` | `string` | No | Maintainer email |
+| `name` | `string` | No | Maintainer username |
 
 ### Operations
 
@@ -149,7 +149,7 @@ local search = client:Search(nil)
 | --- | --- | --- | --- |
 | `package` | `table` | No |  |
 | `score` | `table` | No |  |
-| `searchScore` | `number` | No |  |
+| `searchScore` | `number` | No | Overall search score |
 
 ### Operations
 

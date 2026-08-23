@@ -238,8 +238,8 @@ returns a result `Hash` with these keys:
 
 | Field | Description |
 | --- | --- |
-| `email` |  |
-| `name` |  |
+| `email` | Maintainer email |
+| `name` | Maintainer username |
 
 Operations: List.
 
@@ -251,7 +251,7 @@ API path: `/{package}`
 | --- | --- |
 | `package` |  |
 | `score` |  |
-| `searchScore` |  |
+| `searchScore` | Overall search score |
 
 Operations: List.
 
@@ -276,8 +276,8 @@ Create an instance: `get_package = client.GetPackage`
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `email` | `String` |  |
-| `name` | `String` |  |
+| `email` | `String` | Maintainer email |
+| `name` | `String` | Maintainer username |
 
 #### Example: List
 
@@ -303,7 +303,7 @@ Create an instance: `search = client.Search`
 | --- | --- | --- |
 | `package` | `Hash` |  |
 | `score` | `Hash` |  |
-| `searchScore` | `Float` |  |
+| `searchScore` | `Float` | Overall search score |
 
 #### Example: List
 
