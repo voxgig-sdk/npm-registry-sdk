@@ -38,7 +38,7 @@ try {
     // list() returns an array of GetPackage records — iterate directly.
     $getpackages = $client->GetPackage()->list();
     foreach ($getpackages as $item) {
-        echo $item["email"] . "\n";
+        echo $item["id"] . " " . $item["email"] . "\n";
     }
 } catch (\Throwable $err) {
     echo "Error: " . $err->getMessage();
@@ -249,6 +249,7 @@ On error, `ok` is `false` and `$err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `email` | Maintainer email |
+| `id` |  |
 | `name` | Maintainer username |
 
 Operations: List.
@@ -287,6 +288,7 @@ Create an instance: `$get_package = $client->GetPackage();`
 | Field | Type | Description |
 | --- | --- | --- |
 | `email` | `string` | Maintainer email |
+| `id` | `string` |  |
 | `name` | `string` | Maintainer username |
 
 #### Example: List

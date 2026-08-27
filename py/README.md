@@ -245,6 +245,7 @@ On error, `ok` is `False` and `err` contains the error value.
 | Field | Description |
 | --- | --- |
 | `email` | Maintainer email |
+| `id` |  |
 | `name` | Maintainer username |
 
 Operations: List.
@@ -283,6 +284,7 @@ Create an instance: `get_package = client.GetPackage()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `email` | `str` | Maintainer email |
+| `id` | `str` |  |
 | `name` | `str` | Maintainer username |
 
 #### Example: List

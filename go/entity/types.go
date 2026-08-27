@@ -15,6 +15,7 @@ import (
 // GetPackage is the typed data model for the get_package entity.
 type GetPackage struct {
 	Email *string `json:"email,omitempty"`
+	Id *string `json:"id,omitempty"`
 	Name *string `json:"name,omitempty"`
 }
 

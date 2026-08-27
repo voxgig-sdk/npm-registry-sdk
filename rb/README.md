@@ -37,7 +37,7 @@ begin
   # list returns an Array of GetPackage records — iterate directly.
   getpackages = client.GetPackage.list
   getpackages.each do |item|
-    puts "#{item["email"]}"
+    puts "#{item["id"]} #{item["email"]}"
   end
 rescue => err
   warn "list failed: #{err}"
@@ -239,6 +239,7 @@ returns a result `Hash` with these keys:
 | Field | Description |
 | --- | --- |
 | `email` | Maintainer email |
+| `id` |  |
 | `name` | Maintainer username |
 
 Operations: List.
@@ -277,6 +278,7 @@ Create an instance: `get_package = client.GetPackage`
 | Field | Type | Description |
 | --- | --- | --- |
 | `email` | `String` | Maintainer email |
+| `id` | `String` |  |
 | `name` | `String` | Maintainer username |
 
 #### Example: List

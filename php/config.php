@@ -42,6 +42,7 @@ class NpmRegistryConfig
           'options' => [
             'active' => false,
           ],
+          'transport' => 'base',
         ],
             ],
             "options" => [
@@ -60,6 +61,10 @@ class NpmRegistryConfig
             [
               'name' => 'email',
               'short' => 'Maintainer email',
+              'type' => '`$STRING`',
+            ],
+            [
+              'name' => 'id',
               'type' => '`$STRING`',
             ],
             [

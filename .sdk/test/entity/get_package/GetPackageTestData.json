@@ -2,24 +2,27 @@
   "existing": {
     "get_package": {
       "GET_PACKAGE00": {
-        "email": "s14",
-        "name": "s15"
+        "email": "s1e",
+        "id": "GET_PACKAGE00",
+        "name": "s20"
       },
       "GET_PACKAGE01": {
-        "email": "s28",
-        "name": "s29"
+        "email": "s3c",
+        "id": "GET_PACKAGE01",
+        "name": "s3e"
       },
       "GET_PACKAGE02": {
-        "email": "s3c",
-        "name": "s3d"
+        "email": "s5a",
+        "id": "GET_PACKAGE02",
+        "name": "s5c"
       }
     }
   },
   "new": {
     "get_package": {
       "get_package_ref01": {
-        "email": "s50",
-        "name": "s51"
+        "email": "s78",
+        "name": "s7a"
       }
     }
   }

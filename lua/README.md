@@ -43,7 +43,7 @@ local getpackages, err = client:GetPackage():list()
 if err then error(err) end
 
 for _, item in ipairs(getpackages) do
-  print(item["email"])
+  print(item["id"], item["email"])
 end
 ```
 
@@ -233,6 +233,7 @@ Only `direct()` returns a response envelope — a `table` with `ok`,
 | Field | Description |
 | --- | --- |
 | `email` | Maintainer email |
+| `id` |  |
 | `name` | Maintainer username |
 
 Operations: List.
@@ -271,6 +272,7 @@ Create an instance: `local get_package = client:GetPackage(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `email` | `string` | Maintainer email |
+| `id` | `string` |  |
 | `name` | `string` | Maintainer username |
 
 #### Example: List

@@ -262,6 +262,7 @@ Only `Direct()` returns a response envelope — a `map[string]any` with
 | Field | Description |
 | --- | --- |
 | `"email"` | Maintainer email |
+| `"id"` |  |
 | `"name"` | Maintainer username |
 
 Operations: List.
@@ -300,6 +301,7 @@ Create an instance: `getPackage := client.GetPackage(nil)`
 | Field | Type | Description |
 | --- | --- | --- |
 | `email` | `string` | Maintainer email |
+| `id` | `string` |  |
 | `name` | `string` | Maintainer username |
 
 #### Example: List

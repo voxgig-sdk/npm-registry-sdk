@@ -95,6 +95,7 @@ local get_package = client:GetPackage(nil)
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `email` | `string` | No | Maintainer email |
+| `id` | `string` | No |  |
 | `name` | `string` | No | Maintainer username |
 
 ### Operations

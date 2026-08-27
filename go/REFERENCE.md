@@ -103,6 +103,7 @@ fmt.Println(getPackage.GetName()) // "get_package"
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `email` | `string` | No | Maintainer email |
+| `id` | `string` | No |  |
 | `name` | `string` | No | Maintainer username |
 
 ### Operations

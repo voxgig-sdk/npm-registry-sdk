@@ -7,6 +7,7 @@
 
 export interface GetPackage {
   email?: string
+  id?: string
   name?: string
 }
 

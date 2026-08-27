@@ -28,6 +28,7 @@ module NpmRegistryConfig
           "options" => {
             "active" => false,
           },
+          "transport" => "base",
         },
       },
       "options" => {
@@ -46,6 +47,10 @@ module NpmRegistryConfig
             {
               "name" => "email",
               "short" => "Maintainer email",
+              "type" => "`$STRING`",
+            },
+            {
+              "name" => "id",
               "type" => "`$STRING`",
             },
             {

@@ -18,6 +18,7 @@ from typing import TypedDict, Any
 
 class GetPackage(TypedDict, total=False):
     email: str
+    id: str
     name: str
 
 

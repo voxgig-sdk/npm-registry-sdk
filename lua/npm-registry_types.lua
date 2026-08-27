@@ -8,6 +8,7 @@
 
 ---@class GetPackage
 ---@field email? string
+---@field id? string
 ---@field name? string
 
 ---@class GetPackageListMatch

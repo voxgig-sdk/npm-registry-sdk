@@ -13,10 +13,14 @@
 # @!attribute [rw] email
 #   @return [String, nil]
 #
+# @!attribute [rw] id
+#   @return [String, nil]
+#
 # @!attribute [rw] name
 #   @return [String, nil]
 GetPackage = Struct.new(
   :email,
+  :id,
   :name,
   keyword_init: true
 )

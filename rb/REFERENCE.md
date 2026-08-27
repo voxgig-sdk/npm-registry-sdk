@@ -98,6 +98,7 @@ get_package = client.GetPackage
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
 | `email` | `String` | No | Maintainer email |
+| `id` | `String` | No |  |
 | `name` | `String` | No | Maintainer username |
 
 ### Operations

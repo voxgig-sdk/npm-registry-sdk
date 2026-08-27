@@ -146,7 +146,7 @@ await entity.list()
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data)
+console.log(data.id)
 ```
 
 ### Add custom middleware
@@ -289,6 +289,7 @@ The `prepare()` method returns:
 | Field | Description |
 | --- | --- |
 | `email` | Maintainer email |
+| `id` |  |
 | `name` | Maintainer username |
 
 Operations: list.
@@ -327,6 +328,7 @@ Create an instance: `const get_package = client.GetPackage()`
 | Field | Type | Description |
 | --- | --- | --- |
 | `email` | `string` | Maintainer email |
+| `id` | `string` |  |
 | `name` | `string` | Maintainer username |
 
 #### Example: List
