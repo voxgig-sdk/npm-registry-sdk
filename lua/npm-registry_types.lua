@@ -20,9 +20,12 @@
 ---@field searchScore? number
 
 ---@class SearchListMatch
----@field package? table
----@field score? table
----@field searchScore? number
+---@field from? number
+---@field maintenance? number
+---@field popularity? number
+---@field quality? number
+---@field size? number
+---@field text string
 
 local M = {}
 

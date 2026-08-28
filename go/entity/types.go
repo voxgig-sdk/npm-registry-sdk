@@ -33,9 +33,12 @@ type Search struct {
 
 // SearchListMatch is the typed request payload for Search.ListTyped.
 type SearchListMatch struct {
-	Package *map[string]any `json:"package,omitempty"`
-	Score *map[string]any `json:"score,omitempty"`
-	SearchScore *float64 `json:"searchScore,omitempty"`
+	From *int `json:"from,omitempty"`
+	Maintenance *float64 `json:"maintenance,omitempty"`
+	Popularity *float64 `json:"popularity,omitempty"`
+	Quality *float64 `json:"quality,omitempty"`
+	Size *int `json:"size,omitempty"`
+	Text string `json:"text"`
 }
 
 // asMap turns a typed request/data struct into the map[string]any the

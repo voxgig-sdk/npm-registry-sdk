@@ -22,8 +22,11 @@ export interface Search {
 }
 
 export interface SearchListMatch {
-  package?: Record<string, any>
-  score?: Record<string, any>
-  searchScore?: number
+  from?: number
+  maintenance?: number
+  popularity?: number
+  quality?: number
+  size?: number
+  text: string
 }
 

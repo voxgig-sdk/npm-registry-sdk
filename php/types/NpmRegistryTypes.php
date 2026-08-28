@@ -37,8 +37,11 @@ class Search
 /** Request payload for Search#list. */
 class SearchListMatch
 {
-    public ?array $package = null;
-    public ?array $score = null;
-    public ?float $searchScore = null;
+    public ?int $from = null;
+    public ?float $maintenance = null;
+    public ?float $popularity = null;
+    public ?float $quality = null;
+    public ?int $size = null;
+    public string $text;
 }
 

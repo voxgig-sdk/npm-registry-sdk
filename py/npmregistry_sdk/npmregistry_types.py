@@ -32,7 +32,12 @@ class Search(TypedDict, total=False):
     searchScore: float
 
 
-class SearchListMatch(TypedDict, total=False):
-    package: dict
-    score: dict
-    searchScore: float
+class SearchListMatchRequired(TypedDict):
+    text: str
+
+
+class SearchListMatch(SearchListMatchRequired, total=False):
+    maintenance: float
+    popularity: float
+    quality: float
+    size: int

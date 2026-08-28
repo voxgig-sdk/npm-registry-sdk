@@ -53,18 +53,30 @@ Search = Struct.new(
 
 # Request payload for Search#list.
 #
-# @!attribute [rw] package
-#   @return [Hash, nil]
+# @!attribute [rw] from
+#   @return [Integer, nil]
 #
-# @!attribute [rw] score
-#   @return [Hash, nil]
-#
-# @!attribute [rw] searchScore
+# @!attribute [rw] maintenance
 #   @return [Float, nil]
+#
+# @!attribute [rw] popularity
+#   @return [Float, nil]
+#
+# @!attribute [rw] quality
+#   @return [Float, nil]
+#
+# @!attribute [rw] size
+#   @return [Integer, nil]
+#
+# @!attribute [rw] text
+#   @return [String]
 SearchListMatch = Struct.new(
-  :package,
-  :score,
-  :searchScore,
+  :from,
+  :maintenance,
+  :popularity,
+  :quality,
+  :size,
+  :text,
   keyword_init: true
 )
 
