@@ -33,6 +33,7 @@ local function make_config()
       ["get_package"] = {
         ["fields"] = {
           {
+            ["format"] = "email",
             ["name"] = "email",
             ["short"] = "Maintainer email",
             ["type"] = "`$STRING`",
@@ -46,6 +47,10 @@ local function make_config()
             ["short"] = "Maintainer username",
             ["type"] = "`$STRING`",
           },
+        },
+        ["id"] = {
+          ["field"] = "id",
+          ["name"] = "id",
         },
         ["name"] = "get_package",
         ["op"] = {
@@ -69,12 +74,14 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/{package}",
-                ["parts"] = {
-                  "{id}",
-                },
                 ["rename"] = {
                   ["param"] = {
                     ["package"] = "id",
+                  },
+                },
+                ["segments"] = {
+                  {
+                    ["var"] = "id",
                   },
                 },
                 ["select"] = {
@@ -85,6 +92,9 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
+                },
+                ["parts"] = {
+                  "{id}",
                 },
               },
             },
@@ -105,6 +115,7 @@ local function make_config()
             ["type"] = "`$OBJECT`",
           },
           {
+            ["format"] = "float",
             ["name"] = "searchScore",
             ["short"] = "Overall search score",
             ["type"] = "`$NUMBER`",
@@ -167,10 +178,16 @@ local function make_config()
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/-/v1/search",
-                ["parts"] = {
-                  "-",
-                  "v1",
-                  "search",
+                ["segments"] = {
+                  {
+                    ["lit"] = "-",
+                  },
+                  {
+                    ["lit"] = "v1",
+                  },
+                  {
+                    ["lit"] = "search",
+                  },
                 },
                 ["select"] = {
                   ["exist"] = {
@@ -185,6 +202,11 @@ local function make_config()
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body.objects`",
+                },
+                ["parts"] = {
+                  "-",
+                  "v1",
+                  "search",
                 },
               },
             },

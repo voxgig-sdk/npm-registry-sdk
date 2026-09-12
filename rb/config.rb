@@ -45,6 +45,7 @@ module NpmRegistryConfig
         "get_package" => {
           "fields" => [
             {
+              "format" => "email",
               "name" => "email",
               "short" => "Maintainer email",
               "type" => "`$STRING`",
@@ -59,6 +60,10 @@ module NpmRegistryConfig
               "type" => "`$STRING`",
             },
           ],
+          "id" => {
+            "field" => "id",
+            "name" => "id",
+          },
           "name" => "get_package",
           "op" => {
             "list" => {
@@ -81,14 +86,16 @@ module NpmRegistryConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/{package}",
-                  "parts" => [
-                    "{id}",
-                  ],
                   "rename" => {
                     "param" => {
                       "package" => "id",
                     },
                   },
+                  "segments" => [
+                    {
+                      "var" => "id",
+                    },
+                  ],
                   "select" => {
                     "exist" => [
                       "id",
@@ -98,6 +105,9 @@ module NpmRegistryConfig
                     "req" => "`reqdata`",
                     "res" => "`body`",
                   },
+                  "parts" => [
+                    "{id}",
+                  ],
                 },
               ],
             },
@@ -117,6 +127,7 @@ module NpmRegistryConfig
               "type" => "`$OBJECT`",
             },
             {
+              "format" => "float",
               "name" => "searchScore",
               "short" => "Overall search score",
               "type" => "`$NUMBER`",
@@ -179,10 +190,16 @@ module NpmRegistryConfig
                   "kind" => "http",
                   "method" => "GET",
                   "orig" => "/-/v1/search",
-                  "parts" => [
-                    "-",
-                    "v1",
-                    "search",
+                  "segments" => [
+                    {
+                      "lit" => "-",
+                    },
+                    {
+                      "lit" => "v1",
+                    },
+                    {
+                      "lit" => "search",
+                    },
                   ],
                   "select" => {
                     "exist" => [
@@ -198,6 +215,11 @@ module NpmRegistryConfig
                     "req" => "`reqdata`",
                     "res" => "`body.objects`",
                   },
+                  "parts" => [
+                    "-",
+                    "v1",
+                    "search",
+                  ],
                 },
               ],
             },

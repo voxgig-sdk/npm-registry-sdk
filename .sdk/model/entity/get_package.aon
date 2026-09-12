@@ -6,6 +6,7 @@ main: kit: entity: get_package: {
 
   fields: [
     {
+      format: "email"
       name: "email"
       req: false
       short: "Maintainer email"
@@ -49,14 +50,16 @@ main: kit: entity: get_package: {
           }
           method: "GET"
           orig: "/{package}"
-          parts: [
-            "{id}"
-          ]
           rename: {
             param: {
               package: "id"
             }
           }
+          segments: [
+            {
+              var: "id"
+            }
+          ]
           select: {
             exist: [
               "id"

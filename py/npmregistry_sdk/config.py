@@ -1,6 +1,14 @@
 # NpmRegistry SDK configuration
 
 
+# The sekreto plugin DEFINITIONS the model selected per feature, imported
+# above by name from the modules the catalogue's active `plugin.def`
+# entries declare. Handed to each feature (secrets builds its Sekreto
+# with them): a provider kind not listed here is unknown to that SDK.
+FEATURE_PLUGINS = {
+}
+
+
 _shared_config = None
 
 
@@ -54,6 +62,7 @@ def make_config():
       "get_package": {
         "fields": [
           {
+            "format": "email",
             "name": "email",
             "short": "Maintainer email",
             "type": "`$STRING`",
@@ -68,6 +77,10 @@ def make_config():
             "type": "`$STRING`",
           },
         ],
+        "id": {
+          "field": "id",
+          "name": "id",
+        },
         "name": "get_package",
         "op": {
           "list": {
@@ -90,14 +103,16 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/{package}",
-                "parts": [
-                  "{id}",
-                ],
                 "rename": {
                   "param": {
                     "package": "id",
                   },
                 },
+                "segments": [
+                  {
+                    "var": "id",
+                  },
+                ],
                 "select": {
                   "exist": [
                     "id",
@@ -107,6 +122,9 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body`",
                 },
+                "parts": [
+                  "{id}",
+                ],
               },
             ],
           },
@@ -126,6 +144,7 @@ def make_config():
             "type": "`$OBJECT`",
           },
           {
+            "format": "float",
             "name": "searchScore",
             "short": "Overall search score",
             "type": "`$NUMBER`",
@@ -188,10 +207,16 @@ def make_config():
                 "kind": "http",
                 "method": "GET",
                 "orig": "/-/v1/search",
-                "parts": [
-                  "-",
-                  "v1",
-                  "search",
+                "segments": [
+                  {
+                    "lit": "-",
+                  },
+                  {
+                    "lit": "v1",
+                  },
+                  {
+                    "lit": "search",
+                  },
                 ],
                 "select": {
                   "exist": [
@@ -207,6 +232,11 @@ def make_config():
                   "req": "`reqdata`",
                   "res": "`body.objects`",
                 },
+                "parts": [
+                  "-",
+                  "v1",
+                  "search",
+                ],
               },
             ],
           },

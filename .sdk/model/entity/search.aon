@@ -16,6 +16,7 @@ main: kit: entity: search: {
       type: "`$OBJECT`"
     }
     {
+      format: "float"
       name: "searchScore"
       req: false
       short: "Overall search score"
@@ -83,10 +84,16 @@ main: kit: entity: search: {
           }
           method: "GET"
           orig: "/-/v1/search"
-          parts: [
-            "-"
-            "v1"
-            "search"
+          segments: [
+            {
+              lit: "-"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              lit: "search"
+            }
           ]
           select: {
             exist: [

@@ -1,3 +1,4 @@
 /dist/
 /npm-registry-cli
 /go-cli
+.jostraca/
