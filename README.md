@@ -105,7 +105,7 @@ local results, err = client:GetPackage():list()
 
 | Language | Package | Install |
 | --- | --- | --- |
-| TypeScript | `@voxgig-sdk/npm-registry` | publish pending — [install from git tag](https://github.com/voxgig-sdk/npm-registry-sdk/releases) |
+| TypeScript | `@voxgig-sdk/npm-registry-sdk` | publish pending — [install from git tag](https://github.com/voxgig-sdk/npm-registry-sdk/releases) |
 | Python | `voxgig-sdk-npm-registry` | publish pending — [install from git tag](https://github.com/voxgig-sdk/npm-registry-sdk/releases) |
 | PHP | `voxgig-sdk/npm-registry` | publish pending — [install from git tag](https://github.com/voxgig-sdk/npm-registry-sdk/releases) |
 | Golang | `github.com/voxgig-sdk/npm-registry-sdk/go` | `go get github.com/voxgig-sdk/npm-registry-sdk/go@latest` |
@@ -119,7 +119,7 @@ local results, err = client:GetPackage():list()
 ### TypeScript
 
 ```ts
-import { NpmRegistrySDK } from '@voxgig-sdk/npm-registry'
+import { NpmRegistrySDK } from '@voxgig-sdk/npm-registry-sdk'
 
 const client = new NpmRegistrySDK()
 

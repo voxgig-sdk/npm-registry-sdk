@@ -1,5 +1,5 @@
 {
-  "name": "@voxgig-sdk/npm-registry",
+  "name": "@voxgig-sdk/npm-registry-sdk",
   "version": "0.0.1",
   "description": "Unofficial generated TypeScript SDK for the NPM Registry public API. Not affiliated with or endorsed by the upstream API provider.",
   "keywords": [

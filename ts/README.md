@@ -28,7 +28,7 @@ loading a specific record.
 ### 1. Create a client
 
 ```ts
-import { NpmRegistrySDK } from '@voxgig-sdk/npm-registry'
+import { NpmRegistrySDK } from '@voxgig-sdk/npm-registry-sdk'
 
 const client = new NpmRegistrySDK()
 ```
@@ -445,7 +445,7 @@ npm-registry/
 Import the SDK from the package root:
 
 ```ts
-import { NpmRegistrySDK } from '@voxgig-sdk/npm-registry'
+import { NpmRegistrySDK } from '@voxgig-sdk/npm-registry-sdk'
 ```
 
 ### Entity state
