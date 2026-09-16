@@ -1,12 +1,18 @@
 # NpmRegistry SDK feature factory
 
 from npmregistry_sdk.feature.base_feature import NpmRegistryBaseFeature
+from npmregistry_sdk.feature.ratelimit_feature import NpmRegistryRatelimitFeature
+from npmregistry_sdk.feature.retry_feature import NpmRegistryRetryFeature
 from npmregistry_sdk.feature.test_feature import NpmRegistryTestFeature
+from npmregistry_sdk.feature.timeout_feature import NpmRegistryTimeoutFeature
 
 
 _FEATURES = {
     "base": lambda: NpmRegistryBaseFeature(),
+    "ratelimit": lambda: NpmRegistryRatelimitFeature(),
+    "retry": lambda: NpmRegistryRetryFeature(),
     "test": lambda: NpmRegistryTestFeature(),
+    "timeout": lambda: NpmRegistryTimeoutFeature(),
 }
 
 
