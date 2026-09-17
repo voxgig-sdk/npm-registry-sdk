@@ -1,4 +1,4 @@
 # Flows
 
-@"BasicGetPackageFlow.aon"
-@"BasicSearchFlow.aon"
+@"./BasicGetPackageFlow.aon"
+@"./BasicSearchFlow.aon"

@@ -1,4 +1,4 @@
 # Entity Models
 
-@"get_package.aon"
-@"search.aon"
+@"./get_package.aon"
+@"./search.aon"

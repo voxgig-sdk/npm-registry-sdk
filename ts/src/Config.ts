@@ -127,12 +127,12 @@ class Config {
 
     entity: {
       
-      get_package: {
-      },
-
-      search: {
-      },
-
+        get_package: {
+        },
+  
+        search: {
+        },
+  
     }
   }
 
