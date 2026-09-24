@@ -91,19 +91,22 @@ func MakeConfig() map[string]any {
 			"get_package": map[string]any{
 				"fields": []any{
 					map[string]any{
-						"format": "email",
 						"name": "email",
-						"short": "Maintainer email",
+						"title": "Email",
 						"type": "`$STRING`",
+						"short": "Maintainer email",
+						"format": "email",
 					},
 					map[string]any{
 						"name": "id",
+						"title": "Id",
 						"type": "`$STRING`",
 					},
 					map[string]any{
 						"name": "name",
-						"short": "Maintainer username",
+						"title": "Name",
 						"type": "`$STRING`",
+						"short": "Maintainer username",
 					},
 				},
 				"id": map[string]any{
@@ -117,42 +120,42 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"params": []any{
-										map[string]any{
-											"example": "express",
-											"kind": "param",
-											"name": "id",
-											"orig": "package",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/{package}",
-								"rename": map[string]any{
-									"param": map[string]any{
-										"package": "id",
-									},
-								},
 								"segments": []any{
 									map[string]any{
 										"var": "id",
 									},
 								},
-								"select": map[string]any{
-									"exist": []any{
-										"id",
+								"parts": []any{
+									"{id}",
+								},
+								"rename": map[string]any{
+									"param": map[string]any{
+										"package": "id",
 									},
 								},
 								"transform": map[string]any{
 									"req": "`reqdata`",
 									"res": "`body`",
 								},
-								"parts": []any{
-									"{id}",
+								"args": map[string]any{
+									"params": []any{
+										map[string]any{
+											"name": "id",
+											"orig": "package",
+											"type": "`$STRING`",
+											"kind": "param",
+											"reqd": true,
+											"example": "express",
+										},
+									},
+								},
+								"select": map[string]any{
+									"exist": []any{
+										"id",
+									},
 								},
 							},
 						},
@@ -166,17 +169,20 @@ func MakeConfig() map[string]any {
 				"fields": []any{
 					map[string]any{
 						"name": "package",
+						"title": "Package",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
 						"name": "score",
+						"title": "Score",
 						"type": "`$OBJECT`",
 					},
 					map[string]any{
-						"format": "float",
 						"name": "searchScore",
-						"short": "Overall search score",
+						"title": "Search Score",
 						"type": "`$NUMBER`",
+						"short": "Overall search score",
+						"format": "float",
 					},
 				},
 				"name": "search",
@@ -186,53 +192,6 @@ func MakeConfig() map[string]any {
 						"name": "list",
 						"points": []any{
 							map[string]any{
-								"args": map[string]any{
-									"query": []any{
-										map[string]any{
-											"example": 0,
-											"kind": "query",
-											"name": "from",
-											"orig": "from",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": 0.5,
-											"kind": "query",
-											"name": "maintenance",
-											"orig": "maintenance",
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"example": 0.98,
-											"kind": "query",
-											"name": "popularity",
-											"orig": "popularity",
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"example": 0.65,
-											"kind": "query",
-											"name": "quality",
-											"orig": "quality",
-											"type": "`$NUMBER`",
-										},
-										map[string]any{
-											"example": 20,
-											"kind": "query",
-											"name": "size",
-											"orig": "size",
-											"type": "`$INTEGER`",
-										},
-										map[string]any{
-											"example": "react",
-											"kind": "query",
-											"name": "text",
-											"orig": "text",
-											"reqd": true,
-											"type": "`$STRING`",
-										},
-									},
-								},
 								"kind": "http",
 								"method": "GET",
 								"orig": "/-/v1/search",
@@ -247,6 +206,63 @@ func MakeConfig() map[string]any {
 										"lit": "search",
 									},
 								},
+								"parts": []any{
+									"-",
+									"v1",
+									"search",
+								},
+								"rename": map[string]any{},
+								"transform": map[string]any{
+									"req": "`reqdata`",
+									"res": "`body.objects`",
+								},
+								"args": map[string]any{
+									"query": []any{
+										map[string]any{
+											"name": "from",
+											"orig": "from",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 0,
+										},
+										map[string]any{
+											"name": "maintenance",
+											"orig": "maintenance",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"example": 0.5,
+										},
+										map[string]any{
+											"name": "popularity",
+											"orig": "popularity",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"example": 0.98,
+										},
+										map[string]any{
+											"name": "quality",
+											"orig": "quality",
+											"type": "`$NUMBER`",
+											"kind": "query",
+											"example": 0.65,
+										},
+										map[string]any{
+											"name": "size",
+											"orig": "size",
+											"type": "`$INTEGER`",
+											"kind": "query",
+											"example": 20,
+										},
+										map[string]any{
+											"name": "text",
+											"orig": "text",
+											"type": "`$STRING`",
+											"kind": "query",
+											"reqd": true,
+											"example": "react",
+										},
+									},
+								},
 								"select": map[string]any{
 									"exist": []any{
 										"from",
@@ -256,15 +272,6 @@ func MakeConfig() map[string]any {
 										"size",
 										"text",
 									},
-								},
-								"transform": map[string]any{
-									"req": "`reqdata`",
-									"res": "`body.objects`",
-								},
-								"parts": []any{
-									"-",
-									"v1",
-									"search",
 								},
 							},
 						},

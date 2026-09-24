@@ -87,19 +87,22 @@ local function make_config()
       ["get_package"] = {
         ["fields"] = {
           {
-            ["format"] = "email",
             ["name"] = "email",
-            ["short"] = "Maintainer email",
+            ["title"] = "Email",
             ["type"] = "`$STRING`",
+            ["short"] = "Maintainer email",
+            ["format"] = "email",
           },
           {
             ["name"] = "id",
+            ["title"] = "Id",
             ["type"] = "`$STRING`",
           },
           {
             ["name"] = "name",
-            ["short"] = "Maintainer username",
+            ["title"] = "Name",
             ["type"] = "`$STRING`",
+            ["short"] = "Maintainer username",
           },
         },
         ["id"] = {
@@ -113,42 +116,42 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["params"] = {
-                    {
-                      ["example"] = "express",
-                      ["kind"] = "param",
-                      ["name"] = "id",
-                      ["orig"] = "package",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/{package}",
-                ["rename"] = {
-                  ["param"] = {
-                    ["package"] = "id",
-                  },
-                },
                 ["segments"] = {
                   {
                     ["var"] = "id",
                   },
                 },
-                ["select"] = {
-                  ["exist"] = {
-                    "id",
+                ["parts"] = {
+                  "{id}",
+                },
+                ["rename"] = {
+                  ["param"] = {
+                    ["package"] = "id",
                   },
                 },
                 ["transform"] = {
                   ["req"] = "`reqdata`",
                   ["res"] = "`body`",
                 },
-                ["parts"] = {
-                  "{id}",
+                ["args"] = {
+                  ["params"] = {
+                    {
+                      ["name"] = "id",
+                      ["orig"] = "package",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "param",
+                      ["reqd"] = true,
+                      ["example"] = "express",
+                    },
+                  },
+                },
+                ["select"] = {
+                  ["exist"] = {
+                    "id",
+                  },
                 },
               },
             },
@@ -162,17 +165,20 @@ local function make_config()
         ["fields"] = {
           {
             ["name"] = "package",
+            ["title"] = "Package",
             ["type"] = "`$OBJECT`",
           },
           {
             ["name"] = "score",
+            ["title"] = "Score",
             ["type"] = "`$OBJECT`",
           },
           {
-            ["format"] = "float",
             ["name"] = "searchScore",
-            ["short"] = "Overall search score",
+            ["title"] = "Search Score",
             ["type"] = "`$NUMBER`",
+            ["short"] = "Overall search score",
+            ["format"] = "float",
           },
         },
         ["name"] = "search",
@@ -182,53 +188,6 @@ local function make_config()
             ["name"] = "list",
             ["points"] = {
               {
-                ["args"] = {
-                  ["query"] = {
-                    {
-                      ["example"] = 0,
-                      ["kind"] = "query",
-                      ["name"] = "from",
-                      ["orig"] = "from",
-                      ["type"] = "`$INTEGER`",
-                    },
-                    {
-                      ["example"] = 0.5,
-                      ["kind"] = "query",
-                      ["name"] = "maintenance",
-                      ["orig"] = "maintenance",
-                      ["type"] = "`$NUMBER`",
-                    },
-                    {
-                      ["example"] = 0.98,
-                      ["kind"] = "query",
-                      ["name"] = "popularity",
-                      ["orig"] = "popularity",
-                      ["type"] = "`$NUMBER`",
-                    },
-                    {
-                      ["example"] = 0.65,
-                      ["kind"] = "query",
-                      ["name"] = "quality",
-                      ["orig"] = "quality",
-                      ["type"] = "`$NUMBER`",
-                    },
-                    {
-                      ["example"] = 20,
-                      ["kind"] = "query",
-                      ["name"] = "size",
-                      ["orig"] = "size",
-                      ["type"] = "`$INTEGER`",
-                    },
-                    {
-                      ["example"] = "react",
-                      ["kind"] = "query",
-                      ["name"] = "text",
-                      ["orig"] = "text",
-                      ["reqd"] = true,
-                      ["type"] = "`$STRING`",
-                    },
-                  },
-                },
                 ["kind"] = "http",
                 ["method"] = "GET",
                 ["orig"] = "/-/v1/search",
@@ -243,6 +202,63 @@ local function make_config()
                     ["lit"] = "search",
                   },
                 },
+                ["parts"] = {
+                  "-",
+                  "v1",
+                  "search",
+                },
+                ["rename"] = {},
+                ["transform"] = {
+                  ["req"] = "`reqdata`",
+                  ["res"] = "`body.objects`",
+                },
+                ["args"] = {
+                  ["query"] = {
+                    {
+                      ["name"] = "from",
+                      ["orig"] = "from",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 0,
+                    },
+                    {
+                      ["name"] = "maintenance",
+                      ["orig"] = "maintenance",
+                      ["type"] = "`$NUMBER`",
+                      ["kind"] = "query",
+                      ["example"] = 0.5,
+                    },
+                    {
+                      ["name"] = "popularity",
+                      ["orig"] = "popularity",
+                      ["type"] = "`$NUMBER`",
+                      ["kind"] = "query",
+                      ["example"] = 0.98,
+                    },
+                    {
+                      ["name"] = "quality",
+                      ["orig"] = "quality",
+                      ["type"] = "`$NUMBER`",
+                      ["kind"] = "query",
+                      ["example"] = 0.65,
+                    },
+                    {
+                      ["name"] = "size",
+                      ["orig"] = "size",
+                      ["type"] = "`$INTEGER`",
+                      ["kind"] = "query",
+                      ["example"] = 20,
+                    },
+                    {
+                      ["name"] = "text",
+                      ["orig"] = "text",
+                      ["type"] = "`$STRING`",
+                      ["kind"] = "query",
+                      ["reqd"] = true,
+                      ["example"] = "react",
+                    },
+                  },
+                },
                 ["select"] = {
                   ["exist"] = {
                     "from",
@@ -252,15 +268,6 @@ local function make_config()
                     "size",
                     "text",
                   },
-                },
-                ["transform"] = {
-                  ["req"] = "`reqdata`",
-                  ["res"] = "`body.objects`",
-                },
-                ["parts"] = {
-                  "-",
-                  "v1",
-                  "search",
                 },
               },
             },

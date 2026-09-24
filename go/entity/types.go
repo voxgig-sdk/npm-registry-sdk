@@ -1,7 +1,7 @@
 // Typed models for the NpmRegistry SDK.
 //
-// GENERATED from the API model: main.kit.entity.<e>.fields[] and per-op
-// params (op.<name>.points[].args.params[]). Field/param types come from the
+// GENERATED from the API model: main.kit.entity.<e>.fields{} and per-op
+// params (op.<name>.points[].g.params[]). Field/param types come from the
 // canonical type sentinels via @voxgig/sdkgen canonToType (source of truth:
 // @voxgig/apidef VALID_CANON). Do not edit by hand.
 package entity
@@ -14,9 +14,6 @@ import (
 
 // GetPackage is the typed data model for the get_package entity.
 type GetPackage struct {
-	Email *string `json:"email,omitempty"`
-	Id *string `json:"id,omitempty"`
-	Name *string `json:"name,omitempty"`
 }
 
 // GetPackageListMatch is the typed request payload for GetPackage.ListTyped.
@@ -26,9 +23,6 @@ type GetPackageListMatch struct {
 
 // Search is the typed data model for the search entity.
 type Search struct {
-	Package *map[string]any `json:"package,omitempty"`
-	Score *map[string]any `json:"score,omitempty"`
-	SearchScore *float64 `json:"searchScore,omitempty"`
 }
 
 // SearchListMatch is the typed request payload for Search.ListTyped.

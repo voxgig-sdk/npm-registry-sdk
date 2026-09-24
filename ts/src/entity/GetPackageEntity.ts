@@ -19,7 +19,6 @@ import type {
   GetPackageListMatch,
 } from '../NpmRegistryTypes'
 
-// TODO: needs Entity superclass
 class GetPackageEntity extends NpmRegistryEntityBase<GetPackage> {
 
   constructor(client: NpmRegistrySDK, entopts: any) {

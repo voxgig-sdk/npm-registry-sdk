@@ -43,7 +43,7 @@ local getpackages, err = client:GetPackage():list()
 if err then error(err) end
 
 for _, item in ipairs(getpackages) do
-  print(item["id"], item["email"])
+  print(item["id"])
 end
 ```
 

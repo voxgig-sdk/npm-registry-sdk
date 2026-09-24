@@ -1,0 +1,127 @@
+# Entity: search
+
+main: kit: entity: search: {
+
+  alias: field: {}
+
+  fields: {
+    package: {
+      h: "Package"
+      n: "package"
+      r: false
+      t: "`$OBJECT`"
+    }
+    score: {
+      h: "Score"
+      n: "score"
+      r: false
+      t: "`$OBJECT`"
+    }
+    searchScore: {
+      fo: "float"
+      h: "Search Score"
+      n: "searchScore"
+      r: false
+      sh: "Overall search score"
+      t: "`$NUMBER`"
+    }
+  }
+
+  name: "search"
+  op: {
+    list: {
+      name: "list"
+      points: [
+        {
+          co: {
+            id: "GET /-/v1/search"
+            source: "openapi3"
+            version: 2
+          }
+          g: {
+            query: [
+              {
+                ex: 0
+                k: "query"
+                n: "from"
+                or: "from"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: 0.5
+                k: "query"
+                n: "maintenance"
+                or: "maintenance"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 0.98
+                k: "query"
+                n: "popularity"
+                or: "popularity"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 0.65
+                k: "query"
+                n: "quality"
+                or: "quality"
+                r: false
+                t: "`$NUMBER`"
+              }
+              {
+                ex: 20
+                k: "query"
+                n: "size"
+                or: "size"
+                r: false
+                t: "`$INTEGER`"
+              }
+              {
+                ex: "react"
+                k: "query"
+                n: "text"
+                or: "text"
+                r: true
+                t: "`$STRING`"
+              }
+            ]
+          }
+          m: "GET"
+          o: "/-/v1/search"
+          q: {
+            exist: [
+              "from"
+              "maintenance"
+              "popularity"
+              "quality"
+              "size"
+              "text"
+            ]
+          }
+          s: [
+            {
+              lit: "-"
+            }
+            {
+              lit: "v1"
+            }
+            {
+              lit: "search"
+            }
+          ]
+          t: {
+            req: "`reqdata`"
+            res: "`body.objects`"
+          }
+        }
+      ]
+    }
+  }
+
+
+
+}

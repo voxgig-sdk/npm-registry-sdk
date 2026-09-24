@@ -19,7 +19,6 @@ import type {
   SearchListMatch,
 } from '../NpmRegistryTypes'
 
-// TODO: needs Entity superclass
 class SearchEntity extends NpmRegistryEntityBase<Search> {
 
   constructor(client: NpmRegistrySDK, entopts: any) {

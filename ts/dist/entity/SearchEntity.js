@@ -2,7 +2,6 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.SearchEntity = void 0;
 const NpmRegistryEntityBase_1 = require("../NpmRegistryEntityBase");
-// TODO: needs Entity superclass
 class SearchEntity extends NpmRegistryEntityBase_1.NpmRegistryEntityBase {
     constructor(client, entopts) {
         super(client, entopts);

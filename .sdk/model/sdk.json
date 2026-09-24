@@ -24,35 +24,104 @@
         "repr": "auto"
       },
       "contributor": {},
+      "doc": {
+        "active": true,
+        "assets": {
+          "path": ".sdk/doc/assets"
+        },
+        "brand": {
+          "label": "",
+          "notice": "",
+          "shortNotice": "",
+          "url": ""
+        },
+        "ci": {
+          "active": true,
+          "branch": "main"
+        },
+        "content": {
+          "path": ".sdk/doc/content"
+        },
+        "edition": {
+          "summary": {
+            "active": true,
+            "base": "node_modules/@voxgig/docgen/project/.sdk",
+            "brand": {},
+            "filter": {
+              "entities": [],
+              "features": [],
+              "targets": []
+            },
+            "kind": "summary",
+            "name": "summary",
+            "origname": "",
+            "output": {
+              "path": "SUMMARY.md"
+            },
+            "package": "@voxgig/docgen",
+            "published": false,
+            "site": {
+              "active": true
+            },
+            "style": {},
+            "title": ""
+          }
+        },
+        "qa": {
+          "vocabulary": []
+        },
+        "style": {
+          "color": {
+            "accent": "#00c6d8",
+            "background": "#f5f5f9",
+            "darkBackground": "#0f1117",
+            "darkText": "#e6edf3",
+            "primary": "#e70042",
+            "text": "#0a0a0a"
+          },
+          "font": "Nunito, system-ui, sans-serif",
+          "fontFile": "",
+          "headingFont": "Nunito, system-ui, sans-serif",
+          "headingFontFile": "",
+          "logo": "",
+          "mode": "light",
+          "mono": "ui-monospace, monospace",
+          "monoFile": ""
+        },
+        "target": {}
+      },
       "entity": {
         "get_package": {
           "active": true,
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "format": "email",
-              "name": "email",
-              "req": false,
-              "short": "Maintainer email",
-              "type": "`$STRING`"
+          "fields": {
+            "email": {
+              "a": true,
+              "fo": "email",
+              "h": "Email",
+              "n": "email",
+              "r": false,
+              "sh": "Maintainer email",
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "id",
-              "req": false,
-              "type": "`$STRING`"
+            "id": {
+              "a": true,
+              "h": "Id",
+              "n": "id",
+              "r": false,
+              "t": "`$STRING`"
             },
-            {
-              "active": true,
-              "name": "name",
-              "req": false,
-              "short": "Maintainer username",
-              "type": "`$STRING`"
+            "name": {
+              "a": true,
+              "h": "Name",
+              "n": "name",
+              "r": false,
+              "sh": "Maintainer username",
+              "t": "`$STRING`"
             }
-          ],
+          },
           "id": {
             "field": "id",
             "name": "id"
@@ -64,45 +133,44 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /{package}",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "params": [
                       {
-                        "active": true,
-                        "example": "express",
-                        "kind": "param",
-                        "name": "id",
-                        "orig": "package",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "express",
+                        "k": "param",
+                        "n": "id",
+                        "or": "package",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /{package}",
-                    "json": "{\"operationId\":\"getPackage\",\"parameters\":[{\"description\":\"The name of the package\",\"example\":\"express\",\"in\":\"path\",\"name\":\"package\",\"required\":true,\"schema\":{\"type\":\"string\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"_id\":{\"description\":\"Package identifier\",\"type\":\"string\"},\"_rev\":{\"description\":\"Revision identifier\",\"type\":\"string\"},\"author\":{\"properties\":{\"email\":{\"description\":\"Person email\",\"format\":\"email\",\"type\":\"string\"},\"name\":{\"description\":\"Person name\",\"type\":\"string\"},\"url\":{\"description\":\"Person URL\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"description\":{\"description\":\"Package description\",\"type\":\"string\"},\"dist-tags\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"Distribution tags mapping to versions\",\"type\":\"object\"},\"homepage\":{\"description\":\"Package homepage URL\",\"type\":\"string\"},\"keywords\":{\"description\":\"Package keywords\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"license\":{\"description\":\"Package license\",\"type\":\"string\"},\"maintainers\":{\"description\":\"Package maintainers\",\"items\":{\"properties\":{\"email\":{\"description\":\"Maintainer email\",\"format\":\"email\",\"type\":\"string\"},\"name\":{\"description\":\"Maintainer username\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"name\":{\"description\":\"Package name\",\"type\":\"string\"},\"readme\":{\"description\":\"Package README content\",\"type\":\"string\"},\"readmeFilename\":{\"description\":\"Name of the README file\",\"type\":\"string\"},\"repository\":{\"properties\":{\"type\":{\"description\":\"Repository type\",\"example\":\"git\",\"type\":\"string\"},\"url\":{\"description\":\"Repository URL\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"time\":{\"additionalProperties\":{\"format\":\"date-time\",\"type\":\"string\"},\"description\":\"Timestamps for each version\",\"type\":\"object\"},\"versions\":{\"additionalProperties\":{\"properties\":{\"_id\":{\"description\":\"Version identifier\",\"type\":\"string\"},\"_nodeVersion\":{\"description\":\"Node version used to publish\",\"type\":\"string\"},\"_npmVersion\":{\"description\":\"NPM version used to publish\",\"type\":\"string\"},\"author\":{\"properties\":{\"email\":{\"description\":\"Person email\",\"format\":\"email\",\"type\":\"string\"},\"name\":{\"description\":\"Person name\",\"type\":\"string\"},\"url\":{\"description\":\"Person URL\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"dependencies\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"Package dependencies\",\"type\":\"object\"},\"description\":{\"description\":\"Version description\",\"type\":\"string\"},\"devDependencies\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"Development dependencies\",\"type\":\"object\"},\"dist\":{\"properties\":{\"fileCount\":{\"description\":\"Number of files in package\",\"type\":\"integer\"},\"integrity\":{\"description\":\"Subresource integrity hash\",\"type\":\"string\"},\"shasum\":{\"description\":\"SHA-1 checksum\",\"type\":\"string\"},\"tarball\":{\"description\":\"URL to tarball\",\"format\":\"uri\",\"type\":\"string\"},\"unpackedSize\":{\"description\":\"Unpacked size in bytes\",\"type\":\"integer\"}},\"type\":\"object\"},\"license\":{\"description\":\"Package license\",\"type\":\"string\"},\"main\":{\"description\":\"Main entry point\",\"type\":\"string\"},\"name\":{\"description\":\"Package name\",\"type\":\"string\"},\"peerDependencies\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"Peer dependencies\",\"type\":\"object\"},\"scripts\":{\"additionalProperties\":{\"type\":\"string\"},\"description\":\"NPM scripts\",\"type\":\"object\"},\"version\":{\"description\":\"Version number\",\"type\":\"string\"}},\"type\":\"object\"},\"description\":\"All versions of the package\",\"type\":\"object\"}},\"type\":\"object\"}}},\"description\":\"Package metadata retrieved successfully\"},\"404\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error type\",\"type\":\"string\"},\"reason\":{\"description\":\"Error reason\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Package not found\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
-                  },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/{package}",
-                  "rename": {
-                    "param": {
-                      "package": "id"
-                    }
-                  },
-                  "segments": [
-                    {
-                      "var": "id"
-                    }
-                  ],
-                  "select": {
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/{package}",
+                  "q": {
                     "exist": [
                       "id"
                     ]
                   },
-                  "transform": {
+                  "r": {
+                    "param": {
+                      "package": "id"
+                    }
+                  },
+                  "s": [
+                    {
+                      "var": "id"
+                    }
+                  ],
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body`"
                   }
@@ -119,28 +187,31 @@
           "alias": {
             "field": {}
           },
-          "fields": [
-            {
-              "active": true,
-              "name": "package",
-              "req": false,
-              "type": "`$OBJECT`"
+          "fields": {
+            "package": {
+              "a": true,
+              "h": "Package",
+              "n": "package",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "name": "score",
-              "req": false,
-              "type": "`$OBJECT`"
+            "score": {
+              "a": true,
+              "h": "Score",
+              "n": "score",
+              "r": false,
+              "t": "`$OBJECT`"
             },
-            {
-              "active": true,
-              "format": "float",
-              "name": "searchScore",
-              "req": false,
-              "short": "Overall search score",
-              "type": "`$NUMBER`"
+            "searchScore": {
+              "a": true,
+              "fo": "float",
+              "h": "Search Score",
+              "n": "searchScore",
+              "r": false,
+              "sh": "Overall search score",
+              "t": "`$NUMBER`"
             }
-          ],
+          },
           "name": "search",
           "op": {
             "list": {
@@ -148,75 +219,85 @@
               "name": "list",
               "points": [
                 {
-                  "active": true,
-                  "args": {
+                  "a": true,
+                  "co": {
+                    "id": "GET /-/v1/search",
+                    "source": "openapi3",
+                    "version": 2
+                  },
+                  "g": {
                     "query": [
                       {
-                        "active": true,
-                        "example": 0,
-                        "kind": "query",
-                        "name": "from",
-                        "orig": "from",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 0,
+                        "k": "query",
+                        "n": "from",
+                        "or": "from",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "example": 0.5,
-                        "kind": "query",
-                        "name": "maintenance",
-                        "orig": "maintenance",
-                        "reqd": false,
-                        "type": "`$NUMBER`"
+                        "a": true,
+                        "ex": 0.5,
+                        "k": "query",
+                        "n": "maintenance",
+                        "or": "maintenance",
+                        "r": false,
+                        "t": "`$NUMBER`"
                       },
                       {
-                        "active": true,
-                        "example": 0.98,
-                        "kind": "query",
-                        "name": "popularity",
-                        "orig": "popularity",
-                        "reqd": false,
-                        "type": "`$NUMBER`"
+                        "a": true,
+                        "ex": 0.98,
+                        "k": "query",
+                        "n": "popularity",
+                        "or": "popularity",
+                        "r": false,
+                        "t": "`$NUMBER`"
                       },
                       {
-                        "active": true,
-                        "example": 0.65,
-                        "kind": "query",
-                        "name": "quality",
-                        "orig": "quality",
-                        "reqd": false,
-                        "type": "`$NUMBER`"
+                        "a": true,
+                        "ex": 0.65,
+                        "k": "query",
+                        "n": "quality",
+                        "or": "quality",
+                        "r": false,
+                        "t": "`$NUMBER`"
                       },
                       {
-                        "active": true,
-                        "example": 20,
-                        "kind": "query",
-                        "name": "size",
-                        "orig": "size",
-                        "reqd": false,
-                        "type": "`$INTEGER`"
+                        "a": true,
+                        "ex": 20,
+                        "k": "query",
+                        "n": "size",
+                        "or": "size",
+                        "r": false,
+                        "t": "`$INTEGER`"
                       },
                       {
-                        "active": true,
-                        "example": "react",
-                        "kind": "query",
-                        "name": "text",
-                        "orig": "text",
-                        "reqd": true,
-                        "type": "`$STRING`"
+                        "a": true,
+                        "ex": "react",
+                        "k": "query",
+                        "n": "text",
+                        "or": "text",
+                        "r": true,
+                        "t": "`$STRING`"
                       }
                     ]
                   },
-                  "contract": {
-                    "id": "GET /-/v1/search",
-                    "json": "{\"operationId\":\"searchPackages\",\"parameters\":[{\"description\":\"Search query text\",\"example\":\"react\",\"in\":\"query\",\"name\":\"text\",\"required\":true,\"schema\":{\"type\":\"string\"}},{\"description\":\"Number of results to return\",\"in\":\"query\",\"name\":\"size\",\"required\":false,\"schema\":{\"default\":20,\"maximum\":250,\"minimum\":1,\"type\":\"integer\"}},{\"description\":\"Offset for pagination\",\"in\":\"query\",\"name\":\"from\",\"required\":false,\"schema\":{\"default\":0,\"minimum\":0,\"type\":\"integer\"}},{\"description\":\"Weight for quality score (0.0 to 1.0)\",\"in\":\"query\",\"name\":\"quality\",\"required\":false,\"schema\":{\"default\":0.65,\"format\":\"float\",\"maximum\":1,\"minimum\":0,\"type\":\"number\"}},{\"description\":\"Weight for popularity score (0.0 to 1.0)\",\"in\":\"query\",\"name\":\"popularity\",\"required\":false,\"schema\":{\"default\":0.98,\"format\":\"float\",\"maximum\":1,\"minimum\":0,\"type\":\"number\"}},{\"description\":\"Weight for maintenance score (0.0 to 1.0)\",\"in\":\"query\",\"name\":\"maintenance\",\"required\":false,\"schema\":{\"default\":0.5,\"format\":\"float\",\"maximum\":1,\"minimum\":0,\"type\":\"number\"}}],\"protocol\":\"http\",\"responses\":{\"200\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"objects\":{\"description\":\"Array of search result objects\",\"items\":{\"properties\":{\"package\":{\"properties\":{\"author\":{\"properties\":{\"email\":{\"description\":\"Person email\",\"format\":\"email\",\"type\":\"string\"},\"name\":{\"description\":\"Person name\",\"type\":\"string\"},\"url\":{\"description\":\"Person URL\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"date\":{\"description\":\"Last publish date\",\"format\":\"date-time\",\"type\":\"string\"},\"description\":{\"description\":\"Package description\",\"type\":\"string\"},\"keywords\":{\"description\":\"Package keywords\",\"items\":{\"type\":\"string\"},\"type\":\"array\"},\"links\":{\"properties\":{\"bugs\":{\"description\":\"Bug tracker URL\",\"format\":\"uri\",\"type\":\"string\"},\"homepage\":{\"description\":\"Package homepage URL\",\"format\":\"uri\",\"type\":\"string\"},\"npm\":{\"description\":\"NPM package page URL\",\"format\":\"uri\",\"type\":\"string\"},\"repository\":{\"description\":\"Repository URL\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"maintainers\":{\"description\":\"Package maintainers\",\"items\":{\"properties\":{\"email\":{\"description\":\"Maintainer email\",\"format\":\"email\",\"type\":\"string\"},\"name\":{\"description\":\"Maintainer username\",\"type\":\"string\"}},\"type\":\"object\"},\"type\":\"array\"},\"name\":{\"description\":\"Package name\",\"type\":\"string\"},\"publisher\":{\"properties\":{\"email\":{\"description\":\"Person email\",\"format\":\"email\",\"type\":\"string\"},\"name\":{\"description\":\"Person name\",\"type\":\"string\"},\"url\":{\"description\":\"Person URL\",\"format\":\"uri\",\"type\":\"string\"}},\"type\":\"object\"},\"version\":{\"description\":\"Latest version\",\"type\":\"string\"}},\"type\":\"object\"},\"score\":{\"properties\":{\"detail\":{\"properties\":{\"maintenance\":{\"description\":\"Maintenance score\",\"format\":\"float\",\"type\":\"number\"},\"popularity\":{\"description\":\"Popularity score\",\"format\":\"float\",\"type\":\"number\"},\"quality\":{\"description\":\"Quality score\",\"format\":\"float\",\"type\":\"number\"}},\"type\":\"object\"},\"final\":{\"description\":\"Final weighted score\",\"format\":\"float\",\"type\":\"number\"}},\"type\":\"object\"},\"searchScore\":{\"description\":\"Overall search score\",\"format\":\"float\",\"type\":\"number\"}},\"type\":\"object\"},\"type\":\"array\"},\"time\":{\"description\":\"Search execution timestamp\",\"format\":\"date-time\",\"type\":\"string\"},\"total\":{\"description\":\"Total number of results\",\"type\":\"integer\"}},\"type\":\"object\"}}},\"description\":\"Search results retrieved successfully\"},\"400\":{\"content\":{\"application/json\":{\"schema\":{\"properties\":{\"error\":{\"description\":\"Error type\",\"type\":\"string\"},\"reason\":{\"description\":\"Error reason\",\"type\":\"string\"}},\"type\":\"object\"}}},\"description\":\"Invalid search parameters\"}},\"securitySource\":\"unspecified\"}",
-                    "source": "openapi3",
-                    "version": 1
+                  "k": "http",
+                  "m": "GET",
+                  "o": "/-/v1/search",
+                  "q": {
+                    "exist": [
+                      "from",
+                      "maintenance",
+                      "popularity",
+                      "quality",
+                      "size",
+                      "text"
+                    ]
                   },
-                  "kind": "http",
-                  "method": "GET",
-                  "orig": "/-/v1/search",
-                  "segments": [
+                  "r": {},
+                  "s": [
                     {
                       "lit": "-"
                     },
@@ -227,17 +308,7 @@
                       "lit": "search"
                     }
                   ],
-                  "select": {
-                    "exist": [
-                      "from",
-                      "maintenance",
-                      "popularity",
-                      "quality",
-                      "size",
-                      "text"
-                    ]
-                  },
-                  "transform": {
+                  "t": {
                     "req": "`reqdata`",
                     "res": "`body.objects`"
                   }
@@ -666,15 +737,15 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {
                 "package": "package01"
               },
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
@@ -694,13 +765,13 @@
           "param": {},
           "step": [
             {
-              "active": true,
-              "data": {},
-              "input": {},
-              "match": {},
-              "op": "list",
-              "spec": [],
-              "valid": [
+              "a": true,
+              "d": {},
+              "i": {},
+              "m": {},
+              "o": "list",
+              "s": [],
+              "v": [
                 {
                   "apply": "ItemExists",
                   "def": {
