@@ -33,6 +33,8 @@ require_relative 'transform_response'
 
 NpmRegistryUtility.registrar = ->(u) {
   u.clean = NpmRegistryUtilities::Clean
+  u.clean_add = NpmRegistryUtilities::CleanAdd
+  u.clean_explain = NpmRegistryUtilities::CleanExplain
   u.done = NpmRegistryUtilities::Done
   u.make_error = NpmRegistryUtilities::MakeError
   u.feature_add = NpmRegistryUtilities::FeatureAdd

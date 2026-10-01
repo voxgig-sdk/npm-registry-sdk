@@ -37,6 +37,8 @@ require_once __DIR__ . '/TransformResponse.php';
 
 NpmRegistryUtility::setRegistrar(function (NpmRegistryUtility $u): void {
     $u->clean = [NpmRegistryClean::class, 'call'];
+    $u->clean_add = [NpmRegistryClean::class, 'add'];
+    $u->clean_explain = [NpmRegistryDone::class, 'clean_explain'];
     $u->done = [NpmRegistryDone::class, 'call'];
     $u->make_error = [NpmRegistryMakeError::class, 'call'];
     $u->feature_add = [NpmRegistryFeatureAdd::class, 'call'];
