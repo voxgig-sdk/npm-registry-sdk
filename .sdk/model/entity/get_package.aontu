@@ -68,6 +68,10 @@ main: kit: entity: get_package: {
               package: "id"
             }
           }
+          rs: {
+            kind: "json"
+            media: "application/json"
+          }
           s: [
             {
               var: "id"

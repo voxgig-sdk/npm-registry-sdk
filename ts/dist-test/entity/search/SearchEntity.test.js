@@ -54,6 +54,53 @@ const utility_1 = require("../../utility");
         const ent = testsdk.Search();
         (0, node_assert_1.default)(null != ent);
     });
+    class FailHook extends __1.BaseFeature {
+        name = 'failhook';
+        version = '0.0.1';
+        active = true;
+        unexpected = 0;
+        init() { }
+        PreSpec() { throw new Error('search hook failed'); }
+        PreUnexpected() { this.unexpected++; }
+    }
+    (0, node_test_1.test)('stream-error', async () => {
+        const offline = { net: { offline: true } };
+        await node_assert_1.default.rejects(async () => {
+            for await (const _item of __1.NpmRegistrySDK.test(offline).Search().stream('list')) { }
+        }, /offline/);
+        for await (const _item of __1.NpmRegistrySDK.test(offline).Search()
+            .stream('list', undefined, { ctrl: { throw: false } })) { }
+        if (null != __1.config.feature?.rbac) {
+            const denied = __1.NpmRegistrySDK.test(undefined, { feature: { rbac: { active: true, deny: true } } });
+            await node_assert_1.default.rejects(async () => {
+                for await (const _item of denied.Search().stream('list')) { }
+            }, (err) => 'rbac_denied' === err.code);
+        }
+    });
+    (0, node_test_1.test)('stream-ctrl', async () => {
+        const explain = {};
+        const ctrl = { explain };
+        for await (const _item of __1.NpmRegistrySDK.test().Search().stream('list', undefined, { ctrl })) { }
+        node_assert_1.default.deepStrictEqual(Object.keys(ctrl), ['explain']);
+        (0, node_assert_1.default)(explain === ctrl.explain && 0 < Object.keys(explain).length);
+    });
+    (0, node_test_1.test)('unexpected', async () => {
+        const hook = new FailHook();
+        const client = new __1.NpmRegistrySDK({ feature: { test: { active: true } }, extend: [hook] });
+        await node_assert_1.default.rejects(client.Search().list(), /hook failed/);
+        (0, node_assert_1.default)(0 < hook.unexpected);
+        const fired = hook.unexpected;
+        node_assert_1.default.strictEqual(await client.Search().list(undefined, { throw: false }), undefined);
+        (0, node_assert_1.default)(fired < hook.unexpected);
+    });
+    (0, node_test_1.test)('validate', async (t) => {
+        if (null == __1.config.feature?.validate) {
+            t.skip('feature not present in this SDK: validate');
+            return;
+        }
+        const client = __1.NpmRegistrySDK.test(undefined, { feature: { validate: { active: true } } });
+        await node_assert_1.default.rejects(client.Search().list({ "from": "x", "text": "x" }), (err) => 'validate_failed' === err.code);
+    });
     (0, node_test_1.test)('basic', async (t) => {
         const live = 'TRUE' === process.env.NPM_REGISTRY_TEST_LIVE;
         for (const op of ['list']) {
@@ -62,7 +109,7 @@ const utility_1 = require("../../utility");
         }
         const setup = basicSetup();
         if (setup.live) {
-            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "package": { "a": true, "h": "Package", "n": "package", "r": false, "t": "`$OBJECT`", "key$": "package", "index$": 0 }, "score": { "a": true, "h": "Score", "n": "score", "r": false, "t": "`$OBJECT`", "key$": "score", "index$": 1 }, "searchScore": { "a": true, "fo": "float", "h": "Search Score", "n": "searchScore", "r": false, "sh": "Overall search score", "t": "`$NUMBER`", "key$": "searchScore", "index$": 2 } }, "name": "search", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /-/v1/search", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": 0, "k": "query", "n": "from", "or": "from", "r": false, "t": "`$INTEGER`", "index$": 0 }, { "a": true, "ex": 0.5, "k": "query", "n": "maintenance", "or": "maintenance", "r": false, "t": "`$NUMBER`", "index$": 1 }, { "a": true, "ex": 0.98, "k": "query", "n": "popularity", "or": "popularity", "r": false, "t": "`$NUMBER`", "index$": 2 }, { "a": true, "ex": 0.65, "k": "query", "n": "quality", "or": "quality", "r": false, "t": "`$NUMBER`", "index$": 3 }, { "a": true, "ex": 20, "k": "query", "n": "size", "or": "size", "r": false, "t": "`$INTEGER`", "index$": 4 }, { "a": true, "ex": "react", "k": "query", "n": "text", "or": "text", "r": true, "t": "`$STRING`", "index$": 5 }] }, "k": "http", "m": "GET", "o": "/-/v1/search", "q": { "exist": ["from", "maintenance", "popularity", "quality", "size", "text"] }, "r": {}, "s": [{ "lit": "-" }, { "lit": "v1" }, { "lit": "search" }], "t": { "req": "`reqdata`", "res": "`body.objects`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "search", "name__orig": "search", "Name": "Search", "name_": "search", "name-": "search", "NAME": "SEARCH", "index$": 1 }, { "active": true, "entity": "search", "key$": "BasicSearchFlow", "kind": "basic", "name": "BasicSearchFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "search_ref01" } }], "index$": 0 }] }, 'Search', { "GET /-/v1/search": { "protocol": "http", "parameters": [{ "name": "text", "in": "query", "required": true, "description": "Search query text", "schema": { "type": "string" }, "example": "react", "index$": 0 }, { "name": "size", "in": "query", "required": false, "description": "Number of results to return", "schema": { "type": "integer", "default": 20, "minimum": 1, "maximum": 250 }, "index$": 1 }, { "name": "from", "in": "query", "required": false, "description": "Offset for pagination", "schema": { "type": "integer", "default": 0, "minimum": 0 }, "index$": 2 }, { "name": "quality", "in": "query", "required": false, "description": "Weight for quality score (0.0 to 1.0)", "schema": { "type": "number", "format": "float", "minimum": 0, "maximum": 1, "default": 0.65 }, "index$": 3 }, { "name": "popularity", "in": "query", "required": false, "description": "Weight for popularity score (0.0 to 1.0)", "schema": { "type": "number", "format": "float", "minimum": 0, "maximum": 1, "default": 0.98 }, "index$": 4 }, { "name": "maintenance", "in": "query", "required": false, "description": "Weight for maintenance score (0.0 to 1.0)", "schema": { "type": "number", "format": "float", "minimum": 0, "maximum": 1, "default": 0.5 }, "index$": 5 }] } });
+            return (0, live_entity_1.runLiveEntity)(setup, { "active": true, "alias": { "field": {} }, "fields": { "package": { "a": true, "h": "Package", "n": "package", "r": false, "t": "`$OBJECT`", "key$": "package", "index$": 0 }, "score": { "a": true, "h": "Score", "n": "score", "r": false, "t": "`$OBJECT`", "key$": "score", "index$": 1 }, "searchScore": { "a": true, "fo": "float", "h": "Search Score", "n": "searchScore", "r": false, "sh": "Overall search score", "t": "`$NUMBER`", "key$": "searchScore", "index$": 2 } }, "name": "search", "op": { "list": { "input": "data", "name": "list", "points": [{ "a": true, "co": { "id": "GET /-/v1/search", "source": "openapi3", "version": 2 }, "g": { "query": [{ "a": true, "ex": 0, "k": "query", "n": "from", "or": "from", "r": false, "t": "`$INTEGER`", "index$": 0 }, { "a": true, "ex": 0.5, "k": "query", "n": "maintenance", "or": "maintenance", "r": false, "t": "`$NUMBER`", "index$": 1 }, { "a": true, "ex": 0.98, "k": "query", "n": "popularity", "or": "popularity", "r": false, "t": "`$NUMBER`", "index$": 2 }, { "a": true, "ex": 0.65, "k": "query", "n": "quality", "or": "quality", "r": false, "t": "`$NUMBER`", "index$": 3 }, { "a": true, "ex": 20, "k": "query", "n": "size", "or": "size", "r": false, "t": "`$INTEGER`", "index$": 4 }, { "a": true, "ex": "react", "k": "query", "n": "text", "or": "text", "r": true, "t": "`$STRING`", "index$": 5 }] }, "k": "http", "m": "GET", "o": "/-/v1/search", "q": { "exist": ["text"] }, "r": {}, "rs": { "kind": "json", "media": "application/json" }, "s": [{ "lit": "-" }, { "lit": "v1" }, { "lit": "search" }], "t": { "req": "`reqdata`", "res": "`body.objects`" }, "index$": 0 }], "key$": "list" } }, "relations": { "ancestors": [] }, "key$": "search", "name__orig": "search", "Name": "Search", "name_": "search", "name-": "search", "NAME": "SEARCH", "index$": 1 }, { "active": true, "entity": "search", "key$": "BasicSearchFlow", "kind": "basic", "name": "BasicSearchFlow", "param": {}, "step": [{ "a": true, "d": {}, "i": {}, "m": {}, "o": "list", "s": [], "v": [{ "apply": "ItemExists", "def": { "ref": "search_ref01" } }], "index$": 0 }] }, 'Search', { "GET /-/v1/search": { "protocol": "http", "parameters": [{ "name": "text", "in": "query", "required": true, "description": "Search query text", "schema": { "type": "string" }, "example": "react", "index$": 0 }, { "name": "size", "in": "query", "required": false, "description": "Number of results to return", "schema": { "type": "integer", "default": 20, "minimum": 1, "maximum": 250 }, "index$": 1 }, { "name": "from", "in": "query", "required": false, "description": "Offset for pagination", "schema": { "type": "integer", "default": 0, "minimum": 0 }, "index$": 2 }, { "name": "quality", "in": "query", "required": false, "description": "Weight for quality score (0.0 to 1.0)", "schema": { "type": "number", "format": "float", "minimum": 0, "maximum": 1, "default": 0.65 }, "index$": 3 }, { "name": "popularity", "in": "query", "required": false, "description": "Weight for popularity score (0.0 to 1.0)", "schema": { "type": "number", "format": "float", "minimum": 0, "maximum": 1, "default": 0.98 }, "index$": 4 }, { "name": "maintenance", "in": "query", "required": false, "description": "Weight for maintenance score (0.0 to 1.0)", "schema": { "type": "number", "format": "float", "minimum": 0, "maximum": 1, "default": 0.5 }, "index$": 5 }] } }, { strict: LIVE_STRICT, t });
         }
         const client = setup.client;
         const struct = setup.struct;
@@ -75,6 +122,11 @@ const utility_1 = require("../../utility");
         const search_ref01_list = (await search_ref01_ent.list(search_ref01_match)).map((e) => e.data());
     });
 });
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true;
 function basicSetup(extra) {
     // TODO: fix test def options
     const options = {}; // null

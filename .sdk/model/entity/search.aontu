@@ -94,13 +94,12 @@ main: kit: entity: search: {
           o: "/-/v1/search"
           q: {
             exist: [
-              "from"
-              "maintenance"
-              "popularity"
-              "quality"
-              "size"
               "text"
             ]
+          }
+          rs: {
+            kind: "json"
+            media: "application/json"
           }
           s: [
             {

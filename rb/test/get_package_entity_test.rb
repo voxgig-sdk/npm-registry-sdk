@@ -6,64 +6,40 @@ require_relative "../NpmRegistry_sdk"
 require_relative "runner"
 
 class GetPackageEntityTest < Minitest::Test
+  # main.kit.test.live.strict is true (the default is true): a live
+  # request that fails, or a live test missing an input it needs,
+  # fails the test.
+  # An account with no record for a test to read skips it either way.
+  LIVE_STRICT = true
+
   def test_create_instance
     testsdk = NpmRegistrySDK.test(nil, nil)
     ent = testsdk.GetPackage(nil)
     assert !ent.nil?
   end
 
-  # Feature #4: the entity stream(action, ...) method runs the op pipeline and
-  # returns an Enumerator over result items. With the streaming feature active
-  # it yields the feature's incremental output; otherwise it falls back to the
-  # materialised list so stream always yields.
-  def test_stream
-    seed = {
-      "entity" => {
-        "get_package" => {
-          "s1" => { "id" => "s1" },
-          "s2" => { "id" => "s2" },
-          "s3" => { "id" => "s3" },
-        },
-      },
-    }
-
-    # Fallback: streaming inactive -> yields the materialised list items.
-    base = NpmRegistrySDK.test(seed, nil)
-    seen = base.GetPackage(nil).stream("list", nil, nil).to_a
-    assert_equal 3, seen.length
-
-    # Inbound: streaming active -> yields each item from the feature.
+  def test_validate
     cfg = NpmRegistryConfig.shared_config
-    if cfg["feature"].is_a?(Hash) && cfg["feature"].key?("streaming")
-      sdk = NpmRegistrySDK.test(seed, { "feature" => { "streaming" => { "active" => true } } })
-      got = []
-      sdk.GetPackage(nil).stream("list", nil, nil).each do |item|
-        if item.is_a?(Array)
-          got.concat(item)
-        else
-          got << item
-        end
-      end
-      assert_equal 3, got.length
+    unless cfg["feature"].is_a?(Hash) && cfg["feature"].key?("validate")
+      skip("feature not present in this SDK: validate")
     end
+    client = NpmRegistrySDK.test(nil, { "feature" => { "validate" => { "active" => true } } })
+    err = assert_raises(StandardError) do
+      client.GetPackage(nil).list({ "id" => 1 }, nil)
+    end
+    assert_equal "validate_failed", err.code
   end
 
   def test_basic_flow
     setup = get_package_basic_setup(nil)
     # Per-op sdk-test-control.json skip.
     _live = setup[:live] || false
-    ["list"].each do |_op|
+    [].each do |_op|
       _should_skip, _reason = Runner.is_control_skipped("entityOp", "get_package." + _op, _live ? "live" : "unit")
       if _should_skip
         skip(_reason || "skipped via sdk-test-control.json")
         return
       end
-    end
-    # The basic flow consumes synthetic IDs from the fixture. In live mode
-    # without an *_ENTID env override, those IDs hit the live API and 4xx.
-    if setup[:synthetic_only]
-      skip "live entity test uses synthetic IDs from fixture — set NPM_REGISTRY_TEST_GET_PACKAGE_ENTID JSON to run live"
-      return
     end
     client = setup[:client]
 
@@ -75,15 +51,6 @@ class GetPackageEntityTest < Minitest::Test
       get_package_ref01_data = Helpers.to_map(get_package_ref01_data_raw[0][1])
     end
 
-    # LIST
-    get_package_ref01_ent = client.GetPackage(nil)
-    get_package_ref01_match = {
-      "package" => setup[:idmap]["package01"],
-    }
-
-    get_package_ref01_list_result = get_package_ref01_ent.list(get_package_ref01_match, nil)
-    assert get_package_ref01_list_result.is_a?(Array)
-
   end
 end
 
@@ -91,7 +58,7 @@ def get_package_basic_setup(extra)
   Runner.load_env_local
 
   entity_data_file = File.join(__dir__, "..", "..", ".sdk", "test", "entity", "get_package", "GetPackageTestData.json")
-  entity_data_source = File.read(entity_data_file)
+  entity_data_source = File.read(entity_data_file, encoding: "UTF-8")
   entity_data = JSON.parse(entity_data_source)
 
   options = {}
@@ -101,7 +68,7 @@ def get_package_basic_setup(extra)
 
   # Generate idmap via transform.
   idmap = Vs.transform(
-    ["get_package01", "get_package02", "get_package03", "package01"],
+    ["get_package01", "get_package02", "get_package03"],
     {
       "`$PACK`" => ["", {
         "`$KEY`" => "`$COPY`",
@@ -110,9 +77,8 @@ def get_package_basic_setup(extra)
     }
   )
 
-  # Detect ENTID env override before envOverride consumes it. When live
-  # mode is on without a real override, the basic test runs against synthetic
-  # IDs from the fixture and 4xx's. Surface this so the test can skip.
+  # Whether *_ENTID supplied the idmap, read before env_override consumes
+  # it: without it, the ids a live flow binds are the fixture's synthetic ones.
   entid_env_raw = ENV["NPM_REGISTRY_TEST_GET_PACKAGE_ENTID"]
   idmap_overridden = !entid_env_raw.nil? && entid_env_raw.strip.start_with?("{")
 

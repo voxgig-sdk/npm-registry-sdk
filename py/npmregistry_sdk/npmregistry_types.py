@@ -32,12 +32,18 @@ class Search(TypedDict, total=False):
     searchScore: float
 
 
-class SearchListMatchRequired(TypedDict):
-    text: str
+SearchListMatchRequired = TypedDict('SearchListMatchRequired', {
+    "text": str,
+})
+
+SearchListMatchOptional = TypedDict('SearchListMatchOptional', {
+    "from": int,
+    "maintenance": float,
+    "popularity": float,
+    "quality": float,
+    "size": int,
+}, total=False)
 
 
-class SearchListMatch(SearchListMatchRequired, total=False):
-    maintenance: float
-    popularity: float
-    quality: float
-    size: int
+class SearchListMatch(SearchListMatchRequired, SearchListMatchOptional):
+    pass

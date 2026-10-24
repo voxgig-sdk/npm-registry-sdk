@@ -23,7 +23,12 @@ const PLAN: any[] = [
     ],
     "select": {},
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [],
+    "queryArgs": [],
     "auth": null,
     "status": 200,
     "sample": {
@@ -35,14 +40,14 @@ const PLAN: any[] = [
       "versions": {},
       "maintainers": [
         {
-          "email": "x",
-          "name": "x"
+          "name": "x",
+          "email": "x"
         }
       ],
       "time": {},
       "author": {
-        "email": "x",
         "name": "x",
+        "email": "x",
         "url": "x"
       },
       "repository": {
@@ -67,14 +72,18 @@ const PLAN: any[] = [
     "path": "/-/v1/search",
     "args": [],
     "select": {
-      "from": "v1",
-      "maintenance": "v1",
-      "popularity": "v1",
-      "quality": "v1",
-      "size": "v1",
-      "text": "react"
+      "text": "react",
+      "from": 0,
+      "maintenance": 0.5,
+      "popularity": 0.98,
+      "quality": 0.65,
+      "size": 20
     },
     "headers": [],
+    "cookies": [],
+    "responseMedia": [
+      "application/json"
+    ],
     "query": [
       "text",
       "size",
@@ -83,49 +92,75 @@ const PLAN: any[] = [
       "popularity",
       "maintenance"
     ],
+    "queryArgs": [
+      {
+        "name": "from",
+        "wire": "from"
+      },
+      {
+        "name": "maintenance",
+        "wire": "maintenance"
+      },
+      {
+        "name": "popularity",
+        "wire": "popularity"
+      },
+      {
+        "name": "quality",
+        "wire": "quality"
+      },
+      {
+        "name": "size",
+        "wire": "size"
+      },
+      {
+        "name": "text",
+        "wire": "text"
+      }
+    ],
     "auth": null,
     "status": 200,
     "sample": {
       "objects": [
         {
           "package": {
-            "author": {
-              "email": "x",
-              "name": "x",
-              "url": "x"
-            },
-            "date": "2026-01-01T00:00:00Z",
+            "name": "x",
+            "version": "x",
             "description": "x",
             "keywords": [
               "x"
             ],
+            "date": "2026-01-01T00:00:00Z",
             "links": {
-              "bugs": "x",
-              "homepage": "x",
               "npm": "x",
-              "repository": "x"
+              "homepage": "x",
+              "repository": "x",
+              "bugs": "x"
+            },
+            "author": {
+              "name": "x",
+              "email": "x",
+              "url": "x"
+            },
+            "publisher": {
+              "name": "x",
+              "email": "x",
+              "url": "x"
             },
             "maintainers": [
               {
-                "email": "x",
-                "name": "x"
+                "name": "x",
+                "email": "x"
               }
-            ],
-            "name": "x",
-            "publisher": {
-              "email": "x",
-              "name": "x",
-              "url": "x"
-            },
-            "version": "x"
+            ]
           },
           "score": {
+            "final": 1,
             "detail": {
-              "maintenance": 1,
+              "quality": 1,
               "popularity": 1,
-              "quality": 1
-            },
-            "final": 1
+              "maintenance": 1
+            }
           },
           "searchScore": 1
         }

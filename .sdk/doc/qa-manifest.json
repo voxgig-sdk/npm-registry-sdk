@@ -3,5 +3,16 @@
     "SUMMARY.md"
   ],
   "config": ".sdk/doc/qa/vale.ini",
-  "routes": {}
+  "routes": {},
+  "quoted": {
+    "SUMMARY.md": [
+      "API for accessing package metadata from the NPM registry. Allows retrieval of package information, versions, and search functionality with detailed response formats.",
+      "NPM Registry Production Server",
+      "Overall search score",
+      "Package metadata retrieved successfully",
+      "Package name",
+      "Person email",
+      "Search results retrieved successfully"
+    ]
+  }
 }

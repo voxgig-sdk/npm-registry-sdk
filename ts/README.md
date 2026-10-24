@@ -15,7 +15,7 @@ predictable and low-friction for both humans and AI agents.
 
 ## Install
 This package is not yet published to npm. Install it from the GitHub
-release tag (`ts/vX.Y.Z`, see [Releases](https://github.com/voxgig-sdk/npm-registry-sdk/releases)), or from a
+release tag (`ts/vX.Y.Z`, see [Tags](https://github.com/voxgig-sdk/npm-registry-sdk/tags)), or from a
 clone, which carries the compiled `dist/`:
 
 ```bash
@@ -47,7 +47,7 @@ resolves to entities, not raw records. Iterate them directly, and call
 const getpackages = await client.GetPackage().list({ id: "example" })
 
 for (const getpackage of getpackages) {
-  console.log(getpackage)
+  console.log(getpackage.data())
 }
 ```
 
@@ -58,15 +58,16 @@ Entity operations reject on failure, so wrap them in `try` / `catch`:
 
 ```ts
 try {
-  const getpackages = await client.GetPackage().list()
-  console.log(getpackages)
+  const searchs = await client.Search().list({ text: "example" })
+  console.log(searchs.map((item) => item.data()))
 } catch (err) {
   console.error('list failed:', err)
 }
 ```
 
 The low-level `direct()` method does **not** throw — it returns the
-value or an `Error`, so check the result before using it:
+result envelope. Branch on `ok`; on failure `status` holds the HTTP status
+(for error responses) and `err` holds the error:
 
 ```ts
 const result = await client.direct({
@@ -75,8 +76,8 @@ const result = await client.direct({
   params: { id: 'example_id' },
 })
 
-if (result instanceof Error) {
-  throw result
+if (!result.ok) {
+  console.error('request failed:', result.status, result.err)
 }
 ```
 
@@ -94,9 +95,6 @@ const result = await client.direct({
   params: { id: 'example' },
 })
 
-if (result instanceof Error) {
-  throw result
-}
 if (result.ok) {
   console.log(result.status)  // 200
   console.log(result.data)    // response body
@@ -125,10 +123,9 @@ Create a mock client for unit testing — no server required:
 ```ts
 const client = NpmRegistrySDK.test()
 
-const getpackage = await client.GetPackage().list()
-// getpackage is the entity, populated with mock response data
-// — call getpackage.data() for the record itself
-console.log(getpackage)
+const searchs = await client.Search().list({ text: 'example_text' })
+// searchs is an array of Search entities, one per mock record
+console.log(searchs.map((search) => search.data()))
 ```
 
 You can also use the instance method:
@@ -143,14 +140,14 @@ const testClient = client.tester()
 Entity instances remember their last match and data:
 
 ```ts
-const entity = client.GetPackage()
+const entity = client.Search()
 
 // First call runs the operation and stores its result
-await entity.list()
+await entity.list({ text: 'example_text' })
 
 // Subsequent calls reuse the stored state
 const data = entity.data()
-console.log(data.id)
+console.log(data)
 ```
 
 ### Add custom middleware
@@ -244,7 +241,7 @@ All entities share the same interface.
 
 | Method | Signature | Description |
 | --- | --- | --- |
-| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria. |
+| `list` | `list(reqmatch?, ctrl?): Promise<Entity[]>` | List entities matching the criteria, one per record. |
 | `data` | `data(data?: Partial<Entity>): Entity` | Get or set entity data. |
 | `match` | `match(match?: Partial<Entity>): Partial<Entity>` | Get or set entity match criteria. |
 | `make` | `make(): Entity` | Create a new instance with the same options. |
@@ -253,8 +250,8 @@ All entities share the same interface.
 
 #### Return values
 
-Entity operations resolve to the entity data directly — there is no
-result envelope:
+Entity operations resolve to the entity itself — there is no result
+envelope, and an entity's `data()` reads its record:
 
 - `list` resolves to an **array** of entity objects (iterate it directly;
   there is no `.data` and no `.ok`).
@@ -525,11 +522,11 @@ stores the returned data and match criteria internally. Subsequent
 calls on the same instance can rely on this state.
 
 ```ts
-const getpackage = client.GetPackage()
-await getpackage.list()
+const search = client.Search()
+await search.list({ text: "example" })
 
-// getpackage.data() now returns the getpackage data from the last `list`
-// getpackage.match() returns the last match criteria
+// search.data() now returns the search data from the last `list`
+// search.match() returns the last match criteria
 ```
 
 Call `make()` to create a fresh instance with the same configuration

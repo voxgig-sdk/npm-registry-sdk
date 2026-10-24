@@ -79,6 +79,7 @@ module NpmRegistryConfig
           },
           "optspec" => {
             "clearTimer" => "`$FUNCTION`",
+            "now" => "`$FUNCTION`",
             "setTimer" => "`$FUNCTION`",
           },
           "strict" => false,
@@ -164,6 +165,10 @@ module NpmRegistryConfig
                     "exist" => [
                       "id",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],
@@ -273,13 +278,12 @@ module NpmRegistryConfig
                   },
                   "select" => {
                     "exist" => [
-                      "from",
-                      "maintenance",
-                      "popularity",
-                      "quality",
-                      "size",
                       "text",
                     ],
+                  },
+                  "response" => {
+                    "kind" => "json",
+                    "media" => "application/json",
                   },
                 },
               ],

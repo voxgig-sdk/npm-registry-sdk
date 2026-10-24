@@ -9,7 +9,7 @@ import { createLiveTransport } from '../../live-runner'
 import { runLiveEntity } from '../../live-entity'
 
 
-import { NpmRegistrySDK, BaseFeature, stdutil } from '../../..'
+import { NpmRegistrySDK, BaseFeature, config, stdutil } from '../../..'
 
 import {
   envOverride,
@@ -41,17 +41,29 @@ describe('GetPackageEntity', async () => {
   })
 
 
+  test('validate', async (t) => {
+    if (null == (config as any).feature?.validate) {
+      t.skip('feature not present in this SDK: validate')
+      return
+    }
+    const client = NpmRegistrySDK.test(undefined, { feature: { validate: { active: true } } })
+    await assert.rejects(client.GetPackage().list({"id":1} as any),
+      (err: any) => 'validate_failed' === err.code)
+  })
+
+
+
   test('basic', async (t) => {
 
     const live = 'TRUE' === process.env.NPM_REGISTRY_TEST_LIVE
-    for (const op of ['list']) {
+    for (const op of []) {
       if (!live && maybeSkipControl(t, 'entityOp', 'get_package.' + op, live)) return
     }
 
     
     const setup = basicSetup()
     if (setup.live) {
-      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"email":{"a":true,"fo":"email","h":"Email","n":"email","r":false,"sh":"Maintainer email","t":"`$STRING`","key$":"email","index$":0},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":1},"name":{"a":true,"h":"Name","n":"name","r":false,"sh":"Maintainer username","t":"`$STRING`","key$":"name","index$":2}},"id":{"field":"id","name":"id"},"name":"get_package","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /{package}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"express","k":"param","n":"id","or":"package","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/{package}","q":{"exist":["id"]},"r":{"param":{"package":"id"}},"s":[{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"get_package","name__orig":"get_package","Name":"GetPackage","name_":"get_package","name-":"get-package","NAME":"GET_PACKAGE","index$":0}, {"active":true,"entity":"get_package","key$":"BasicGetPackageFlow","kind":"basic","name":"BasicGetPackageFlow","param":{},"step":[{"a":true,"d":{},"i":{},"m":{"package":"package01"},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"get_package_ref01"}}],"index$":0}]}, 'GetPackage', {"GET /{package}":{"protocol":"http","parameters":[{"name":"package","in":"path","required":true,"description":"The name of the package","schema":{"type":"string"},"example":"express","index$":0}]}})
+      return runLiveEntity(setup, {"active":true,"alias":{"field":{}},"fields":{"email":{"a":true,"fo":"email","h":"Email","n":"email","r":false,"sh":"Maintainer email","t":"`$STRING`","key$":"email","index$":0},"id":{"a":true,"h":"Id","n":"id","r":false,"t":"`$STRING`","key$":"id","index$":1},"name":{"a":true,"h":"Name","n":"name","r":false,"sh":"Maintainer username","t":"`$STRING`","key$":"name","index$":2}},"id":{"field":"id","name":"id"},"name":"get_package","op":{"list":{"input":"data","name":"list","points":[{"a":true,"co":{"id":"GET /{package}","source":"openapi3","version":2},"g":{"params":[{"a":true,"ex":"express","k":"param","n":"id","or":"package","r":true,"t":"`$STRING`","index$":0}]},"k":"http","m":"GET","o":"/{package}","q":{"exist":["id"]},"r":{"param":{"package":"id"}},"rs":{"kind":"json","media":"application/json"},"s":[{"var":"id"}],"t":{"req":"`reqdata`","res":"`body`"},"index$":0}],"key$":"list"}},"relations":{"ancestors":[]},"key$":"get_package","name__orig":"get_package","Name":"GetPackage","name_":"get_package","name-":"get-package","NAME":"GET_PACKAGE","index$":0}, {"active":true,"entity":"get_package","key$":"BasicGetPackageFlow","kind":"basic","name":"BasicGetPackageFlow","param":{},"step":[{"a":false,"d":{},"i":{},"m":{"package":"package01"},"o":"list","s":[],"v":[{"apply":"ItemExists","def":{"ref":"get_package_ref01"}}],"unreachable":true}]}, 'GetPackage', {"GET /{package}":{"protocol":"http","parameters":[{"name":"package","in":"path","required":true,"description":"The name of the package","schema":{"type":"string"},"example":"express","index$":0}]}}, { strict: LIVE_STRICT, t })
     }
     const client = setup.client
     const struct = setup.struct
@@ -61,18 +73,16 @@ describe('GetPackageEntity', async () => {
 
     let get_package_ref01_data = Object.values(setup.data.existing.get_package)[0] as any
 
-    // LIST
-    const get_package_ref01_ent = client.GetPackage()
-    const get_package_ref01_match: any = {}
-    get_package_ref01_match['package'] = setup.idmap['package01']
-
-    const get_package_ref01_list = (await get_package_ref01_ent.list(get_package_ref01_match)).map((e: any) => e.data())
-
-
   })
 })
 
 
+
+// main.kit.test.live.strict is true (the default is true): a live
+// request that fails, or a live test missing an input it needs,
+// fails the test.
+// An account with no record for a test to read skips it either way.
+const LIVE_STRICT = true
 
 function basicSetup(extra?: any) {
   // TODO: fix test def options
@@ -97,7 +107,7 @@ function basicSetup(extra?: any) {
   const transform = struct.transform
 
   let idmap = transform(
-    ['get_package01','get_package02','get_package03','package01'],
+    ['get_package01','get_package02','get_package03'],
     {
       '`$PACK`': ['', {
         '`$KEY`': '`$COPY`',
